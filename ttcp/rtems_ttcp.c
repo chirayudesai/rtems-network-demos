@@ -291,4 +291,6 @@ test_network (void)
  */
 #define htons(x)	(x)
 
+#undef delay
+
 #include "ttcp_orig/ttcp.c"
