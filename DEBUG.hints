@@ -1,0 +1,14 @@
+#
+#  $Id$
+#
+
+Debugging Hints
+===============
+If you also define TRACE_NETWORK_DRIVER you'll get a *lot*
+of printout describing each packet as  it passes through the stack.
+
+For debugging, I'd suggest breakpoints in the socket receive and transmit  
+tasks to trace where you're running.  Also, if you have a LANalyzer or  
+workstation with `snoop' capability set it up to show all packets to/from the  
+hardware (Ethernet) address of your target machine.
+
