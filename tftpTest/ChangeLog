@@ -1,3 +1,7 @@
+2000-12-14	Eric Norum <eric.norum@usask.ca>
+
+	* init.c, test.c: Added test of write capability.
+
 2000-12-14	Joel Sherrill <joel@OARcorp.com>
 
 	* ChangeLog: New file.

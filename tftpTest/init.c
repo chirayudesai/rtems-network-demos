@@ -18,6 +18,9 @@
 #include <bsp.h>
 #include <rtems/tftp.h>
 
+#define CONFIGURE_LIBIO_MAXIMUM_FILE_DESCRIPTORS 20
+#define CONFIGURE_USE_IMFS_AS_BASE_FILESYSTEM
+
 #define CONFIGURE_TEST_NEEDS_CONSOLE_DRIVER
 #define CONFIGURE_TEST_NEEDS_CLOCK_DRIVER
 #define CONFIGURE_RTEMS_INIT_TASKS_TABLE
@@ -46,6 +49,8 @@ rtems_task Init (rtems_task_argument argument);
 #include <arpa/inet.h>
 #include "../networkconfig.h"
 
+void testTFTP (const char *hostname, const char *filename);
+
 /*
  * RTEMS Startup Task
  */
@@ -57,13 +62,8 @@ Init (rtems_task_argument ignored)
 	rtems_bsdnet_initialize_network ();
 	rtems_bsdnet_initialize_tftp_filesystem ();
 
-#if (defined (RTEMS_USE_BOOTP))
-	hostname = inet_ntoa (rtems_bsdnet_bootp_server_address);
-	filename = rtems_bsdnet_bootp_boot_file_name;
-#else
 	hostname = RTEMS_TFTP_TEST_HOST_NAME;
 	filename = RTEMS_TFTP_TEST_FILE_NAME;
-#endif
 
 	testTFTP (hostname, filename);
 	exit (0);
