@@ -17,6 +17,16 @@
 #include <bsp.h>
 
 /*
+ * Define RTEMS_SET_ETHERNET_ADDRESS if you want to specify the
+ * Ethernet address here.  If RTEMS_SET_ETHERNET_ADDRESS is not
+ * defined the driver will choose an address.
+ */
+/* #define RTEMS_SET_ETHERNET_ADDRESS */
+#if (defined (RTEMS_SET_ETHERNET_ADDRESS))
+static char ethernet_address[6] = { 0x08, 0x00, 0x3e, 0x12, 0x28, 0xb1 };
+#endif
+
+/*
  * Default network interface
  */
 static struct rtems_bsdnet_ifconfig netdriver_config = {
@@ -33,7 +43,11 @@ static struct rtems_bsdnet_ifconfig netdriver_config = {
 	"255.255.255.0",		/* IP net mask */
 #endif /* !RTEMS_USE_BOOTP */
 
-	NULL,				/* Driver supplies hardware address */
+#if (defined (RTEMS_SET_ETHERNET_ADDRESS))
+	ethernet_address,               /* Ethernet hardware address */
+#else
+	NULL,                           /* Driver supplies hardware address */
+#endif
 	0				/* Use default driver parameters */
 };
 
