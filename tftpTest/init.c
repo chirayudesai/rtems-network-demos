@@ -42,7 +42,9 @@ rtems_driver_address_table Device_drivers[] = {
 
 #include <confdefs.h>
 
+#if (defined (USE_BOOTP))
 #include <bootp.h>
+#endif
 extern void testTFTP (void);
 
 /*
@@ -69,7 +71,14 @@ Init (rtems_task_argument ignored)
 	/*
 	 * Hook up drivers
 	 */
-	if (rtems_ka9q_execute_command ("attach rtems broadcast n ether " MY_ETHERNET_ADDRESS))
+#if (defined (USE_BOOTP))
+	if (rtems_ka9q_execute_command ("attach rtems broadcast y"
+					" ether " MY_ETHERNET_ADDRESS))
+#else
+	if (rtems_ka9q_execute_command ("attach rtems broadcast y"
+					" ip " MY_IP_ADDRESS
+					" ether " MY_ETHERNET_ADDRESS))
+#endif
 		rtems_panic ("Can't attach Ethernet driver.\n");
 
 	/*
@@ -84,6 +93,9 @@ Init (rtems_task_argument ignored)
 	if (rtems_ka9q_execute_command ("arp add 255.255.255.255 ether FF:FF:FF:FF:FF:FF"))
 		rtems_panic ("Can't add broadcast entry to ARP table.\n");
 
+#if (defined (USE_BOOTP))
+	{
+	int i;
 	/*
 	 * Get BOOTP information
 	 */
@@ -92,8 +104,22 @@ Init (rtems_task_argument ignored)
 			break;
 		if (++i == 10)
 			rtems_panic ("Can't get information from BOOTP server.\n");
-		rtems_task_wake_after (i * ticksPerSecond);
+		delay_task (i);
 	}
+	if (BootpFileName)
+		printf ("BOOTP filename: `%s'\n", BootpFileName);
+	else
+		printf ("BOOTP -- No filename!\n");
+	}
+#else
+	if (rtems_ka9q_execute_command ("ifconfig rtems netmask 255.255.255.0"))
+		rtems_panic ("Can't set netmask.\n");
+	if (rtems_ka9q_execute_command ("route add default rtems"))
+		rtems_panic ("Can't add default route.\n");
+	printf ("Routing table after adding default route\n");
+	rtems_ka9q_execute_command ("route");
+#endif
+
 
 	/*
 	 * Test TFTP driver
