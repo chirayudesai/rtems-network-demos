@@ -64,8 +64,21 @@ struct rtems_ftpd_configuration rtems_ftpd_configuration = {
    NULL                    /* List of hooks       */
 };
 
+/*
+ *  Settings for the Application Profiles:
+ *
+ *    Base Networking Profile - neither
+ *    FTP Server Profile - include ftpd
+ *    Web Server Profile -include httpd
+ */
+
 #define INCLUDE_FTPD 0
 #define INCLUDE_HTTPD 1
+
+/* XXX until binutils are rebuilt */
+
+int _binary_tarfile_start;
+int _binary_tarfile_size;
 
 rtems_task Init(
   rtems_task_argument argument

@@ -18,7 +18,7 @@ DOCTYPES=
 DOCS=$(DOCTYPES:%=$(SAMPLE).%)
 
 SRCS=$(DOCS) $(C_FILES) $(CC_FILES) $(H_FILES) $(S_FILES)
-OBJS=$(C_O_FILES) $(CC_O_FILES) $(S_O_FILES) $(ARCH)/tarfile.o
+OBJS=$(C_O_FILES) $(CC_O_FILES) $(S_O_FILES) # $(ARCH)/tarfile.o
 
 PRINT_SRCS=$(DOCS)
 
@@ -58,9 +58,9 @@ all:	${ARCH} $(SRCS) $(PGM)
 ${PGM}: $(OBJS) $(LINK_FILES)
 	$(make-exe)
 
-$(ARCH)/tarfile.o: 
-	tar cf tarfile index.html
-	$(LD) -r -o $(ARCH)/tarfile.o -b binary tarfile
+#$(ARCH)/tarfile.o: 
+#	tar cf tarfile index.html
+#	$(LD) -r -o $(ARCH)/tarfile.o -b binary tarfile
 
 # Install the program(s), appending _g or _p as appropriate.
 # for include files, just use $(INSTALL)
