@@ -1,0 +1,19 @@
+This directory contains an RTEMS application for measuring TCP/UDP
+network throughput.   The ttcp_orig subdirectory contains the original
+UNIX program which can be compiled and run on your host machine.
+
+The RTEMS version of the test program is a little clumsy to use.  You
+have to edit the rtems_ttcp.c source file and change the ttcp_argv
+array of strings to set the arguments you want passed to the ttcp
+task.
+
+It does work, though.  The best throughputs I've seen so far are:
+	68360 card can transmit a TCP stream at 198 kbytes/second.
+	68360 card can receive a TCP stream at 119 kbytes/second.
+In both cases, the other end of the transfer was a 486DX2/66 running
+OPENSTEP/MACH 4.1.  
+
+One noteworthy item is that I was able to get the UNIX test program
+running under RTEMS with no changes to the test program itself.  The
+entire UNIX source file is included, without changes, into the RTEMS
+source file.
