@@ -64,6 +64,9 @@ struct rtems_ftpd_configuration rtems_ftpd_configuration = {
    NULL                    /* List of hooks       */
 };
 
+#define INCLUDE_FTPD 0
+#define INCLUDE_HTTPD 1
+
 rtems_task Init(
   rtems_task_argument argument
 )
@@ -72,14 +75,20 @@ rtems_task Init(
 
   rtems_bsdnet_initialize_network ();
 
-  rtems_initialize_ftpd();
-
+#if INCLUDE_FTPD
   status = Untar_FromMemory((unsigned char *)(&_binary_tarfile_start),
 			    &_binary_tarfile_size);
-   
-  rtems_initialize_webserver();
-#if 0
+  rtems_initialize_ftpd();
 
+#endif
+   
+#if INCLUDE_HTTPD
+  status = Untar_FromMemory((unsigned char *)(&_binary_tarfile_start),
+			    &_binary_tarfile_size);
+  rtems_initialize_webserver();
+#endif 
+
+#if 0
   status = rtems_task_delete( RTEMS_SELF );
 #endif
 }
