@@ -49,17 +49,6 @@ static void
 	return 0;;
 }
 
-int
-gettimeofday (struct timeval *tp, struct timezone *tzp)
-{
-	rtems_clock_time_value now;
-
-	rtems_clock_get (RTEMS_CLOCK_GET_TIME_VALUE, &now);
-	tp->tv_sec = now.seconds;
-	tp->tv_usec = now.microseconds;
-	return 0;
-}
-
 #define _SYS_RESOURCE_H_
 #define	RUSAGE_SELF	0		/* calling process */
 #define	RUSAGE_CHILDREN	-1		/* terminated child processes */
@@ -229,7 +218,5 @@ test_network (void)
 
 #define main		rtems_ttcp_main
 #define exit(code)	close(fd),rtems_ttcp_exit(code)
-#define read_timer	rtems_read_timer
-#undef delay
 
 #include "ttcp_orig/ttcp.c"
