@@ -1,3 +1,7 @@
+2000-12-14	Eric Norum <eric.norum@usask.ca>
+
+	* networkconfig.h: Default to using bootp host for tftp test.
+
 2000-12-14	Joel Sherrill <joel@OARcorp.com>
 
 	* ChangeLog: New file.

@@ -126,7 +126,10 @@ struct rtems_bsdnet_config rtems_bsdnet_config = {
 /*
  * For TFTP test application
  */
-#if (!defined (RTEMS_USE_BOOTP))
+#if (defined (RTEMS_USE_BOOTP))
+#define RTEMS_TFTP_TEST_HOST_NAME "BOOTP_HOST"
+#define RTEMS_TFTP_TEST_FILE_NAME "BOOTP_FILE"
+#else
 #define RTEMS_TFTP_TEST_HOST_NAME "XXX.YYY.ZZZ.XYZ"
 #define RTEMS_TFTP_TEST_FILE_NAME "tftptest"
 #endif
