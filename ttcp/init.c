@@ -40,6 +40,8 @@ rtems_task Init (rtems_task_argument argument);
 #include <bootp.h>
 #endif
 
+volatile int ttcp_running;
+
 /*
  * Suspend execution for the specified number of seconds
  */
@@ -47,6 +49,33 @@ static void
 delay_task (int seconds)
 {
 	rtems_task_wake_after ((seconds * 1000000) / BSP_Configuration.microseconds_per_tick);
+}
+
+/*
+ * Display the contents of several KA9Q tables
+ */
+void
+show_ka9q_tables (void)
+{
+	printf ("\n****************** MALLOC Statistics ***************\n");
+	malloc_dump ();
+	printf ("\n****************** MBUF Statistics ***************\n");
+	mbufstat ();
+	mbufsizes ();
+	printf ("\n****************** Routing Table ***************\n");
+	rtems_ka9q_execute_command ("route");
+	printf ("\n****************** ARP Table ***************\n");
+	rtems_ka9q_execute_command ("arp");
+	printf ("\n****************** Driver Statistics ***************\n");
+	rtems_ka9q_execute_command ("ifconfig rtems");
+	printf ("\n****************** Ip Statistics ***************\n");
+	rtems_ka9q_execute_command ("ip status");
+	printf ("\n****************** ICMP Statistics ***************\n");
+	rtems_ka9q_execute_command ("icmp status");
+	printf ("\n****************** UDP Statistics ***************\n");
+	rtems_ka9q_execute_command ("udp status");
+	printf ("\n****************** TCP Statistics ***************\n");
+	rtems_ka9q_execute_command ("tcp status");
 }
 
 /*
@@ -74,6 +103,8 @@ Init (rtems_task_argument ignored)
 			"movec %0,cacr" : : "d" (0x80008000));
 #endif
 
+	ttcp_running = 0;
+
 	/*
 	 * Start KA9Q
 	 */
@@ -83,16 +114,13 @@ Init (rtems_task_argument ignored)
 	/*
 	 * Hook up drivers
 	 */
-#if (defined (USE_BOOTP))
 	if (rtems_ka9q_execute_command ("attach rtems"
-					" rbuf 24 tbuf 5"
-					" ether " MY_ETHERNET_ADDRESS))
-#else
-	if (rtems_ka9q_execute_command ("attach rtems" 
-					" rbuf 24 tbuf 5"
+					/* " rbuf 24 tbuf 5" */
+					" rbuf 100 tbuf 10"
+#if !(defined (USE_BOOTP))
 					" ip " MY_IP_ADDRESS
-					" ether " MY_ETHERNET_ADDRESS))
 #endif
+					" ether " MY_ETHERNET_ADDRESS))
 		rtems_panic ("Can't attach Ethernet driver.\n");
 
 #if (defined (TRACE_NETWORK_DRIVER))
@@ -145,7 +173,13 @@ Init (rtems_task_argument ignored)
 	printf ("Routing table after adding default route\n");
 	rtems_ka9q_execute_command ("route");
 #endif
-
+	/*
+	 * Issue a gratuitous ARP request to update tables in
+	 * other hosts on this network.
+	 */
+	if (rtems_ka9q_execute_command ("arp gratuitous rtems"))
+		rtems_panic ("Can't send gratuitous ARP.\n");
+	
 	rtems_ka9q_execute_command ("tcp window");
 	rtems_ka9q_execute_command ("tcp window 4096");
 	rtems_ka9q_execute_command ("tcp window");
@@ -164,5 +198,27 @@ Init (rtems_task_argument ignored)
 	 * See if sockets work properly
 	 */
 	test_network ();
+
+	/*
+	 * Wait for characters from console terminal
+	 */
+	do {
+		rtems_task_wake_after( 1 );
+	} while ( !ttcp_running );
+        printf( "Now accepting input from the console\n" );
+	for (;;) {
+		switch (getchar ()) {
+		case '\004':
+			printf( "Exiting test\n" );
+			return;
+
+		case 's':
+			/*
+			 * Show what's been accomplished
+			 */
+			show_ka9q_tables ();
+			break;
+		}
+	}
 	exit (0);
 }

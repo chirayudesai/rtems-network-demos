@@ -119,30 +119,7 @@ getrusage(int ignored, struct rusage *ru)
 	return 0;
 }
 
-/*
- * Display the contents of several KA9Q tables
- */
-static void
-show_ka9q_tables (void)
-{
-	printf ("\n****************** MBUF Statistics ***************\n");
-	mbufstat ();
-	mbufsizes ();
-	printf ("\n****************** Routing Table ***************\n");
-	rtems_ka9q_execute_command ("route");
-	printf ("\n****************** ARP Table ***************\n");
-	rtems_ka9q_execute_command ("arp");
-	printf ("\n****************** Driver Statistics ***************\n");
-	rtems_ka9q_execute_command ("ifconfig rtems");
-	printf ("\n****************** Ip Statistics ***************\n");
-	rtems_ka9q_execute_command ("ip status");
-	printf ("\n****************** ICMP Statistics ***************\n");
-	rtems_ka9q_execute_command ("icmp status");
-	printf ("\n****************** UDP Statistics ***************\n");
-	rtems_ka9q_execute_command ("udp status");
-	printf ("\n****************** TCP Statistics ***************\n");
-	rtems_ka9q_execute_command ("tcp status");
-}
+void show_ka9q_tables (void);
 
 static void
 rtems_ttcp_exit (int code)
@@ -154,6 +131,8 @@ rtems_ttcp_exit (int code)
 	show_ka9q_tables ();
 	exit (code);
 }
+
+extern volatile int ttcp_running;
 
 /*
  * Task to run UNIX ttcp command
@@ -216,6 +195,7 @@ ttcpTask (rtems_task_argument arg)
 		printf ("or\n");
 		printf ("         -t destination.internet.address\n");
 	}
+        ttcp_running = 1;
 	code = rtems_ttcp_main (argc, argv);
 	rtems_ttcp_exit (code);
 }
@@ -278,7 +258,7 @@ test_network (void)
 		printf ("Can't start task; %s\n", rtems_status_text (sc));
 		return;
 	}
-	rtems_task_suspend (RTEMS_SELF);
+	/* rtems_task_suspend (RTEMS_SELF); */
 }
 
 #define main		rtems_ttcp_main
