@@ -15,7 +15,6 @@
 
 #include "../usercfg.h"
 
-/*#define TRACE_SCC1 1 */
 #include <bsp.h>
 
 #define CONFIGURE_TEST_NEEDS_CONSOLE_DRIVER
@@ -95,6 +94,18 @@ Init (rtems_task_argument ignored)
 					" ether " MY_ETHERNET_ADDRESS))
 #endif
 		rtems_panic ("Can't attach Ethernet driver.\n");
+
+#if (defined (TRACE_NETWORK_DRIVER))
+	/*
+	 * Turn on debugging
+	 */
+	puts( "Enabling debug mode of KA9Q" );
+	if (rtems_ka9q_execute_command ("trace rtems input <stdout>")
+	 || rtems_ka9q_execute_command ("trace rtems output <stdout>")
+	 || rtems_ka9q_execute_command ("trace rtems ascii <stdout>"))
+		rtems_panic ("Can't set tracing for Ethernet driver.\n");
+#endif
+
 
 	/*
 	 * Configure the driver
