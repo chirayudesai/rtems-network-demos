@@ -788,6 +788,7 @@ again:
 		cnt = sendto( fd, buf, count, 0, &sinhim, sizeof(sinhim) );
 		numCalls++;
 		if( cnt<0 && errno == ENOBUFS )  {
+			printf("ttcp: out of buffers -- delaying\n"); /*JRS*/
 			delay(18000);
 			errno = 0;
 			goto again;
