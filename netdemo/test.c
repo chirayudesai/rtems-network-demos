@@ -24,10 +24,7 @@
 #include <netuser.h>
 #include <rtems_ka9q.h>
 
-#define NSERVER		2
-#define BASE_PORT	24742
-
-#define DATA_SINK_HOST	"128.233.14.1"
+#include "../usercfg.h"
 
 /*
  * Display the contents of several KA9Q tables
@@ -290,6 +287,7 @@ doSocket (void)
 	for (;;) {
 		switch (getchar ()) {
 		case '\004':
+			printf( "Exiting test\n" );
 			return;
 
 		case 't':

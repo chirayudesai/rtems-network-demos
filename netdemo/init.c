@@ -85,14 +85,11 @@ Init (rtems_task_argument ignored)
 	 * Hook up drivers
 	 */
 	puts( "Attaching to the network" );
-#if (defined (USE_BOOTP))
 	if (rtems_ka9q_execute_command ("attach rtems broadcast y"
-					" ether " MY_ETHERNET_ADDRESS))
-#else
-	if (rtems_ka9q_execute_command ("attach rtems broadcast y"
+#if !(defined (USE_BOOTP))
 					" ip " MY_IP_ADDRESS
-					" ether " MY_ETHERNET_ADDRESS))
 #endif
+					" ether " MY_ETHERNET_ADDRESS))
 		rtems_panic ("Can't attach Ethernet driver.\n");
 
 #if (defined (TRACE_NETWORK_DRIVER))
