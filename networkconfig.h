@@ -38,6 +38,22 @@ static char ethernet_address[6] = { 0x00, 0x80, 0x7F, 0x22, 0x61, 0x77 };
 
 #endif
 
+#ifdef RTEMS_USE_LOOPBACK 
+/*
+ * Loopback interface
+ */
+extern void rtems_bsdnet_loopattach();
+static struct rtems_bsdnet_ifconfig loopback_config = {
+	"lo0",				/* name */
+	rtems_bsdnet_loopattach,	/* attach function */
+
+	NULL,				/* link to next interface */
+
+	"127.0.0.1",			/* IP address */
+	"255.0.0.0",			/* IP net mask */
+};
+#endif
+
 /*
  * Default network interface
  */
@@ -45,7 +61,11 @@ static struct rtems_bsdnet_ifconfig netdriver_config = {
 	RTEMS_BSP_NETWORK_DRIVER_NAME,		/* name */
 	RTEMS_BSP_NETWORK_DRIVER_ATTACH,	/* attach function */
 
-	NULL,				/* link to next interface */
+#ifdef RTEMS_USE_LOOPBACK 
+	&loopback_config,		/* link to next interface */
+#else
+	NULL,				/* No more interfaces */
+#endif
 
 #if (defined (RTEMS_USE_BOOTP))
 	NULL,				/* BOOTP supplies IP address */
@@ -85,6 +105,7 @@ struct rtems_bsdnet_config rtems_bsdnet_config = {
 	"XXX.YYY.ZZZ.1",	/* Gateway */
 	"XXX.YYY.ZZZ.1",	/* Log host */
 	{"XXX.YYY.ZZZ.1" },	/* Name server(s) */
+	{"XXX.YYY.ZZZ.1" },	/* NTP server(s) */
 
 	/*
 	 *  A real example -- DO NOT USE THIS YOURSELF!!!
@@ -96,6 +117,7 @@ struct rtems_bsdnet_config rtems_bsdnet_config = {
 	"192.168.1.2",   	/* Gateway */
 	"192.168.1.2", 		/* Log host */
 	{"192.168.1.2" },	/* Name server(s) */
+	{"192.168.1.2" },	/* NTP server(s) */
 #endif
 #endif /* !RTEMS_USE_BOOTP */
 
