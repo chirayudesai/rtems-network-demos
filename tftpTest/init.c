@@ -42,6 +42,8 @@ rtems_task Init (rtems_task_argument argument);
 
 #include <stdio.h>
 #include <rtems/rtems_bsdnet.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 #include "../networkconfig.h"
 
 /*
@@ -56,7 +58,7 @@ Init (rtems_task_argument ignored)
 	rtems_bsdnet_initialize_tftp_filesystem ();
 
 #if (defined (RTEMS_USE_BOOTP))
-	hostname = NULL;
+	hostname = inet_ntoa (rtems_bsdnet_bootp_server_address);
 	filename = rtems_bsdnet_bootp_boot_file_name;
 #else
 	hostname = RTEMS_TFTP_TEST_HOST_NAME;
