@@ -113,7 +113,9 @@ makeFullname (rtems_unsigned32 host, const char *file)
 	static char name[16];
 #endif
 
+#if 0
 	printf( "makeFullname(0x08%x, %s)\n", host, file);
+#endif
 
 #if (defined (USE_BOOTP))
 	if (host) {

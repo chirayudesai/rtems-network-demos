@@ -120,6 +120,14 @@ Init (rtems_task_argument ignored)
 	rtems_ka9q_execute_command ("route");
 #endif
 
+	/*
+	 * Issue a gratuitous ARP request to update tables in
+	 * other hosts on this network.
+	 */
+
+	if (rtems_ka9q_execute_command ("arp gratuitous rtems"))
+		rtems_panic ("Can't send gratuitous ARP.\n");
+
 
 	/*
 	 * Test TFTP driver
