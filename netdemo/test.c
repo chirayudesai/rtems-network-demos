@@ -11,7 +11,10 @@
  * University of Saskatchewan
  * Saskatoon, Saskatchewan, CANADA
  * eric@skatter.usask.ca
+ *
+ * $Id$
  */
+
 #include <stdio.h>
 #include <unistd.h>
 #include <rtems.h>
