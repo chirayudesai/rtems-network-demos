@@ -1,14 +1,10 @@
-#
-#  $Id$
-#
-
 SAMPLE=netdemo
 PGM=${ARCH}/$(SAMPLE).exe
 
-MANAGERS=io message event semaphore timer rate_monotonic region
+MANAGERS=io event semaphore
 
 # C source names, if any, go here -- minus the .c
-C_PIECES= init test
+C_PIECES= init  test
 C_FILES=$(C_PIECES:%=%.c)
 C_O_FILES=$(C_PIECES:%=${ARCH}/%.o)
 
@@ -35,7 +31,7 @@ include $(PROJECT_ROOT)/make/leaf.cfg
 DEFINES  +=
 CPPFLAGS +=
 CFLAGS   +=
-CFLAGS_LD += -Wl,--defsym -Wl,HeapSize=0xC0000	# KA9Q needs more space
+CFLAGS_LD += -Wl,--defsym -Wl,HeapSize=0xC0000 
 CFLAGS_OPTIMIZE_V   +=
 CFLAGS_DEBUG_V   += -v -qrtems_debug
 

@@ -1,7 +1,7 @@
 SAMPLE=tftp
 PGM=${ARCH}/$(SAMPLE).exe
 
-MANAGERS=io event semaphore timer rate_monotonic
+MANAGERS=io event semaphore
 
 # C source names, if any, go here -- minus the .c
 C_PIECES= init test
@@ -31,7 +31,7 @@ include $(PROJECT_ROOT)/make/leaf.cfg
 DEFINES  +=
 CPPFLAGS +=
 CFLAGS   +=
-CFLAGS_LD +=  -Wl,--defsym -Wl,HeapSize=0x40000 # KA9Q needs more space
+CFLAGS_LD +=  -Wl,--defsym -Wl,HeapSize=0x40000
 CFLAGS_OPTIMIZE_V   +=
 CFLAGS_DEBUG_V   += -qrtems_debug # -v
 

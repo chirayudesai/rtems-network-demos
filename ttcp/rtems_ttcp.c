@@ -2,7 +2,7 @@
  * A collection of hacks, glue, and patches to
  * provide a `UNIX-like' environment to ttcp.
  *
- * Some of the code here should migrate to the libc
+ * Some of the code here may migrate to the libc
  * support routines some day.  Some of the more sleazy
  * hacks should never make it outside this file!
  * 
@@ -19,38 +19,20 @@
  */
 
 #include <stdio.h>
+#include <ctype.h>
 #include <rtems.h>
-#include <rtems_ka9q.h>
+#include <rtems/rtems_bsdnet.h>
 #include <rtems/error.h>
-#include <socket.h>
-#include <sockaddr.h>
-#include <netuser.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
 #include <sys/time.h>
 
 /*
  * Glue between UNIX-style ttcp code and RTEMS
  */
 int rtems_ttcp_main (int argc, char **argv);
-
-#define ENOBUFS	2000
-
-struct  hostent {
-	char    *h_name;        /* official name of host */
-	char    **h_aliases;    /* alias list */
-	int     h_addrtype;     /* host address type */
-	int     h_length;       /* length of address */
-	char    **h_addr_list;  /* list of addresses from name server */
-	#define h_addr  h_addr_list[0]  /* address, for backward compatiblity */
-};
-
-#define SOL_SOCKET	0
-#define SO_DEBUG	0
-
-static struct hostent *
-gethostbyname (const char *cp)
-{
-	rtems_panic ("gethostbyname()");
-}
 
 static int
 select(int nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout)
@@ -63,14 +45,6 @@ static void
 {
 	return 0;;
 }
-
-static char *
-rtems_inet_ntoa (struct in_addr in)
-{
-	return inet_ntoa (in.s_addr);
-}
-#define inet_ntoa rtems_inet_ntoa
-#define inet_addr(cp)	resolve(cp)
 
 int
 gettimeofday (struct timeval *tp, struct timezone *tzp)
@@ -119,20 +93,15 @@ getrusage(int ignored, struct rusage *ru)
 	return 0;
 }
 
-void show_ka9q_tables (void);
-
 static void
 rtems_ttcp_exit (int code)
 {
-	rtems_interval ticksPerSecond;
-
-	rtems_clock_get (RTEMS_CLOCK_GET_TICKS_PER_SECOND, &ticksPerSecond);
-	rtems_task_wake_after (ticksPerSecond * 2);
-	show_ka9q_tables ();
+	rtems_bsdnet_show_mbuf_stats ();
+	rtems_bsdnet_show_if_stats ();
+	rtems_bsdnet_show_ip_stats ();
+	rtems_bsdnet_show_tcp_stats ();
 	exit (code);
 }
-
-extern volatile int ttcp_running;
 
 /*
  * Task to run UNIX ttcp command
@@ -157,12 +126,18 @@ ttcpTask (rtems_task_argument arg)
 		strcpy (arg0, "ttcp");
 		argv[0] = __progname = arg0;
 
+#if (defined (WRITE_TEST_ONLY))
+		strcpy (linebuf, "-s -t crux");
+#elif (defined (READ_TEST_ONLY))
+		strcpy (linebuf, "-s -r");
+#else
 		/*
 		 * Read a line
 		 */
 		printf (">>> %s ", argv[0]);
 		fflush (stdout);
 		fgets (linebuf, sizeof linebuf, stdin);
+#endif
 
 		/*
 		 * Break line into arguments
@@ -195,21 +170,8 @@ ttcpTask (rtems_task_argument arg)
 		printf ("or\n");
 		printf ("         -t destination.internet.address\n");
 	}
-        ttcp_running = 1;
 	code = rtems_ttcp_main (argc, argv);
 	rtems_ttcp_exit (code);
-}
-
-static int
-rtems_ttcp_bind (int s, struct sockaddr *name, int namelen)
-{
-	struct sockaddr_in *in = (struct sockaddr_in *)name;
-	/*
-	 * KA9Q doesn't like 0 port numbers
-	 */
-	if (in->sin_port == 0)
-		in->sin_port = 2662;
-	return bind (s, name, namelen);
 }
 
 /*
@@ -258,19 +220,11 @@ test_network (void)
 		printf ("Can't start task; %s\n", rtems_status_text (sc));
 		return;
 	}
-	/* rtems_task_suspend (RTEMS_SELF); */
+	rtems_task_suspend (RTEMS_SELF);
 }
 
 #define main		rtems_ttcp_main
 #define exit(code)	close(fd),rtems_ttcp_exit(code)
-#define bind		rtems_ttcp_bind
 #define read_timer	rtems_read_timer
-
-/*
- * RTEMS/KA9Q code expects port numbers in host byte order!
- */
-#define htons(x)	(x)
-
-#undef delay
 
 #include "ttcp_orig/ttcp.c"

@@ -14,14 +14,12 @@
  */
 
 #include <stdio.h>
+#include <errno.h>
+#include <string.h>
 #include <rtems.h>
 #include <rtems/error.h>
 #include <sys/fcntl.h>
 #include <unistd.h>
-#include <bootp.h>
-#include <netuser.h>
-
-#include "../usercfg.h"
 
 static char cbuf[1024];
 static char *fullname;
@@ -42,7 +40,6 @@ showRate (unsigned long totalRead)
 								/ elapsed));
 	}
 	printf (".\n");
-rtems_ka9q_execute_command ("ifconfig rtems");
 }
 
 static void
@@ -106,37 +103,10 @@ testFread (void)
 }
 
 static int
-makeFullname (rtems_unsigned32 host, const char *file)
+makeFullname (const char *hostname, const char *file)
 {
-	const char *hostname;
-#if !defined(USE_BOOTP)
-	static char name[16];
-#endif
-
-#if 0
-	printf( "makeFullname(0x08%x, %s)\n", host, file);
-#endif
-
-#if (defined (USE_BOOTP))
-	if (host) {
-		hostname = rtems_hostname_for_address (BootpHost.s_addr, 0);
-		if (hostname == NULL) {
-			printf ("No host to read from!\n");
-			return 0;
-		}
-	} else {
+	if (hostname == NULL)
 		hostname = "";
-	}
-#else
-	if (host) {
-		sprintf( name, "%d.%d.%d.%d", host >> 24, (host >> 16) & 0xff, 
-			(host >> 8) & 0xff, host & 0xff
-		);
-		hostname = name;
-	} else {
-		hostname = "";
-	}
-#endif
 	fullname = realloc (fullname, 8 + strlen (file) + strlen (hostname));
 	sprintf (fullname, "/TFTP/%s/%s", hostname, file);
 	printf ("Read `%s'.\n", fullname);
@@ -144,12 +114,12 @@ makeFullname (rtems_unsigned32 host, const char *file)
 }
 
 void
-testTFTP (void)
+testTFTP (const char *hostname, const char *filename)
 {
 	/*
 	 * Check that invalid file names are reported as such
 	 */
-	if (makeFullname (0, "")) {
+	if (makeFullname (hostname, "")) {
 		testRawRead ();
 		testFread ();
 	}
@@ -157,24 +127,15 @@ testTFTP (void)
 	/*
 	 * Check that non-existent files are reported as such
 	 */
-	if (makeFullname (0, "BAD-FILE-NAME")) {
+	if (makeFullname (hostname, "BAD-FILE-NAME")) {
 		testRawRead ();
 		testFread ();
 	}
 
 	/*
-	 * Check read speed
+	 * Check that read works
 	 */
-#if (defined (USE_BOOTP))
-	if (BootpFileName == NULL) {
-		printf ("Nothing to read!\n");
-		return;
-	}
-	if (makeFullname (BootpHost.s_addr, BootpFileName)) {
-#else
-	if (makeFullname (aton (DATA_SOURCE_HOST), DATA_SOURCE_FILE)) {
-#endif
-
+	if (makeFullname (hostname, filename)) {
 		testRawRead ();
 		testFread ();
 	}

@@ -1,18 +1,14 @@
-#
-# $Revision$    $Date$    $Author$
-#
-
 SAMPLE=ttcp
 PGM=${ARCH}/$(SAMPLE).exe
 
-MANAGERS=io event message rate_monotonic semaphore timer
+MANAGERS=io event semaphore
 
 # C source names, if any, go here -- minus the .c
-C_PIECES= init rtems_ttcp
+C_PIECES= init  rtems_ttcp
 C_FILES=$(C_PIECES:%=%.c)
 C_O_FILES=$(C_PIECES:%=${ARCH}/%.o)
 
-H_FILES= 
+H_FILES=
 
 DOCTYPES=
 DOCS=$(DOCTYPES:%=$(SAMPLE).%)
@@ -34,9 +30,10 @@ include $(PROJECT_ROOT)/make/leaf.cfg
 
 DEFINES  +=
 CPPFLAGS +=
-CFLAGS   += -I./include
-CFLAGS_LD   += -Wl,--defsym -Wl,HeapSize=0x200000 # KA9Q needs more space
+CFLAGS   += 
+CFLAGS_LD += -Wl,--defsym -Wl,HeapSize=0xC0000 
 CFLAGS_OPTIMIZE_V   +=
+CFLAGS_DEBUG_V   += -v -qrtems_debug
 
 LD_PATHS  +=
 LD_LIBS   +=
@@ -48,7 +45,7 @@ LD_LIBS   +=
 #  'make clobber' already includes 'make clean'
 #
 
-CLEAN_ADDITIONS += 
+CLEAN_ADDITIONS +=
 CLOBBER_ADDITIONS +=
 
 all:	${ARCH} $(SRCS) $(PGM)
@@ -56,7 +53,7 @@ all:	${ARCH} $(SRCS) $(PGM)
 ${PGM}: $(OBJS) $(LINK_FILES)
 	$(make-exe)
 
-install: $(INSTALL_TARGET)
-
-$(INSTALL_TARGET): all
-	cp ${PGM} $(INSTALL_TARGET)
+# Install the program(s), appending _g or _p as appropriate.
+# for include files, just use $(INSTALL)
+install:  all
+	$(INSTALL_VARIANT) -m 555 ${PGM} ${PROJECT_RELEASE}/tests

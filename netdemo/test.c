@@ -1,5 +1,5 @@
 /*
- * Test KA9Q networking
+ * Test RTEMS networking
  *
  * This program may be distributed and used for any purpose.
  * I ask only that you:
@@ -11,46 +11,44 @@
  * University of Saskatchewan
  * Saskatoon, Saskatchewan, CANADA
  * eric@skatter.usask.ca
- *
- * $Id$
  */
-
 #include <stdio.h>
+#include <string.h>
+#include <errno.h>
 #include <unistd.h>
 #include <rtems.h>
+#include <rtems/rtems_bsdnet.h>
 #include <rtems/error.h>
-#include <socket.h>
-#include <sockaddr.h>
-#include <netuser.h>
-#include <rtems_ka9q.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
 
-#include "../usercfg.h"
+#define NSERVER		2
+#define BASE_PORT	24742
 
-/*
- * Display the contents of several KA9Q tables
- */
-static void
-show_ka9q_tables (void)
+#define DATA_SINK_HOST	((128 << 24) | (233 << 16) | (14 << 8) | 60)
+
+void showbroad(int s)
 {
-	printf ("\n****************** MALLOC Statistics ***************\n");
-	malloc_dump ();
-	printf ("\n****************** MBUF Statistics ***************\n");
-	mbufstat ();
-	mbufsizes ();
-	printf ("\n****************** Routing Table ***************\n");
-	rtems_ka9q_execute_command ("route");
-	printf ("\n****************** ARP Table ***************\n");
-	rtems_ka9q_execute_command ("arp");
-	printf ("\n****************** Driver Statistics ***************\n");
-	rtems_ka9q_execute_command ("ifconfig rtems");
-	printf ("\n****************** Ip Statistics ***************\n");
-	rtems_ka9q_execute_command ("ip status");
-	printf ("\n****************** ICMP Statistics ***************\n");
-	rtems_ka9q_execute_command ("icmp status");
-	printf ("\n****************** UDP Statistics ***************\n");
-	rtems_ka9q_execute_command ("udp status");
-	printf ("\n****************** TCP Statistics ***************\n");
-	rtems_ka9q_execute_command ("tcp status");
+	int opt;
+	int optlen = sizeof opt;
+
+	if (getsockopt (s, SOL_SOCKET, SO_BROADCAST, &opt, &optlen) < 0)
+		printf ("getsockopt failed: %s\n", strerror (errno));
+	printf ("Opt:%d    Optlen:%d\n", opt, optlen);
+}
+
+static
+void
+showStatistics (void)
+{
+	rtems_bsdnet_show_inet_routes ();
+	rtems_bsdnet_show_mbuf_stats ();
+	rtems_bsdnet_show_if_stats ();
+	rtems_bsdnet_show_ip_stats ();
+	rtems_bsdnet_show_icmp_stats ();
+	rtems_bsdnet_show_udp_stats ();
+	rtems_bsdnet_show_tcp_stats ();
 }
 
 /*
@@ -61,40 +59,54 @@ transmitUdp (void)
 {
 	int s;
 	int i;
+	int opt;
 	static struct sockaddr_in myAddr, farAddr;
 	static char cbuf[800];
-	static char bigbuf[20000];
+	static char bigbuf[9000];
 
 	printf ("Create socket.\n");
 	s = socket (AF_INET, SOCK_DGRAM, 0);
 	if (s < 0)
 		rtems_panic ("Can't create socket: %s", strerror (errno));
 	myAddr.sin_family = AF_INET;
-	myAddr.sin_port = 1234;
-	myAddr.sin_addr.s_addr = INADDR_ANY;
+	myAddr.sin_port = htons (1234);
+	myAddr.sin_addr.s_addr = htonl (INADDR_ANY);
 	printf ("Bind socket.\n");
 	if (bind (s, (struct sockaddr *)&myAddr, sizeof myAddr) < 0)
 		rtems_panic ("Can't bind socket: %s", strerror (errno));
 	farAddr.sin_family = AF_INET;
-	farAddr.sin_port = 9;	/* The `discard' port */
-	farAddr.sin_addr.s_addr = 0xFFFFFFFF;
+	farAddr.sin_port = htons (9);	/* The `discard' port */
+#if 1
+	farAddr.sin_addr.s_addr = htonl (0xFFFFFFFF);
+	if (sendto (s, cbuf, sizeof cbuf, 0, (struct sockaddr *)&farAddr, sizeof farAddr) >= 0)
+		printf ("Broadcast succeeded, but should not have!\n");
+showbroad (s);
+	opt = 1;
+	if (setsockopt (s, SOL_SOCKET, SO_BROADCAST, &opt, sizeof opt) < 0)
+		rtems_panic ("Can't set socket broadcast: %s", strerror (errno));
+showbroad (s);
 	for (i = 0 ; i < 5 ; i++) {
 		if (sendto (s, cbuf, sizeof cbuf, 0, (struct sockaddr *)&farAddr, sizeof farAddr) < 0)
 			rtems_panic ("Can't broadcast: %s", strerror (errno));
 	}
-	farAddr.sin_addr.s_addr = aton (DATA_SINK_HOST);
+#endif
+	farAddr.sin_addr.s_addr = htonl (DATA_SINK_HOST);
+#if 1
 	for (i = 0 ; i < 500 ; i++) {
 		if (sendto (s, cbuf, sizeof cbuf, 0, (struct sockaddr *)&farAddr, sizeof farAddr) < 0)
 			rtems_panic ("Can't send: %s", strerror (errno));
 		if (sendto (s, cbuf, sizeof cbuf, 0, (struct sockaddr *)&farAddr, sizeof farAddr) < 0)
 			rtems_panic ("Can't send: %s", strerror (errno));
 	}
+#endif
+#if 1
 	for (i = 0 ; i < 2 ; i++) {
 		if (sendto (s, bigbuf, sizeof bigbuf, 0, (struct sockaddr *)&farAddr, sizeof farAddr) < 0)
 			rtems_panic ("Can't send: %s", strerror (errno));
 		if (sendto (s, bigbuf, sizeof bigbuf, 0, (struct sockaddr *)&farAddr, sizeof farAddr) < 0)
 			rtems_panic ("Can't send: %s", strerror (errno));
 	}
+#endif
 	close (s);
 }
 	
@@ -115,19 +127,21 @@ transmitTcp (void)
 	if (s < 0)
 		rtems_panic ("Can't create socket: %s", strerror (errno));
 	myAddr.sin_family = AF_INET;
-	myAddr.sin_port = 1234;
-	myAddr.sin_addr.s_addr = INADDR_ANY;
+	myAddr.sin_port = htons (1234);
+	myAddr.sin_addr.s_addr = htonl (INADDR_ANY);
 	printf ("Bind socket.\n");
 	if (bind (s, (struct sockaddr *)&myAddr, sizeof myAddr) < 0)
 		rtems_panic ("Can't bind socket: %s", strerror (errno));
 	farAddr.sin_family = AF_INET;
-	farAddr.sin_port = 9;	/* The `discard' port */
-	farAddr.sin_addr.s_addr = aton (DATA_SINK_HOST);
+	farAddr.sin_port = htons (9);	/* The `discard' port */
+	farAddr.sin_addr.s_addr = htonl (DATA_SINK_HOST);
+	printf ("Connect socket.\n");
 	if (connect (s, (struct sockaddr *)&farAddr, sizeof farAddr) < 0) {
 		printf ("Can't connect socket: %s\n", strerror (errno));
 		close (s);
 		return;
 	}
+	printf ("Write to socket.\n");
 	for (i = 0 ; i < 500 ; i++) {
 		if (write (s, cbuf, sizeof cbuf) < 0)
 			rtems_panic ("Can't send: %s", strerror (errno));
@@ -154,9 +168,8 @@ echoTask (rtems_task_argument fd)
 	int n;
 	rtems_status_code sc;
 
-  printf( "echoTask on %d\n", fd );
 	for (;;) {
-#if 0
+#if 1
 		n = read (fd, cbuf, sizeof cbuf);
 #else
 		n = read (fd, cbuf, 1);
@@ -171,8 +184,6 @@ echoTask (rtems_task_argument fd)
 		printf ("Received: %d\n", n);
 		if (send (fd, cbuf, n, 0) < 0)
 			rtems_panic ("Error sending message: %s", strerror (errno));
-		if (cbuf[0] == '\007')
-			show_ka9q_tables ();
 		if (cbuf[0] == 'Q')
 			break;
 	}
@@ -198,7 +209,7 @@ echoServer (unsigned short port)
 	if (s < 0)
 		rtems_panic ("Can't create socket: %s", strerror (errno));
 	myAddr.sin_family = AF_INET;
-	myAddr.sin_port = port;
+	myAddr.sin_port = htons (port);
 	myAddr.sin_addr.s_addr = INADDR_ANY;
 	memset (myAddr.sin_zero, '\0', sizeof myAddr.sin_zero);
 	printf ("Bind socket.\n");
@@ -214,7 +225,7 @@ echoServer (unsigned short port)
 		if (s1 < 0)
 			rtems_panic ("Can't accept connection: %s", strerror (errno));
 		else
-			printf ("ACCEPTED:%lX\n", farAddr.sin_addr.s_addr);
+			printf ("ACCEPTED:%lX\n", ntohl (farAddr.sin_addr.s_addr));
 
 		/*
 		 * Start an echo task
@@ -258,6 +269,7 @@ doSocket (void)
 	rtems_status_code sc;
 	rtems_task_priority my_priority;
 
+#if 1
 	/*
 	 * Spawn other servers
 	 */
@@ -280,6 +292,7 @@ doSocket (void)
 			return;
 		}
 	}
+#endif
 
 	/*
 	 * Wait for characters from console terminal
@@ -287,7 +300,6 @@ doSocket (void)
 	for (;;) {
 		switch (getchar ()) {
 		case '\004':
-			printf( "Exiting test\n" );
 			return;
 
 		case 't':
@@ -305,10 +317,7 @@ doSocket (void)
 			break;
 
 		case 's':
-			/*
-			 * Show what's been accomplished
-			 */
-			show_ka9q_tables ();
+			showStatistics ();
 			break;
 		}
 	}
