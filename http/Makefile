@@ -55,8 +55,10 @@ CLOBBER_ADDITIONS +=
 all:	${ARCH} $(SRCS) $(PGM)
 
 ${PGM}: $(OBJS) $(LINK_FILES)
-	tar cf $(ARCH)/tarfile index.html
-	$(LD) -r -o $(ARCH)/temp.o  $(ARCH)/init.o -b binary $(ARCH)/tarfile
+ 	cd rootfs ; tar cf ../$(ARCH)/tarfile web etc
+	cp $(ARCH)/tarfile .
+	$(OBJCOPY) -I binary -O elf32-powerpc tarfile $(ARCH)/tarfile.o
+	$(LD) -r -o $(ARCH)/temp.o  $(ARCH)/init.o $(ARCH)/tarfile.o
 	$(MV) $(ARCH)/temp.o  $(ARCH)/init.o
 	$(RM) $(ARCH)/temp.o
 	$(make-exe)
