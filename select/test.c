@@ -29,21 +29,16 @@
 #define BASE_PORT	24742
 #define CLIENT_COUNT	2
 
+static int clientfd[CLIENT_COUNT];
+
 static void
-echoServer (unsigned short port)
+getClients (unsigned short port)
 {
 	int s, s1;
 	struct sockaddr_in myAddr, farAddr;
 	int addrlen;
-	rtems_id tid;
-	rtems_task_priority my_priority;
-	rtems_status_code sc;
-	char c = 'a';
-	fd_set clientfdset;
-	int clientCount, clientfd[CLIENT_COUNT];
-	int topfd = 0;
+	int clientCount;
 
-	FD_ZERO (&clientfdset);
 	printf ("Create socket.\n");
 	s = socket (AF_INET, SOCK_STREAM, 0);
 	if (s < 0)
@@ -70,10 +65,30 @@ echoServer (unsigned short port)
 			rtems_panic ("Can't accept connection: %s", strerror (errno));
 		else
 			printf ("ACCEPTED:%lX\n", ntohl (farAddr.sin_addr.s_addr));
+		clientfd[clientCount] = s1;
+	}
+
+	close (s);
+}
+
+static void
+echoServer (unsigned short port)
+{
+	fd_set clientfdset;
+	int clientCount;
+	int topfd = 0;
+
+	getClients (port);
+
+	FD_ZERO (&clientfdset);
+
+	for (clientCount = 0 ; clientCount < CLIENT_COUNT ; clientCount++) {
+		int s1;
+
+		s1 = clientfd[clientCount];
 		FD_SET (s1, &clientfdset);
 		if (s1 > topfd)
 			topfd = s1;
-		clientfd[clientCount] = s1;
 	}
 
 	/*
@@ -115,6 +130,94 @@ echoServer (unsigned short port)
 				if (nread == 0) {
 					printf ("EOF\n");
 					FD_CLR (fd, &clientfdset);
+					close (fd);
+					if (--clientCount == 0)
+						return;
+				}
+				printf ("Read %d.\n", nread);
+			}
+		}
+	}
+}
+
+static rtems_id tid;
+
+static void
+wakeup (struct socket *so, caddr_t arg)
+{
+	rtems_event_send (tid, RTEMS_EVENT_0 + (int) arg);
+}
+
+static void
+echoServer2 (port)
+{
+	struct sockwakeup sw, sw2;
+	int swlen;
+	int clientCount;
+	rtems_event_set clientEvents;
+
+	getClients (port);
+
+	sw.sw_pfn = &wakeup;
+	clientEvents = 0;
+	for (clientCount = 0 ; clientCount < CLIENT_COUNT ; clientCount++) {
+		sw.sw_arg = (caddr_t) clientCount;
+		if (setsockopt (clientfd[clientCount], SOL_SOCKET,
+				SO_RCVWAKEUP, &sw, sizeof sw) < 0)
+			rtems_panic ("setsockopt failed: %s",
+				     strerror (errno));
+		swlen = sizeof sw2;
+		if (getsockopt (clientfd[clientCount], SOL_SOCKET,
+				SO_RCVWAKEUP, &sw2, &swlen) < 0)
+			rtems_panic ("getsockopt failed: %s",
+				     strerror (errno));
+		if (swlen != sizeof sw2
+		    || sw2.sw_pfn != &wakeup
+		    || (int) sw2.sw_arg != clientCount)
+			rtems_panic ("getsockopt mismatch");
+
+		clientEvents |= RTEMS_EVENT_0 + clientCount;
+	}
+
+	if (rtems_task_ident (RTEMS_SELF, RTEMS_SEARCH_LOCAL_NODE, &tid)
+	    != RTEMS_SUCCESSFUL)
+	  rtems_panic ("rtems_task_ident failed");
+
+	for (;;) {
+		rtems_event_set events;
+		rtems_status_code status;
+		int i;
+
+		status = rtems_event_receive (clientEvents,
+					      RTEMS_WAIT | RTEMS_EVENT_ANY,
+					      RTEMS_MILLISECONDS_TO_TICKS (5000),
+					      &events);
+
+		if (status == RTEMS_TIMEOUT) {
+			printf ("Timeout\n");
+			continue;
+		}
+
+		for (i = 0; i < CLIENT_COUNT; ++i) {
+			if (events == 0)
+				break;
+			if (events & (i + RTEMS_EVENT_0)) {
+				int fd;
+				char buf[200];
+				int nread;
+
+				fd = clientfd[i];
+				printf ("Activity on file descriptor %d.\n", fd);
+				events &= ~ (i + RTEMS_EVENT_0);
+				nread = read (fd, buf, sizeof buf);
+				if (nread < 0) {
+					printf ("Read error %s.\n", strerror (errno));
+					return;
+				}
+				if (nread == 0) {
+					printf ("EOF\n");
+					clientEvents &= ~ (i + RTEMS_EVENT_0);
+					close (fd);
 					if (--clientCount == 0)
 						return;
 				}
