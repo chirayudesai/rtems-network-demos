@@ -52,6 +52,7 @@ Init (rtems_task_argument ignored)
 	int doSocket(void);
 
 	rtems_bsdnet_initialize_network ();
+	rtems_bsdnet_show_inet_routes ();
 	doSocket ();
 	exit (0);
 }
