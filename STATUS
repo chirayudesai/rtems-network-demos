@@ -2,5 +2,6 @@
 #  $Id$
 #
 
-This set of tests is in the process of being converted from KA9Q to
-the newer port of the FreeBSD stack.
+This set of tests is intended to demonstrate the capabilities
+of the RTEMS port of the FreeBSD TCP/IP stack.  In addition, these
+tests can be used to test a network device driver.
