@@ -51,7 +51,7 @@ static struct rtems_bsdnet_ifconfig netdriver_config = {
 	NULL,				/* BOOTP supplies IP address */
 	NULL,				/* BOOTP supplies IP net mask */
 #else
-	"192.168.1.100",		/* IP address */
+	"XXX.YYY.ZZZ.XYZ",		/* IP address */
 	"255.255.255.0",		/* IP net mask */
 #endif /* !RTEMS_USE_BOOTP */
 
@@ -80,18 +80,23 @@ struct rtems_bsdnet_config rtems_bsdnet_config = {
 	0,			/* Default mbuf cluster capacity */
 
 #if (!defined (RTEMS_USE_BOOTP))
+	"rtems_host",		/* Host name */
+	"nodomain.com",		/* Domain name */
+	"XXX.YYY.ZZZ.1",	/* Gateway */
+	"XXX.YYY.ZZZ.1",	/* Log host */
+	{"XXX.YYY.ZZZ.1" },	/* Name server(s) */
+
+	/*
+	 *  A real example -- DO NOT USE THIS YOURSELF!!!
+	 */
+
 #if 0
-	"rgamon",		/* Host name */
-	"usask.ca",		/* Domain name */
-	"128.233.14.100",	/* Gateway */
-	"128.233.14.1",		/* Log host */
-	{"128.233.14.1" },	/* Name server(s) */
-#endif
 	"dy4",			/* Host name */
-	"oarcorp.com",		/* Domain name */
+	"NOT_oarcorp.com",	/* Domain name */
 	"192.168.1.2",   	/* Gateway */
 	"192.168.1.2", 		/* Log host */
 	{"192.168.1.2" },	/* Name server(s) */
+#endif
 #endif /* !RTEMS_USE_BOOTP */
 
 };
@@ -100,7 +105,7 @@ struct rtems_bsdnet_config rtems_bsdnet_config = {
  * For TFTP test application
  */
 #if (!defined (RTEMS_USE_BOOTP))
-#define RTEMS_TFTP_TEST_HOST_NAME "192.168.1.2"
+#define RTEMS_TFTP_TEST_HOST_NAME "XXX.YYY.ZZZ.XYZ"
 #define RTEMS_TFTP_TEST_FILE_NAME "tftptest"
 #endif
 
