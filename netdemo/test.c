@@ -157,6 +157,7 @@ echoTask (rtems_task_argument fd)
 	int n;
 	rtems_status_code sc;
 
+  printf( "echoTask on %d\n", fd );
 	for (;;) {
 #if 0
 		n = read (fd, cbuf, sizeof cbuf);
