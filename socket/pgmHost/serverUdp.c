@@ -2,6 +2,8 @@
  * serverUdp.c : generate an executable to test the UDP Sockets.
  * the RTEMS target must be configured as client.
  * Don't forget to change the IP address.
+ *
+ *  $Id$
  */
 
 

@@ -2,6 +2,8 @@
  * serverTcp.c : generate an executable to test the TCP Sockets.
  * the RTEMS target must be configured as client.
  * Don't forget to change the IP address.
+ *
+ *  $Id$
  */
 
 

@@ -34,7 +34,10 @@
  *
  * Distribution Status -
  *      Public Domain.  Distribution Unlimited.
+ *
+ *  $Id$
  */
+
 #ifndef lint
 static char RCSid[] = "ttcp.c $Revision$";
 #endif

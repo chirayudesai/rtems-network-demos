@@ -2,6 +2,8 @@
  * clientTcp.c : generate an executable to test the TCP Sockets.
  * the RTEMS target must be configured as server.
  * Don't forget to change the IP address.
+ *
+ *  $Id$
  */
 
 #include <stdio.h>

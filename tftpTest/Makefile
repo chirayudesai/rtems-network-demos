@@ -1,3 +1,7 @@
+#
+#  $Id$
+#
+
 SAMPLE=tftp
 PGM=${ARCH}/$(SAMPLE).exe
 

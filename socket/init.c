@@ -3,6 +3,8 @@
  *  This routine is the initialization task for this test program.
  *
  *  Don't forget to change the IP addresses
+ *
+ *  $Id$
  */
 
 #define TEST_INIT

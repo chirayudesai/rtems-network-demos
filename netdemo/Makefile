@@ -1,3 +1,7 @@
+#
+#  $Id$
+#
+
 SAMPLE=netdemo
 PGM=${ARCH}/$(SAMPLE).exe
 

@@ -1,6 +1,8 @@
 /*
  * buffer.h : generate an executable to test the sockets.
  * contains some useful declarations
+ *
+ *  $Id$
  */
 
 #ifndef _BUFFER_H

@@ -1,6 +1,8 @@
 /*
  * buffer.c : generate an executable to test the sockets.
  * it is used to create/test the sent/receive messages
+ *
+ *  $Id$
  */
 
 #include <stdlib.h>
