@@ -15,7 +15,12 @@
  * $Id$
  */
 
-/*#define TRACE_NETWORK_DRIVER 1 */
+/*
+ *  Include user provided information
+ */
+
+#include "../usercfg.h"
+
 #include <bsp.h>
 
 #define CONFIGURE_TEST_NEEDS_CONSOLE_DRIVER
@@ -45,31 +50,9 @@ rtems_task Init (rtems_task_argument argument);
 #include <stdio.h>
 #include <rtems_ka9q.h>
 
-/*
- * Board ethernet address
- * REPLACE THIS WITH YOUR OWN VALUE BEFORE TRYING TO USE THIS PROGRAM!
- */
-#define MY_ETHERNET_ADDRESS "37:1D:3E:21:2B:A5"
-
-/*
- * Some board support packages let the network driver
- * get the Ethernet address from the bootstrap PROM.
- */
-#define MY_ETHERNET_ADDRESS "prom"
-
-/*
- * Use BOOTP to get information about me?
- */
-#define USE_BOOTP	1
 
 #if (defined (USE_BOOTP))
 #include <bootp.h>
-#else
-/*
- * Information about me if BOOTP isn't used
- * CHOOSE A VALUE APPROPRIATE TO YOUR NETWORK!
- */
-#define MY_IP_ADDRESS	"128.233.14.68"
 #endif
 
 /*
@@ -90,18 +73,18 @@ delay_task (int seconds)
 rtems_task
 Init (rtems_task_argument ignored)
 {
-	printf( "\n\n*** HELLO WORLD TEST ***\n" );
-	printf( "Hello World\n" );
-	printf( "*** END OF HELLO WORLD TEST ***\n" );
+	printf( "\n\n*** ETHERNET DEMO TEST ***\n" );
 
 	/*
 	 * Start KA9Q
 	 */
+	puts( "Starting KA9Q" );
 	rtems_ka9q_start (50);
 
 	/*
 	 * Hook up drivers
 	 */
+	puts( "Attaching to the network" );
 #if (defined (USE_BOOTP))
 	if (rtems_ka9q_execute_command ("attach rtems broadcast y"
 					" ether " MY_ETHERNET_ADDRESS))
@@ -116,6 +99,7 @@ Init (rtems_task_argument ignored)
 	/*
 	 * Turn on debugging
 	 */
+	puts( "Enabling debug mode of KA9Q" );
 	if (rtems_ka9q_execute_command ("trace rtems input <stdout>")
 	 || rtems_ka9q_execute_command ("trace rtems output <stdout>")
 	 || rtems_ka9q_execute_command ("trace rtems ascii <stdout>"))
