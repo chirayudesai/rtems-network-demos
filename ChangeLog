@@ -1,3 +1,11 @@
+2002-10-18	Joel Sherrill <joel@OARcorp.com>
+
+	* dnstest/init.c, netdemo/init.c, netlink/init.c, ntp/init.c,
+	rpc_demo/init.c, select/init.c, tftpTest/init.c, ttcp/init.c:
+	define CONFIGURE_LIBIO_MAXIMUM_FILE_DESCRIPTORS to 20 for enough
+	sockets and CONFIGURE_USE_IMFS_AS_BASE_FILESYSTEM even if not
+	absolutely needed for networking.
+
 2001-08-30	Joel Sherrill <joel@OARcorp.com>
 
 	* SUPPORT: New file.
