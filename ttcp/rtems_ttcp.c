@@ -21,6 +21,7 @@
  */
 
 #include <stdio.h>
+#include <string.h>
 #include <ctype.h>
 #include <rtems.h>
 #include <rtems/rtems_bsdnet.h>
@@ -98,6 +99,7 @@ getrusage(int ignored, struct rusage *ru)
 static void
 rtems_ttcp_exit (int code)
 {
+	rtems_task_wake_after( RTEMS_MILLISECONDS_TO_TICKS(1000) );
 	rtems_bsdnet_show_mbuf_stats ();
 	rtems_bsdnet_show_if_stats ();
 	rtems_bsdnet_show_ip_stats ();
@@ -228,5 +230,6 @@ test_network (void)
 #define main		rtems_ttcp_main
 #define exit(code)	close(fd),rtems_ttcp_exit(code)
 #define read_timer	rtems_read_timer
+#undef delay
 
 #include "ttcp_orig/ttcp.c"
