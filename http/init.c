@@ -5,6 +5,8 @@
  *  Don't forget to change the IP addresses
  */
 
+#define USE_HTTPD
+#define USE_FTPD
 #define TEST_INIT
 
 #define CONFIGURE_TEST_NEEDS_CONSOLE_DRIVER
@@ -57,6 +59,8 @@
  *  built optimized or debug.
  */
 
+#if defined(USE_FTPD)
+/*
 #if defined(RTEMS_DEBUG)
 extern int _binary_o_debug_tarfile_start;
 extern int _binary_o_debug_tarfile_size;
@@ -68,13 +72,21 @@ extern int _binary_o_optimize_tarfile_size;
 #define TARFILE_START _binary_o_optimize_tarfile_start
 #define TARFILE_SIZE _binary_o_optimize_tarfile_size
 #endif
+*/
+extern int _binary_tarfile_start;
+extern int _binary_tarfile_size;
+#define TARFILE_START _binary_tarfile_start
+#define TARFILE_SIZE _binary_tarfile_size
+#endif
 
+#if defined(USE_FTPD)
 struct rtems_ftpd_configuration rtems_ftpd_configuration = {
    10,                     /* FTPD task priority            */
    1024,                   /* Maximum buffersize for hooks  */
    21,                     /* Well-known port     */
    NULL                    /* List of hooks       */
 };
+#endif
 rtems_task Init(
   rtems_task_argument argument
 )
@@ -86,11 +98,15 @@ rtems_task Init(
   /* init_paging(); */
 
   rtems_bsdnet_initialize_network ();
+#if defined(USE_FTPD)
   rtems_initialize_ftpd();
 
   status = Untar_FromMemory((unsigned char *)(&TARFILE_START), &TARFILE_SIZE);
+#endif
    
+#if defined(USE_HTTPD)
   rtems_initialize_webserver();
+#endif
 
   status = rtems_task_delete( RTEMS_SELF );
 }

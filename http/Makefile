@@ -41,6 +41,7 @@ CFLAGS_DEBUG_V   += -v -qrtems_debug
 
 LD_PATHS  +=
 LD_LIBS   +=
+NATIVE_OBJ = $(shell $(OBJCOPY) 2>&1  | grep copy: | cut -d':' -f3 | cut -d' ' -f2)
 
 #
 # Add your list of files to delete here.  The config files
@@ -55,9 +56,9 @@ CLOBBER_ADDITIONS +=
 all:	${ARCH} $(SRCS) $(PGM)
 
 ${PGM}: $(OBJS) $(LINK_FILES)
- 	cd rootfs ; tar cf ../$(ARCH)/tarfile web etc
+	cd rootfs ; tar cf ../$(ARCH)/tarfile web etc
 	cp $(ARCH)/tarfile .
-	$(OBJCOPY) -I binary -O elf32-powerpc tarfile $(ARCH)/tarfile.o
+	$(OBJCOPY) -I binary -O $(NATIVE_OBJ) tarfile $(ARCH)/tarfile.o
 	$(LD) -r -o $(ARCH)/temp.o  $(ARCH)/init.o $(ARCH)/tarfile.o
 	$(MV) $(ARCH)/temp.o  $(ARCH)/init.o
 	$(RM) $(ARCH)/temp.o

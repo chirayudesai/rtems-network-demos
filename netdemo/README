@@ -2,31 +2,26 @@
 # $Id$
 #
 
-A simple application to test some of the KA9Q networking code.
+A simple application to test some of the RTEMS/FreeBSD networking code.
 
     **************************
     *          NOTES         *
     **************************
 
-1. Make sure you change the definition of MY_ETHERNET_ADDRESS in init.c
-   before you try to use this program.
+BE SURE TO LOCALIZE networkconfig.h.  FAILURE TO DO SO MAY PROVOKE YOUR
+NETWORK ADMINISTRATOR TO THE POINT WHERE VICIOUS ATTACKS WILL BE MADE
+UPON YOU.
 
-2. If you do not use BOOTP (i.e. the `#define USE_BOOTP 1' in init.c is
-   removed), make sure you change the definition of MY_INTERNET_ADDRESS
-   before you try to use the program.
+Once this program is running on the target machine, you can test
+the network code by:
 
-FAILURE TO FOLLOW THE ABOVE INSTRUCTIONS MAY PROVOKE YOUR NETWORK
-ADMINISTRATOR TO THE POINT WHERE VICIOUS ATTACKS WILL BE MADE UPON YOU.
-
-3. Once this program is running on the target machine, you can test
-   the network code by:
-	a) Typing commands at the target console:
-		s - show network statistics
-		t - transmit TCP packets
-		u - transmit UDP packets
-	b) Run `telnet target_machine 24742' on another machines.
-	   Everything you type should be echoed back and noted on
-	   the target console.
-	   You can run more than one telnet session at once.
-	   You can use port number 24743 as well.
+ Typing commands at the target console:
+    - show network statistics
+    - transmit TCP packets
+    - transmit UDP packets
+    Run `telnet target_machine 24742' on another machines.
+ Everything you type should be echoed back and noted on
+ the target console.
+ You can run more than one telnet session at once.
+ You can use port number 24743 as well.
 

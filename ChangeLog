@@ -1,3 +1,10 @@
+2001-08-30	Joel Sherrill <joel@OARcorp.com>
+
+	* README, networkconfig.h, netdemo/README, tftpTest/test.c: Merged
+	missing stuff from 4.5 branch.
+	* http/Makefile, http/init.c: Minor modifications to improve
+	buildability.
+
 2000-12-14	Eric Norum <eric.norum@usask.ca>
 
 	* networkconfig.h: Default to using bootp host for tftp test.

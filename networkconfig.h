@@ -12,6 +12,14 @@
 #ifndef _RTEMS_NETWORKCONFIG_H_
 #define _RTEMS_NETWORKCONFIG_H_
 
+/*
+ *  The following will normally be set by the BSP if it supports
+ *  a single network device driver.  In the event, it supports
+ *  multiple network device drivers, then the user's default
+ *  network device driver will have to be selected by a BSP
+ *  specific mechanism.
+ */
+
 #ifndef RTEMS_BSP_NETWORK_DRIVER_NAME
 #warning "RTEMS_BSP_NETWORK_DRIVER_NAME is not defined"
 #define RTEMS_BSP_NETWORK_DRIVER_NAME "no_network1"
