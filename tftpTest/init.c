@@ -13,6 +13,8 @@
  * eric@skatter.usask.ca
  */
 
+#include "../usercfg.h"
+
 #include <bsp.h>
 #include <rtems/error.h>
 #include <tftp.h>
@@ -39,13 +41,6 @@ rtems_driver_address_table Device_drivers[] = {
 };
 
 #include <confdefs.h>
-
-/*
- * Board ethernet address
- * REPLACE THIS WITH YOUR OWN VALUE BEFORE TRYING TO USE THIS PROGRAM!
- */
-#define MY_ETHERNET_ADDRESS "48:3E:3E:21:2E:D5"
-#define MY_ETHERNET_ADDRESS "prom"
 
 #include <bootp.h>
 extern void testTFTP (void);

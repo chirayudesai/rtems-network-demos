@@ -13,6 +13,8 @@
  * eric@skatter.usask.ca
  */
 
+#include "../usercfg.h"
+
 /*#define TRACE_SCC1 1 */
 #include <bsp.h>
 
@@ -35,26 +37,8 @@ rtems_task Init (rtems_task_argument argument);
 #include <stdio.h>
 #include <rtems_ka9q.h>
 
-/*
- * Board ethernet address
- * REPLACE THIS WITH YOUR OWN VALUE BEFORE TRYING TO USE THIS PROGRAM!
- */
-#define MY_ETHERNET_ADDRESS "3B:1D:3E:21:E2:D5"
-#define MY_ETHERNET_ADDRESS "prom"
-
-/*
- * Use BOOTP to get information about me?
- */
-#define USE_BOOTP	1
-
 #if (defined (USE_BOOTP))
 #include <bootp.h>
-#else
-/*
- * Information about me if BOOTP isn't used
- * CHOOSE A VALUE APPROPRIATE TO YOUR NETWORK!
- */
-#define MY_IP_ADDRESS	"128.233.14.68"
 #endif
 
 /*
