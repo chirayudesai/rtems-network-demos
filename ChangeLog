@@ -1,5 +1,9 @@
 2001-08-30	Joel Sherrill <joel@OARcorp.com>
 
+	* SUPPORT: New file.
+
+2001-08-30	Joel Sherrill <joel@OARcorp.com>
+
 	* README, networkconfig.h, netdemo/README, tftpTest/test.c: Merged
 	missing stuff from 4.5 branch.
 	* http/Makefile, http/init.c: Minor modifications to improve
