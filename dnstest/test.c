@@ -95,17 +95,17 @@ testDNS (void)
 		if (fgets (namebuf, sizeof namebuf, stdin) == NULL)
 			return;
 		cp = namebuf;
-		while (isspace (*cp))
+		while (isspace ((int) *cp))
 			cp++;
 		if (cp[0] == '\0') {
 			showStatistics ();
 			continue;
 		}
 		name = cp;
-		while (isgraph (*cp))
+		while (isgraph ((int) *cp))
 			cp++;
 		*cp = '\0';
-		if (isdigit(*name)) {
+		if (isdigit((int) *name)) {
 			struct in_addr addr;
 
 			addr.s_addr = inet_addr (name);
