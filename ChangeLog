@@ -1,5 +1,9 @@
 2002-10-18	Joel Sherrill <joel@OARcorp.com>
 
+	* VERSION: Updated to /usr1/rtems/releases/netdemos-20021018.
+
+2002-10-18	Joel Sherrill <joel@OARcorp.com>
+
 	* dnstest/init.c, netdemo/init.c, netlink/init.c, ntp/init.c,
 	rpc_demo/init.c, select/init.c, tftpTest/init.c, ttcp/init.c:
 	define CONFIGURE_LIBIO_MAXIMUM_FILE_DESCRIPTORS to 20 for enough
