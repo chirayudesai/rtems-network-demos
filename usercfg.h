@@ -37,7 +37,18 @@
  *  Define this if you want to see debugging messages.
  */
 
-#define TRACE_NETWORK_DRIVER 1
+/* #define TRACE_NETWORK_DRIVER 1 */
+
+/*
+ *  Need these for the netdemo
+ */
+
+#define NSERVER               2
+#define BASE_PORT     24742
+
+#define DATA_SINK_HOST        "192.168.1.2"
+#define DATA_SOURCE_HOST      "192.168.1.2"
+#define DATA_SOURCE_FILE      "tftptest"
 
 /*
  *  Do some consistency checking.
