@@ -38,13 +38,6 @@
 #define CONFIGURE_INIT
 rtems_task Init (rtems_task_argument argument);
 
-#define CONFIGURE_HAS_OWN_DEVICE_DRIVER_TABLE
-rtems_driver_address_table Device_drivers[] = {
-  CONSOLE_DRIVER_TABLE_ENTRY,
-  CLOCK_DRIVER_TABLE_ENTRY,
-  TFTP_DRIVER_TABLE_ENTRY,
-};
-
 #include <confdefs.h>
 
 #include <stdio.h>
@@ -60,6 +53,7 @@ Init (rtems_task_argument ignored)
 	const char *hostname, *filename;
 
 	rtems_bsdnet_initialize_network ();
+	rtems_bsdnet_initialize_tftp_filesystem ();
 
 #if (defined (RTEMS_USE_BOOTP))
 	hostname = NULL;
