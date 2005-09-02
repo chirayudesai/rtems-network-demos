@@ -1,3 +1,55 @@
+2005-09-02	Joel Sherrill <joel@OARcorp.com>
+
+	* VERSION: Updated to network-demos-4.6.99.2.
+
+<<<<<<< ChangeLog
+2003-09-18	Joel Sherrill <joel@OARcorp.com>
+
+	PR 493/networking
+	* dnstest/init.c, http/Makefile, http/init.c, http/system.h,
+	netdemo/init.c, netlink/init.c, ntp/init.c, select/init.c,
+	select/test.c, tftpTest/init.c, tftpTest/test.c, ttcp/init.c,
+	ttcp/rtems_ttcp.c: Made all the tests compile and eliminated warnings
+	except in the ttcp_orig code.
+	* Makefile: New file.
+	* netlink/system.h: Removed.
+
+2003-07-03	Joel Sherrill <joel@OARcorp.com>
+
+	* VERSION: Updated to network-demos-4.6.0pre4.
+
+2003-02-11	Joel Sherrill <joel@OARcorp.com>
+
+	* VERSION: Updated to network-demos-4.6.0pre1.
+
+=======
+2003-09-18	Jay Monkman <jtm@smoothsmoothie.com>
+
+	PR 494/networking
+	* Changed Makefile to not use objcopy to create a linkable
+        object file from the tar file. Instead, ld links it in
+        directly.
+
+2003-09-18	Joel Sherrill <joel@OARcorp.com>
+
+	PR 493/networking
+	* dnstest/init.c, http/Makefile, http/init.c, http/system.h,
+	netdemo/init.c, netlink/init.c, ntp/init.c, select/init.c,
+	select/test.c, tftpTest/init.c, tftpTest/test.c, ttcp/init.c,
+	ttcp/rtems_ttcp.c: Made all the tests compile and eliminated warnings
+	except in the ttcp_orig code.
+	* Makefile: New file.
+	* netlink/system.h: Removed.
+
+2003-07-03	Joel Sherrill <joel@OARcorp.com>
+
+	* VERSION: Updated to network-demos-4.6.0pre4.
+
+2003-02-11	Joel Sherrill <joel@OARcorp.com>
+
+	* VERSION: Updated to network-demos-4.6.0pre1.
+
+>>>>>>> 1.8.2.4
 2003-01-28	Joel Sherrill <joel@OARcorp.com>
 
 	* VERSION: Updated to network-demos-20030128.
