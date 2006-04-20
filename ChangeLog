@@ -2,7 +2,6 @@
 
 	* VERSION: Updated to network-demos-4.6.99.2.
 
-<<<<<<< ChangeLog
 2003-09-18	Joel Sherrill <joel@OARcorp.com>
 
 	PR 493/networking
@@ -22,7 +21,6 @@
 
 	* VERSION: Updated to network-demos-4.6.0pre1.
 
-=======
 2003-09-18	Jay Monkman <jtm@smoothsmoothie.com>
 
 	PR 494/networking
@@ -49,7 +47,6 @@
 
 	* VERSION: Updated to network-demos-4.6.0pre1.
 
->>>>>>> 1.8.2.4
 2003-01-28	Joel Sherrill <joel@OARcorp.com>
 
 	* VERSION: Updated to network-demos-20030128.
