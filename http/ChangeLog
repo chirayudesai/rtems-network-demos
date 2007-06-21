@@ -1,5 +1,9 @@
 2007-06-21	Joel Sherrill <joel.sherrill@OARcorp.com>
 
+	* init.c, system.h: confdefs.h should be rtems/confdefs.h
+
+2007-06-21	Joel Sherrill <joel.sherrill@OARcorp.com>
+
 	* init.c: Replace CONFIGURE_TEST_XXX with CONFIGURE_APPLICATION_XXX.
 
 2000-12-14	Joel Sherrill <joel@OARcorp.com>

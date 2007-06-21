@@ -24,7 +24,7 @@ rtems_task Init(
 
 /* configuration information */
 
-#include <confdefs.h>
+#include <rtems/confdefs.h>
 
 /* global variables */
 

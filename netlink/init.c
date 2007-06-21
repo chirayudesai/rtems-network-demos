@@ -32,7 +32,7 @@ rtems_task Init(
 
 /* configuration information */
 
-#include <confdefs.h>
+#include <rtems/confdefs.h>
 
 #include <errno.h>
 #include <time.h>

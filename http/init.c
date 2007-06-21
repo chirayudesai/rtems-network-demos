@@ -35,7 +35,7 @@
 #include <errno.h>
 #include <time.h>
 
-#include <confdefs.h>
+#include <rtems/confdefs.h>
 #include <stdio.h>
 #include <rtems/rtems_bsdnet.h>
 #include <ftpd.h>
