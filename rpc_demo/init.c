@@ -26,7 +26,7 @@
 
 rtems_task Init(rtems_task_argument argument);
 
-#include <confdefs.h>
+#include <rtems/confdefs.h>
 
 /*
  * Network configuration

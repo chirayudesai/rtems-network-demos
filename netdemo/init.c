@@ -39,7 +39,7 @@
 #define CONFIGURE_INIT
 rtems_task Init (rtems_task_argument argument);
 
-#include <confdefs.h>
+#include <rtems/confdefs.h>
 
 #include <stdio.h>
 #include <rtems/rtems_bsdnet.h>
