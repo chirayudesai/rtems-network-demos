@@ -40,7 +40,8 @@ CFLAGS_OPTIMIZE_V   +=
 CFLAGS_DEBUG_V   += -v -qrtems_debug
 
 LD_PATHS  +=
-LD_LIBS   +=
+LD_LIBS   += -lhttpd
+LD_LIBS   += -lftpd
 NATIVE_OBJ = $(shell $(OBJCOPY) 2>&1  | grep copy: | cut -d':' -f3 | cut -d' ' -f2)
 
 #

@@ -9,12 +9,10 @@
  *
  *  The license and distribution terms for this file may be
  *  found in the file LICENSE in this distribution or at
- *  http://www.OARcorp.com/rtems/license.html.
- *
  *  $Id$
  */
 
-#include <tmacros.h>
+#include <rtems.h>
 
 /* functions */
 
@@ -25,9 +23,5 @@ rtems_task Init(
 /* configuration information */
 
 #include <rtems/confdefs.h>
-
-/* global variables */
-
-TEST_EXTERN rtems_id Global_variable;    /* example global variable     */
 
 /* end of include file */
