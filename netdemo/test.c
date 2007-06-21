@@ -34,11 +34,11 @@
 void showbroad(int s)
 {
 	int opt;
-	int optlen = sizeof opt;
+	socklen_t optlen = sizeof opt;
 
 	if (getsockopt (s, SOL_SOCKET, SO_BROADCAST, &opt, &optlen) < 0)
 		printf ("getsockopt failed: %s\n", strerror (errno));
-	printf ("Opt:%d    Optlen:%d\n", opt, optlen);
+	printf ("Opt:%d    Optlen:%ld\n", opt, (long)optlen);
 }
 
 static
@@ -201,7 +201,7 @@ echoServer (unsigned short port)
 {
 	int s, s1;
 	struct sockaddr_in myAddr, farAddr;
-	int addrlen;
+	socklen_t addrlen;
 	rtems_id tid;
 	rtems_task_priority my_priority;
 	rtems_status_code sc;
