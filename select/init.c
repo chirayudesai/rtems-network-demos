@@ -42,6 +42,7 @@ rtems_task Init (rtems_task_argument argument);
 #include <rtems/confdefs.h>
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <rtems/rtems_bsdnet.h>
 #include "../networkconfig.h"
 

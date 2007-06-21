@@ -1,5 +1,9 @@
 2007-06-21	Joel Sherrill <joel.sherrill@OARcorp.com>
 
+	* init.c, test.c: More warnings removed.
+
+2007-06-21	Joel Sherrill <joel.sherrill@OARcorp.com>
+
 	* init.c: confdefs.h should be rtems/confdefs.h
 
 2007-06-21	Joel Sherrill <joel.sherrill@OARcorp.com>

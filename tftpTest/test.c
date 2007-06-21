@@ -22,6 +22,7 @@
 #include <rtems/error.h>
 #include <sys/fcntl.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 static char cbuf[1024];
 static char *fullname;

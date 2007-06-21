@@ -24,6 +24,7 @@
 #include <rtems/error.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <sys/select.h>
 #include <netinet/in.h>
 
 #define BASE_PORT	24742
@@ -36,7 +37,7 @@ getClients (unsigned short port)
 {
 	int s, s1;
 	struct sockaddr_in myAddr, farAddr;
-	int addrlen;
+	socklen_t addrlen;
 	int clientCount;
 
 	printf ("Create socket.\n");
@@ -148,11 +149,12 @@ wakeup (struct socket *so, caddr_t arg)
 	rtems_event_send (tid, RTEMS_EVENT_0 + (int) arg);
 }
 
+#if 0
 static void
 echoServer2 (port)
 {
 	struct sockwakeup sw, sw2;
-	int swlen;
+	socklen_t swlen;
 	int clientCount;
 	rtems_event_set clientEvents;
 
@@ -226,6 +228,7 @@ echoServer2 (port)
 		}
 	}
 }
+#endif
 
 void
 doSocket (void)
