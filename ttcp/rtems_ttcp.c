@@ -31,6 +31,8 @@
 #include <netinet/in.h>
 #include <netdb.h>
 #include <sys/time.h>
+#include <stdlib.h>
+#include <signal.h>
 
 /*
  * Glue between UNIX-style ttcp code and RTEMS
@@ -40,13 +42,8 @@ int rtems_ttcp_main (int argc, char **argv);
 static int
 select(int nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout)
 {
-	rtems_panic ("select()");
-}
-
-static void
-(*signal(int sig, void (*func)()))()
-{
-	return 0;;
+  rtems_panic ("select()");
+  return 0;
 }
 
 #define _SYS_RESOURCE_H_
