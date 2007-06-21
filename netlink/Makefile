@@ -35,13 +35,12 @@ include $(PROJECT_ROOT)/make/leaf.cfg
 DEFINES  +=
 CPPFLAGS +=
 CFLAGS   +=
-CFLAGS_LD += 
 # CFLAGS_LD += -Wl,--defsym -Wl,HeapSize=0xC0000 
 CFLAGS_OPTIMIZE_V   +=
 CFLAGS_DEBUG_V   += -v -qrtems_debug
 
 LD_PATHS  +=
-LD_LIBS   +=
+LD_LIBS   += -lhttpd
 
 #
 # Add your list of files to delete here.  The config files

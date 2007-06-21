@@ -37,10 +37,10 @@ rtems_task Init(
 #include <errno.h>
 #include <time.h>
 
-#include <confdefs.h>
 #include <stdio.h>
 #include <rtems/rtems_bsdnet.h>
-#include <ftpd.h>
+#include <rtems/ftpd.h>
+#include <rtems/untar.h>
 
      
 #include <rtems/error.h>

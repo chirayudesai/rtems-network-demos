@@ -1,5 +1,9 @@
 2007-06-21	Joel Sherrill <joel.sherrill@OARcorp.com>
 
+	* Makefile, init.c: Now compiles reasonably cleanly with CVS head.
+
+2007-06-21	Joel Sherrill <joel.sherrill@OARcorp.com>
+
 	* init.c, system.h: confdefs.h should be rtems/confdefs.h
 
 2007-06-21	Joel Sherrill <joel.sherrill@OARcorp.com>
