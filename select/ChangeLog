@@ -1,3 +1,7 @@
+2007-06-21	Joel Sherrill <joel.sherrill@OARcorp.com>
+
+	* init.c: Replace CONFIGURE_TEST_XXX with CONFIGURE_APPLICATION_XXX.
+
 2003-01-28	Joel Sherrill <joel@OARcorp.com>
 
 	* init.c: Increase number of file descriptors and use IMFS instead of
