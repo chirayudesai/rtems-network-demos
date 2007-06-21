@@ -91,15 +91,15 @@ rtems_task Init(
   rtems_bsdnet_initialize_network ();
 
 #if INCLUDE_FTPD
-  status = Untar_FromMemory((unsigned char *)(&_binary_tarfile_start),
-			    &_binary_tarfile_size);
+  status = Untar_FromMemory((void *)(&_binary_tarfile_start),
+			    (size_t)&_binary_tarfile_size);
   rtems_initialize_ftpd();
 
 #endif
    
 #if INCLUDE_HTTPD
-  status = Untar_FromMemory((unsigned char *)(&_binary_tarfile_start),
-			    &_binary_tarfile_size);
+  status = Untar_FromMemory((void *)(&_binary_tarfile_start),
+			    (size_t)&_binary_tarfile_size);
   rtems_initialize_webserver();
 #endif 
 

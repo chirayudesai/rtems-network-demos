@@ -102,7 +102,7 @@ rtems_task Init(
 #if defined(USE_FTPD)
   rtems_initialize_ftpd();
 
-  status = Untar_FromMemory((unsigned char *)(&TARFILE_START), &TARFILE_SIZE);
+  status = Untar_FromMemory((void *)(&TARFILE_START), (size_t)&TARFILE_SIZE);
 #endif
    
 #if defined(USE_HTTPD)

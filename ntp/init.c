@@ -42,6 +42,7 @@ rtems_task Init (rtems_task_argument argument);
 #include <rtems/confdefs.h>
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <rtems/rtems_bsdnet.h>
 #include <rtems/error.h>
 #include "../networkconfig.h"
@@ -69,14 +70,15 @@ Init (rtems_task_argument ignored)
 	sc = rtems_clock_get (RTEMS_CLOCK_GET_TOD, &now);
 	if (sc != RTEMS_SUCCESSFUL)
 		printf ("Failed to get time of day: %s\n", rtems_status_text (sc));
-	printf ("The time is **** %.4d-%.2d-%.2d %.2d:%.2d:%.2d.%.3d (%d) ****\n",
-				now.year,
-				now.month,
-				now.day,
-				now.hour,
-				now.minute,
-				now.second,
-				(now.ticks * 1000) / ticksPerSecond,
-				now.ticks);
+	printf (
+          "The time is **** %.4ld-%.2ld-%.2ld %.2ld:%.2ld:%.2ld.%.3ld (%ld) ****\n",
+          (long) now.year,
+          (long) now.month,
+          (long) now.day,
+          (long) now.hour,
+          (long) now.minute,
+          (long) now.second,
+          (long) ((now.ticks * 1000) / ticksPerSecond),
+          (long) now.ticks);
 	exit (0);
 }
