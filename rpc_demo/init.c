@@ -6,6 +6,7 @@
 #include <rtems/error.h>
 #include <rtems/rtems_bsdnet.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #define CONFIGURE_RTEMS_INIT_TASKS_TABLE
 #define CONFIGURE_LIBIO_MAXIMUM_FILE_DESCRIPTORS 20
@@ -31,17 +32,7 @@ rtems_task Init(rtems_task_argument argument);
 /*
  * Network configuration
  */
-#define NETWORK_TASK_PRIORITY	50
-static struct rtems_bsdnet_ifconfig netdriver_config = {
-	  RTEMS_BSP_NETWORK_DRIVER_NAME,
-	  RTEMS_BSP_NETWORK_DRIVER_ATTACH,
-};
-
-struct rtems_bsdnet_config rtems_bsdnet_config = {
-	&netdriver_config,	/* Network interface */
-	rtems_bsdnet_do_bootp,  /* Use BOOTP to get network configuration */
-	NETWORK_TASK_PRIORITY,  /* Network task priority */
-};
+#include "../networkconfig.h"
 
 #ifdef SERVER
 #define T(x)            __TXT(x)
@@ -76,5 +67,5 @@ Init (rtems_task_argument ignored)
 /*
  * Dummy portmapper routines
  */
-pmap_set () { ; }
-pmap_unset () { ; }
+void pmap_set () { ; }
+void pmap_unset () { ; }
