@@ -51,7 +51,7 @@ NATIVE_OBJ = $(shell $(OBJCOPY) 2>&1  | grep copy: | cut -d':' -f3 | cut -d' ' -
 #  'make clobber' already includes 'make clean'
 #
 
-CLEAN_ADDITIONS +=
+CLEAN_ADDITIONS += tarfile
 CLOBBER_ADDITIONS +=
 
 all:	${ARCH} $(SRCS) $(PGM)

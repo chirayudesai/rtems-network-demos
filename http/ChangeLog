@@ -1,5 +1,9 @@
 2007-06-21	Joel Sherrill <joel.sherrill@OARcorp.com>
 
+	* Makefile: Remove tarfile when make clean.
+
+2007-06-21	Joel Sherrill <joel.sherrill@OARcorp.com>
+
 	* init.c: More warnings removed.
 
 2007-06-21	Joel Sherrill <joel.sherrill@OARcorp.com>
