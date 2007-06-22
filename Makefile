@@ -4,7 +4,7 @@
 
 include $(RTEMS_MAKEFILE_PATH)/Makefile.inc
 
-SUBDIRS= netdemo netlink http dnstest ntp select tftpTest ttcp
+SUBDIRS= netdemo http dnstest ntp select tftpTest ttcp
 
 # This requires something that is optional and we need to test for it
 #SUBDIRS+= rpc_demo

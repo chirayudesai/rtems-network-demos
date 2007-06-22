@@ -1,3 +1,9 @@
+2007-06-22	Joel Sherrill <joel.sherrill@OARcorp.com>
+
+	* Makefile: Remove netlink. It appeared to be a hacked copy of http.
+	* netlink/ChangeLog, netlink/Makefile, netlink/index.html,
+	netlink/init.c, netlink/networkconfig.h, netlink/system.h: Removed.
+
 2007-06-21	Joel Sherrill <joel.sherrill@OARcorp.com>
 
 	* Makefile: New file.
