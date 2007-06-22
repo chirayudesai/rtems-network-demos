@@ -56,29 +56,19 @@
 #define ARGUMENT 0
 
 /*
- *  The tarfile is built in $(ARCH) so includes whether we were
- *  built optimized or debug.
+ *  The tarfile is built automatically externally so we need to account
+ *  for the leading symbol on the names.
  */
-
-#if defined(USE_FTPD)
-/*
-#if defined(RTEMS_DEBUG)
-extern int _binary_o_debug_tarfile_start;
-extern int _binary_o_debug_tarfile_size;
-#define TARFILE_START _binary_o_debug_tarfile_start
-#define TARFILE_SIZE _binary_o_debug_tarfile_size
+#if defined(__sh__)
+  #define SYM(_x) _x
 #else
-extern int _binary_o_optimize_tarfile_start;
-extern int _binary_o_optimize_tarfile_size;
-#define TARFILE_START _binary_o_optimize_tarfile_start
-#define TARFILE_SIZE _binary_o_optimize_tarfile_size
+  #define SYM(_x) _ ## _x
 #endif
-*/
-extern int _binary_tarfile_start;
-extern int _binary_tarfile_size;
-#define TARFILE_START _binary_tarfile_start
-#define TARFILE_SIZE _binary_tarfile_size
-#endif
+
+extern int SYM(binary_tarfile_start);
+extern int SYM(binary_tarfile_size);
+#define TARFILE_START SYM(binary_tarfile_start)
+#define TARFILE_SIZE SYM(binary_tarfile_size)
 
 #if defined(USE_FTPD)
 struct rtems_ftpd_configuration rtems_ftpd_configuration = {
@@ -96,15 +86,13 @@ rtems_task Init(
 
   printf("\n\n*** HTTP TEST ***\n\r" );
 
-  /* init_paging(); */
-
+  status = Untar_FromMemory((void *)(&TARFILE_START), (size_t)&TARFILE_SIZE);
+   
   rtems_bsdnet_initialize_network ();
 #if defined(USE_FTPD)
   rtems_initialize_ftpd();
-
-  status = Untar_FromMemory((void *)(&TARFILE_START), (size_t)&TARFILE_SIZE);
 #endif
-   
+
 #if defined(USE_HTTPD)
   rtems_initialize_webserver();
 #endif

@@ -42,7 +42,8 @@ CFLAGS_DEBUG_V   += -v -qrtems_debug
 LD_PATHS  +=
 LD_LIBS   += -lhttpd
 LD_LIBS   += -lftpd
-NATIVE_OBJ = $(shell $(OBJCOPY) 2>&1  | grep copy: | cut -d':' -f3 | cut -d' ' -f2)
+#NATIVE_OBJ = $(shell $(OBJCOPY) 2>&1  | grep copy: | cut -d':' -f3 | cut -d' ' -f2)
+OBJDUMP=$(OBJCOPY:copy=dump)
 
 #
 # Add your list of files to delete here.  The config files
@@ -51,16 +52,21 @@ NATIVE_OBJ = $(shell $(OBJCOPY) 2>&1  | grep copy: | cut -d':' -f3 | cut -d' ' -
 #  'make clobber' already includes 'make clean'
 #
 
-CLEAN_ADDITIONS += tarfile
+CLEAN_ADDITIONS += tarfile obj_format
 CLOBBER_ADDITIONS +=
 
 all:	${ARCH} $(SRCS) $(PGM)
 
-${PGM}: $(OBJS) $(LINK_FILES)
+obj_format:
+	$(OBJDUMP) -f $(ARCH)/init.o | grep .o: | \
+	    sed -e 's/^.*format //' >obj_format
+
+${PGM}: $(OBJS) obj_format $(LINK_FILES)
 	cd rootfs ; tar cf ../$(ARCH)/tarfile web etc
 	cp $(ARCH)/tarfile .
-	$(OBJCOPY) -I binary -O $(NATIVE_OBJ) tarfile $(ARCH)/tarfile.o
-	$(LD) -r -o $(ARCH)/temp.o  $(ARCH)/init.o $(ARCH)/tarfile.o
+	$(OBJCOPY) -I binary -O `cat obj_format` tarfile $(ARCH)/tarfile.o
+	$(LD) $(CPU_CFLAGS) -r -o $(ARCH)/temp.o \
+	    $(ARCH)/init.o $(ARCH)/tarfile.o
 	$(MV) $(ARCH)/temp.o  $(ARCH)/init.o
 	$(RM) $(ARCH)/temp.o
 	$(make-exe)
