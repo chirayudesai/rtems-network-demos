@@ -1,3 +1,13 @@
+2007-07-11	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* Makefile: Make slightly smarter on LD arguments.  Do not pick
+	up CVS files in tarball.
+	* init.c: Turn off tracing on GoAhead.  More debug.
+	* rootfs/etc/hosts: Match OAR setup for EP5200.
+	* rootfs/index.html: Cleanup and use RTEMS Logo.
+	* rootfs/rtems_logo.jpg: New files.
+	* rootfs/web/index.html: Removed.
+
 2007-06-22	Joel Sherrill <joel.sherrill@OARcorp.com>
 
 	* Makefile, init.c: Clean up. Make name of TARFILE related symbols

@@ -5,7 +5,7 @@
 SAMPLE=http
 PGM=${ARCH}/$(SAMPLE).exe
 
-MANAGERS=io event semaphore timer rate_monotonic
+MANAGERS=all
 
 # C source names, if any, go here -- minus the .c
 C_PIECES=init
@@ -34,7 +34,7 @@ include $(PROJECT_ROOT)/make/leaf.cfg
 
 DEFINES  +=
 CPPFLAGS +=
-CFLAGS   +=
+CFLAGS   += -DWEBS -DUEMF
 CFLAGS_LD += -Wl,--defsym -Wl,HeapSize=0xC0000 
 CFLAGS_OPTIMIZE_V   +=
 CFLAGS_DEBUG_V   += -v -qrtems_debug
@@ -55,6 +55,9 @@ OBJDUMP=$(OBJCOPY:copy=dump)
 CLEAN_ADDITIONS += tarfile obj_format
 CLOBBER_ADDITIONS +=
 
+# strip out flags gcc knows but LD doesn't like -- add as needed
+LD_CPU_CFLAGS=$(CPU_CFLAGS:-mstrict-align:)
+
 all:	${ARCH} $(SRCS) $(PGM)
 
 obj_format:
@@ -62,10 +65,10 @@ obj_format:
 	    sed -e 's/^.*format //' >obj_format
 
 ${PGM}: $(OBJS) obj_format $(LINK_FILES)
-	cd rootfs ; tar cf ../$(ARCH)/tarfile web etc
+	cd rootfs ; tar cf ../$(ARCH)/tarfile --exclude CVS .
 	cp $(ARCH)/tarfile .
 	$(OBJCOPY) -I binary -O `cat obj_format` tarfile $(ARCH)/tarfile.o
-	$(LD) $(CPU_CFLAGS) -r -o $(ARCH)/temp.o \
+	$(LD) $(LD_CPU_CFLAGS) -r -o $(ARCH)/temp.o \
 	    $(ARCH)/init.o $(ARCH)/tarfile.o
 	$(MV) $(ARCH)/temp.o  $(ARCH)/init.o
 	$(RM) $(ARCH)/temp.o

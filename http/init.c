@@ -31,6 +31,7 @@
 #define CONFIGURE_INIT
 
 #include "system.h"
+#include <bsp.h>
 
 #include <errno.h>
 #include <time.h>
@@ -78,6 +79,14 @@ struct rtems_ftpd_configuration rtems_ftpd_configuration = {
    NULL                    /* List of hooks       */
 };
 #endif
+
+/* GoAhead Trace Handler */
+#include <goahead/uemf.h>
+void quietTraceHandler(int level, char *buf)
+{
+  /* do nothing */
+}
+
 rtems_task Init(
   rtems_task_argument argument
 )
@@ -94,7 +103,10 @@ rtems_task Init(
 #endif
 
 #if defined(USE_HTTPD)
-  rtems_initialize_webserver();
+  if ( rtems_initialize_webserver() )
+    printf( "ERROR -- failed to initialize webserver\n" );
+
+  traceSetHandler( quietTraceHandler );
 #endif
 
   status = rtems_task_delete( RTEMS_SELF );
