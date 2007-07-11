@@ -3,8 +3,8 @@
  * 
  * This program may be distributed and used for any purpose.
  * I ask only that you:
- *	1. Leave this author information intact.
- *	2. Document any changes you make.
+ *    1. Leave this author information intact.
+ *    2. Document any changes you make.
  *
  * W. Eric Norum
  * Saskatchewan Accelerator Laboratory
@@ -23,14 +23,14 @@
 #define CONFIGURE_LIBIO_MAXIMUM_FILE_DESCRIPTORS 20
 #define CONFIGURE_USE_IMFS_AS_BASE_FILESYSTEM
 
-#define CONFIGURE_EXECUTIVE_RAM_SIZE	(512*1024)
-#define CONFIGURE_MAXIMUM_SEMAPHORES	20
-#define CONFIGURE_MAXIMUM_TASKS		20
+#define CONFIGURE_EXECUTIVE_RAM_SIZE (512*1024)
+#define CONFIGURE_MAXIMUM_SEMAPHORES 20
+#define CONFIGURE_MAXIMUM_TASKS      20
 
-#define CONFIGURE_MICROSECONDS_PER_TICK	10000
+#define CONFIGURE_MICROSECONDS_PER_TICK 10000
 
-#define CONFIGURE_INIT_TASK_STACK_SIZE	(10*1024)
-#define CONFIGURE_INIT_TASK_PRIORITY	120
+#define CONFIGURE_INIT_TASK_STACK_SIZE (10*1024)
+#define CONFIGURE_INIT_TASK_PRIORITY   120
 #define CONFIGURE_INIT_TASK_INITIAL_MODES (RTEMS_PREEMPT | \
                                            RTEMS_NO_TIMESLICE | \
                                            RTEMS_NO_ASR | \
@@ -52,10 +52,13 @@ rtems_task Init (rtems_task_argument argument);
 rtems_task
 Init (rtems_task_argument ignored)
 {
-	int doSocket(void);
+  int doSocket(void);
 
-	rtems_bsdnet_initialize_network ();
-	rtems_bsdnet_show_inet_routes ();
-	doSocket ();
-	exit (0);
+  printk( "Initialize network\n" );
+  rtems_bsdnet_initialize_network ();
+  printk( "Network initialized\n" );
+  rtems_bsdnet_show_inet_routes ();
+  printk( "Initiating test\n" );
+  doSocket ();
+  exit (0);
 }

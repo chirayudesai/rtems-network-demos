@@ -5,7 +5,7 @@
 SAMPLE=netdemo
 PGM=${ARCH}/$(SAMPLE).exe
 
-MANAGERS=io event semaphore
+MANAGERS=all
 
 # C source names, if any, go here -- minus the .c
 C_PIECES= init  test

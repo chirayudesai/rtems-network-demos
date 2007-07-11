@@ -1,3 +1,9 @@
+2007-07-11	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* Makefile: Include all managers.
+	* init.c: Make the test just a bit more verbose in case the
+	network initialization failure.
+
 2007-06-21	Joel Sherrill <joel.sherrill@OARcorp.com>
 
 	* test.c: More warnings removed.
