@@ -1,3 +1,21 @@
+2007-07-12	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* ChangeLog, Makefile, init.c: No switchable from GoAhead to SHTTPD but
+	defaults to SHTTPD. The displayed index.html will indicate which
+	httpd implementation is enabled. The user should edit the Makefile to
+	switch settings.
+	* index.html.in: New file.
+	* rootfs/index.html: Removed.
+
+2007-07-12	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* Makefile, init.c: No switchable from GoAhead to SHTTPD but defaults
+	to SHTTPD. The displayed index.html will indicate which httpd
+	implementation is enabled. The user should edit the Makefile to
+	switch settings.
+	* index.html.in: New file.
+	* rootfs/index.html: Removed.
+
 2007-07-11	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* Makefile: Make slightly smarter on LD arguments.  Do not pick

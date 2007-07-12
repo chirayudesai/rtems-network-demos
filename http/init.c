@@ -5,10 +5,6 @@
  *  Don't forget to change the IP addresses
  */
 
-#define USE_HTTPD
-#define USE_FTPD
-#define TEST_INIT
-
 #define CONFIGURE_APPLICATION_NEEDS_CONSOLE_DRIVER
 #define CONFIGURE_APPLICATION_NEEDS_CLOCK_DRIVER
 #define CONFIGURE_RTEMS_INIT_TASKS_TABLE
@@ -72,20 +68,39 @@ extern int SYM(binary_tarfile_size);
 #define TARFILE_SIZE SYM(binary_tarfile_size)
 
 #if defined(USE_FTPD)
-struct rtems_ftpd_configuration rtems_ftpd_configuration = {
-   10,                     /* FTPD task priority            */
-   1024,                   /* Maximum buffersize for hooks  */
-   21,                     /* Well-known port     */
-   NULL                    /* List of hooks       */
-};
+  boolean FTPD_enabled = TRUE;
+  struct rtems_ftpd_configuration rtems_ftpd_configuration = {
+    10,                     /* FTPD task priority            */
+    1024,                   /* Maximum buffersize for hooks  */
+    21,                     /* Well-known port     */
+    NULL                    /* List of hooks       */
+ };
+#else
+ boolean FTPD_enabled = FALSE;
 #endif
 
-/* GoAhead Trace Handler */
-#include <goahead/uemf.h>
-void quietTraceHandler(int level, char *buf)
-{
-  /* do nothing */
-}
+#if defined(USE_GOAHEAD_HTTPD)
+  boolean GoAhead_HTTPD_enabled = TRUE;
+
+  /* GoAhead Trace Handler */
+  #include <goahead/uemf.h>
+  void quietTraceHandler(int level, char *buf)
+  {
+    /* do nothing */
+  }
+#else
+  boolean GoAhead_HTTPD_enabled = FALSE;
+#endif
+
+#if defined(USE_SIMPLE_HTTPD)
+  boolean Simple_HTTPD_enabled = TRUE;
+
+  #include <shttpd/shttpd.h>
+#else
+  boolean Simple_HTTPD_enabled = FALSE;
+#endif
+
+#define bool2string(_b) ((_b) ? "true" : "false")
 
 rtems_task Init(
   rtems_task_argument argument
@@ -94,20 +109,49 @@ rtems_task Init(
   rtems_status_code status;
 
   printf("\n\n*** HTTP TEST ***\n\r" );
+  printf("GoAhead HTTPD Enabled: %s\n", bool2string(GoAhead_HTTPD_enabled) );
+  printf("Simple HTTPD Enabled: %s\n", bool2string(Simple_HTTPD_enabled) );
+  printf("FTPD Enabled: %s\n", bool2string(FTPD_enabled) );
+  printf("\n");
 
+  /*
+   * Load filesystem image
+   */
+  printf("Loading filesystem image");
   status = Untar_FromMemory((void *)(&TARFILE_START), (size_t)&TARFILE_SIZE);
    
+  printf("Initializing Network");
   rtems_bsdnet_initialize_network ();
-#if defined(USE_FTPD)
-  rtems_initialize_ftpd();
-#endif
 
-#if defined(USE_HTTPD)
-  if ( rtems_initialize_webserver() )
-    printf( "ERROR -- failed to initialize webserver\n" );
+  #if defined(USE_FTPD)
+    printf( "Initializing FTPD\n" );
+    rtems_initialize_ftpd();
+  #endif
 
-  traceSetHandler( quietTraceHandler );
-#endif
+  #if defined(USE_GOAHEAD_HTTPD)
+    printf( "Initializing GoAhead HTTPD\n" );
+    status = rtems_initialize_webserver();
+    if ( status )
+      printf( "ERROR -- failed to initialize webserver\n" );
+
+    traceSetHandler( quietTraceHandler );
+  #endif
+
+  #if defined(USE_SIMPLE_HTTPD)
+    printf( "Initializing Simple HTTPD\n" );
+    status = rtems_initialize_webserver(
+      100,                             /* initial priority */
+      RTEMS_MINIMUM_STACK_SIZE * 2,    /* stack size */
+      RTEMS_DEFAULT_MODES,             /* initial modes */
+      RTEMS_DEFAULT_ATTRIBUTES,        /* attributes */
+      NULL,                            /* init_callback */
+      NULL,                            /* addpages_callback */
+      "/"                              /* initial priority */
+    );
+    if ( status )
+      printf( "ERROR -- failed to initialize webserver\n" );
+
+  #endif
 
   status = rtems_task_delete( RTEMS_SELF );
 }
