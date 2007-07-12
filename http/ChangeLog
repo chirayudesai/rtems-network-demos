@@ -1,5 +1,9 @@
 2007-07-12	Joel Sherrill <joel.sherrill@oarcorp.com>
 
+	* init.c: Account for adding port to shttpd initialization.
+
+2007-07-12	Joel Sherrill <joel.sherrill@oarcorp.com>
+
 	* ChangeLog, Makefile, init.c: No switchable from GoAhead to SHTTPD but
 	defaults to SHTTPD. The displayed index.html will indicate which
 	httpd implementation is enabled. The user should edit the Makefile to

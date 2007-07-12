@@ -146,7 +146,8 @@ rtems_task Init(
       RTEMS_DEFAULT_ATTRIBUTES,        /* attributes */
       NULL,                            /* init_callback */
       NULL,                            /* addpages_callback */
-      "/"                              /* initial priority */
+      "/",                             /* initial priority */
+      80                               /* port to listen on */
     );
     if ( status )
       printf( "ERROR -- failed to initialize webserver\n" );
