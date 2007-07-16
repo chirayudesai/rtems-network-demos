@@ -1,0 +1,10 @@
+2007-07-16	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* ChangeLog, rootfs/etc/host.conf, rootfs/etc/hosts: New files.
+
+2007-07-16	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	Initial add of NFS Client test.
+	* .cvsignore, Makefile, dirutils.c, init.c, rootfs/rtems_logo.jpg:
+	New files.
+
