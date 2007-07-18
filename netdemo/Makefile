@@ -35,7 +35,8 @@ include $(PROJECT_ROOT)/make/leaf.cfg
 DEFINES  +=
 CPPFLAGS +=
 CFLAGS   +=
-CFLAGS_LD += -Wl,--defsym -Wl,HeapSize=0xC0000 
+CFLAGS_LD += 
+# CFLAGS_LD += -Wl,--defsym -Wl,HeapSize=0xC0000 
 CFLAGS_OPTIMIZE_V   +=
 CFLAGS_DEBUG_V   += -v -qrtems_debug
 

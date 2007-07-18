@@ -1,3 +1,7 @@
+2007-07-18	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* Makefile: Do not restrict size of heap.
+
 2007-07-11	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* Makefile: Include all managers.
