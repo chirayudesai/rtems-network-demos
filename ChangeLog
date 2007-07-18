@@ -1,5 +1,9 @@
 2007-07-18	Joel Sherrill <joel.sherrill@oarcorp.com>
 
+	* networkconfig-qemu.h: New file.
+
+2007-07-18	Joel Sherrill <joel.sherrill@oarcorp.com>
+
 	* networkconfig.h: Make the NFS server, remote filesystem, and
 	directory to look at configurable.
 
