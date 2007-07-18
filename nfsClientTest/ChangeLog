@@ -1,5 +1,10 @@
 2007-07-18	Joel Sherrill <joel.sherrill@oarcorp.com>
 
+	* init.c: Make the NFS server, remote filesystem, and directory to look
+	at configurable.
+
+2007-07-18	Joel Sherrill <joel.sherrill@oarcorp.com>
+
 	* ChangeLog, init.c: Clean up and now works on PowerPC/ep5200.
 
 2007-07-18	Joel Sherrill <joel.sherrill@oarcorp.com>

@@ -125,26 +125,27 @@ rtems_task Init(
   printf("============== Mounting Remote Filesystem ==============\n");
 #if 1
   /* This code uses the NFS mount wrapper function */
-  int_status = nfsMount("192.168.1.210", "/home", "/home" );
+  int_status = nfsMount( RTEMS_NFS_SERVER, RTEMS_NFS_SERVER_PATH, "/mnt" );
 #else
   /* This section does it more explicitly */
-  mkdir( "/home", 0777 );
+  mkdir( "/mnt", 0777 );
   int_status = mount(
     NULL,                        /* mount_table_entry_pointer */
     &nfs_fs_ops,                 /* filesystem_operations_table_pointer */
     RTEMS_FILESYSTEM_READ_WRITE, /* options */
-    "192.168.1.210:/home",       /* device aka remote filesystem */
-    "/home"                      /* mount_point */
+                                 /* device aka remote filesystem */
+    RTEMS_NFS_SERVER ":" RTEMS_NFS_SERVER_PATH,
+    "/mnt"                       /* mount_point */
   );
 #endif
   if ( int_status )
     printf( "NFS Mount failed -- %s\n", strerror(errno) );
 
   printf("============== Look at Remote Filesystem ==============\n");
-  printf( "\n---> ls /home\n" );
-  ls("/home");
-  printf( "\n---> ls /home/nfstest\n" );
-  ls("/home/nfstest");
+  printf( "\n---> ls /mnt\n" );
+  ls( "/mnt" );
+  printf( "\n---> ls %s\n", RTEMS_NFS_LS_PATH );
+  ls( RTEMS_NFS_LS_PATH );
 
   exit(0);
 
