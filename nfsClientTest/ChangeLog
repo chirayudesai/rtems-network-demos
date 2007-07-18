@@ -1,3 +1,12 @@
+2007-07-18	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* ChangeLog, init.c: Clean up and now works on PowerPC/ep5200.
+
+2007-07-18	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* init.c: Clean up and now works on ep5200.
+	* mon.c: New file.
+
 2007-07-16	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* ChangeLog, rootfs/etc/host.conf, rootfs/etc/hosts: New files.

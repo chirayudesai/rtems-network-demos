@@ -102,14 +102,17 @@ rtems_task Init(
   printf( "PWD: " );
   pwd(); 
   
-  printf( "\nls /\n" );
+  printf( "\n--->ls /\n" );
   ls("/");
 
-  printf( "\nls /etc\n" );
+  printf( "\n--->ls /etc\n" );
   ls("/etc");
 
   printf("============== Initializing Network ==============\n");
   rtems_bsdnet_initialize_network ();
+
+  printf("============== Add Route ==============\n");
+  rtems_bsdnet_show_inet_routes ();
 
   printf("============== Initializing RPC ==============\n");
   int_status = rpcUdpInit();
@@ -120,9 +123,12 @@ rtems_task Init(
   nfsInit( 0, 0 );
 
   printf("============== Mounting Remote Filesystem ==============\n");
-#if 0
+#if 1
+  /* This code uses the NFS mount wrapper function */
   int_status = nfsMount("192.168.1.210", "/home", "/home" );
 #else
+  /* This section does it more explicitly */
+  mkdir( "/home", 0777 );
   int_status = mount(
     NULL,                        /* mount_table_entry_pointer */
     &nfs_fs_ops,                 /* filesystem_operations_table_pointer */
@@ -130,15 +136,15 @@ rtems_task Init(
     "192.168.1.210:/home",       /* device aka remote filesystem */
     "/home"                      /* mount_point */
   );
-
 #endif
-
   if ( int_status )
     printf( "NFS Mount failed -- %s\n", strerror(errno) );
 
   printf("============== Look at Remote Filesystem ==============\n");
-  printf( "\nls /home\n" );
+  printf( "\n---> ls /home\n" );
   ls("/home");
+  printf( "\n---> ls /home/nfstest\n" );
+  ls("/home/nfstest");
 
   exit(0);
 
