@@ -44,7 +44,7 @@ LD_PATHS  +=
 OBJDUMP=$(OBJCOPY:copy=dump)
 
 USE_GOHEAD=no
-USE_SIMPLE=yes
+USE_SIMPLE=no
 USE_FTPD=yes
 ifeq ($(USE_GOHEAD),yes)
   HTTPD     = GoAhead Web Server
@@ -89,7 +89,6 @@ $(ARCH)/tarfile.o: $(ARCH) stamp-index-html obj_format
 	cd rootfs ; tar cf ../$(ARCH)/tarfile --exclude CVS .
 	cp $(ARCH)/tarfile .
 	$(OBJCOPY) -I binary -O `cat obj_format` tarfile $(ARCH)/tarfile.o
-	$(LD) $(LD_CPU_CFLAGS) -r -o $(ARCH)/temp.o $(ARCH)/tarfile.o
 
 stamp-index-html: index.html.in
 ifneq ($(HTTPD),)
