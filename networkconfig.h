@@ -1,5 +1,5 @@
 /*
- * Network configuration
+ * Network configuration EXAMPLE!!! 
  * 
  ************************************************************
  * EDIT THIS FILE TO REFLECT YOUR NETWORK CONFIGURATION     *
@@ -115,18 +115,6 @@ struct rtems_bsdnet_config rtems_bsdnet_config = {
 	{"XXX.YYY.ZZZ.1" },	/* Name server(s) */
 	{"XXX.YYY.ZZZ.1" },	/* NTP server(s) */
 
-	/*
-	 *  A real example -- DO NOT USE THIS YOURSELF!!!
-	 */
-
-#if 0
-	"dy4",			/* Host name */
-	"NOT_oarcorp.com",	/* Domain name */
-	"192.168.1.2",   	/* Gateway */
-	"192.168.1.2", 		/* Log host */
-	{"192.168.1.2" },	/* Name server(s) */
-	{"192.168.1.2" },	/* NTP server(s) */
-#endif
 #endif /* !RTEMS_USE_BOOTP */
 
 };
@@ -142,4 +130,12 @@ struct rtems_bsdnet_config rtems_bsdnet_config = {
 #define RTEMS_TFTP_TEST_FILE_NAME "tftptest"
 #endif
 
+/*
+ * For NFS test application
+ * 
+ * NFS server/path to mount and a directory to ls once mounted
+ */
+#define RTEMS_NFS_SERVER      "192.168.1.210"
+#define RTEMS_NFS_SERVER_PATH "/home"
+#define RTEMS_NFS_LS_PATH     "/mnt/nfstest"
 #endif /* _RTEMS_NETWORKCONFIG_H_ */
