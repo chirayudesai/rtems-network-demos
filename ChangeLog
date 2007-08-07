@@ -1,3 +1,7 @@
+2007-08-07	Joel Sherrill <joel.sherrill@OARcorp.com>
+
+	* VERSION: Updated to network-demos-4.7.99.2.
+
 2007-07-18	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* networkconfig-qemu.h: New file.
