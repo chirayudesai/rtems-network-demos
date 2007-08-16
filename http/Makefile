@@ -76,6 +76,8 @@ CLOBBER_ADDITIONS +=
 # strip out flags gcc knows but LD doesn't like -- add as needed
 LD_CPU_CFLAGS=$(CPU_CFLAGS:-mstrict-align:)
 
+COPY_ARCH=$(shell echo $(OBJCOPY) | cut -d'-' -f1)
+
 all:	${ARCH} $(SRCS) $(PGM)
 
 obj_format:
@@ -88,7 +90,8 @@ ${PGM}: $(OBJS) $(LINK_FILES)
 $(ARCH)/tarfile.o: $(ARCH) stamp-index-html obj_format
 	cd rootfs ; tar cf ../$(ARCH)/tarfile --exclude CVS .
 	cp $(ARCH)/tarfile .
-	$(OBJCOPY) -I binary -O `cat obj_format` tarfile $(ARCH)/tarfile.o
+	$(OBJCOPY) -I binary -O `cat obj_format` \
+	    -B $(COPY_ARCH) tarfile $(ARCH)/tarfile.o
 
 stamp-index-html: index.html.in
 ifneq ($(HTTPD),)
@@ -100,3 +103,4 @@ endif
 # for include files, just use $(INSTALL)
 install:  all
 	$(INSTALL_VARIANT) -m 555 ${PGM} ${PROJECT_RELEASE}/tests
+
