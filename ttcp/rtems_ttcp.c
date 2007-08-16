@@ -85,6 +85,7 @@ getrusage(int ignored, struct rusage *ru)
 static void
 rtems_ttcp_exit (int code)
 {
+	rtems_cpu_usage_report();
 	rtems_task_wake_after( RTEMS_MILLISECONDS_TO_TICKS(1000) );
 	rtems_bsdnet_show_mbuf_stats ();
 	rtems_bsdnet_show_if_stats ();
@@ -160,6 +161,7 @@ ttcpTask (rtems_task_argument arg)
 		printf ("or\n");
 		printf ("         -t destination.internet.address\n");
 	}
+	rtems_cpu_usage_reset();
 	code = rtems_ttcp_main (argc, argv);
 	rtems_ttcp_exit (code);
 }

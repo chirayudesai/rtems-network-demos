@@ -47,6 +47,8 @@
 /* #define BSD41a */
 /* #define SYSV */	/* required on SGI IRIX releases before 3.3 */
 
+#define ENABLE_NANOSLEEP_DELAY
+
 #include <stdio.h>
 #include <signal.h>
 #include <ctype.h>
@@ -57,7 +59,11 @@
 #include <netinet/tcp.h>
 #include <arpa/inet.h>
 #include <netdb.h>
+#include <string.h>
 #include <sys/time.h>		/* struct timeval */
+
+#include <unistd.h>
+#include <stdlib.h>
 
 #if defined(SYSV)
 #include <sys/times.h>
@@ -106,6 +112,7 @@ char fmt = 'K';			/* output format: k = kilobits, K = kilobytes,
 				 *  m = megabits, M = megabytes, 
 				 *  g = gigabits, G = gigabytes */
 int touchdata = 0;		/* access data after reading */
+long milliseconds = 0;          /* delay in milliseconds */
 
 struct hostent *addr;
 extern int errno;
@@ -133,6 +140,7 @@ Options specific to -t:\n\
 Options specific to -r:\n\
 	-B	for -s, only output full blocks as specified by -l (for TAR)\n\
 	-T	\"touch\": access each byte as it's read\n\
+	-m ##	delay for specified milliseconds between each write\n\
 ";	
 
 char stats[128];
@@ -156,6 +164,17 @@ sigpipe()
 {
 }
 
+void millisleep(long msec)
+{
+#if defined(ENABLE_NANOSLEEP_DELAY)
+  struct timespec req;
+
+  req.tv_sec = msec / 1000;
+  req.tv_nsec = (msec % 1000) * 1000000;
+
+  nanosleep( &req, NULL );
+#endif
+}
 int main(argc,argv)
 int argc;
 char **argv;
@@ -165,7 +184,7 @@ char **argv;
 
 	if (argc < 2) goto usage;
 
-	while ((c = getopt(argc, argv, "drstuvBDTb:f:l:n:p:A:O:")) != -1) {
+	while ((c = getopt(argc, argv, "drstuvBDTb:f:l:m:n:p:A:O:")) != -1) {
 		switch (c) {
 
 		case 'B':
@@ -187,6 +206,12 @@ char **argv;
 			fprintf(stderr, 
 	"ttcp: -D option ignored: TCP_NODELAY socket option not supported\n");
 #endif
+			break;
+		case 'm':
+			milliseconds = atoi(optarg);
+			#if !defined(ENABLE_NANOSLEEP_DELAY)
+				fprintf(stderr, "millisecond delay disabled\n");
+			#endif
 			break;
 		case 'n':
 			nbuf = atoi(optarg);
@@ -379,8 +404,10 @@ char **argv;
 		if (trans)  {
 			pattern( buf, buflen );
 			if(udp)  (void)Nwrite( fd, buf, 4 ); /* rcvr start */
-			while (nbuf-- && Nwrite(fd,buf,buflen) == buflen)
+			while (nbuf-- && Nwrite(fd,buf,buflen) == buflen) {
 				nbytes += buflen;
+				millisleep( milliseconds );
+                        }
 			if(udp)  (void)Nwrite( fd, buf, 4 ); /* rcvr end */
 		} else {
 			if (udp) {

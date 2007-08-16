@@ -1,3 +1,9 @@
+2007-08-16	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* init.c: Change clock tick to 1 millisecond.
+	* rtems_ttcp.c: Add CPU usage reporting.
+	* ttcp_orig/ttcp.c: Add -m option for delaying between writes.
+
 2007-06-21	Joel Sherrill <joel.sherrill@OARcorp.com>
 
 	* init.c: More warnings removed.
