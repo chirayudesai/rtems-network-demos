@@ -8,7 +8,7 @@ PGM=${ARCH}/$(SAMPLE).exe
 MANAGERS=all
 
 # C source names, if any, go here -- minus the .c
-C_PIECES=init
+C_PIECES=init FilesystemImage
 C_FILES=$(C_PIECES:%=%.c)
 C_O_FILES=$(C_PIECES:%=${ARCH}/%.o)
 
@@ -18,7 +18,7 @@ DOCTYPES=
 DOCS=$(DOCTYPES:%=$(SAMPLE).%)
 
 SRCS=$(DOCS) $(C_FILES) $(CC_FILES) $(H_FILES) $(S_FILES)
-OBJS=$(C_O_FILES) $(CC_O_FILES) $(S_O_FILES) $(ARCH)/tarfile.o
+OBJS=$(C_O_FILES) $(CC_O_FILES) $(S_O_FILES)
 
 PRINT_SRCS=$(DOCS)
 
@@ -44,7 +44,7 @@ LD_PATHS  +=
 OBJDUMP=$(OBJCOPY:copy=dump)
 
 USE_GOHEAD=no
-USE_SIMPLE=no
+USE_SIMPLE=yes
 USE_FTPD=yes
 ifeq ($(USE_GOHEAD),yes)
   HTTPD     = GoAhead Web Server
@@ -63,6 +63,8 @@ ifeq ($(USE_FTPD),yes)
   LD_LIBS  += -lftpd
 endif
 
+LD_LIBS +=
+
 #
 # Add your list of files to delete here.  The config files
 #  already know how to delete some stuff, so you may want
@@ -70,7 +72,8 @@ endif
 #  'make clobber' already includes 'make clean'
 #
 
-CLEAN_ADDITIONS += tarfile obj_format stamp-index-html rootfs/index.html
+CLEAN_ADDITIONS += FilesystemImage FilesystemImage.c FilesystemImage.h
+CLEAN_ADDIRIONS += stamp-index-html rootfs/index.html
 CLOBBER_ADDITIONS +=
 
 # strip out flags gcc knows but LD doesn't like -- add as needed
@@ -80,18 +83,18 @@ COPY_ARCH=$(shell echo $(OBJCOPY) | cut -d'-' -f1)
 
 all:	${ARCH} $(SRCS) $(PGM)
 
-obj_format:
-	$(OBJDUMP) -f $(ARCH)/init.o | grep .o: | \
-	    sed -e 's/^.*format //' >obj_format
-
 ${PGM}: $(OBJS) $(LINK_FILES)
 	$(make-exe)
 
-$(ARCH)/tarfile.o: $(ARCH) stamp-index-html obj_format
-	cd rootfs ; tar cf ../$(ARCH)/tarfile --exclude CVS .
-	cp $(ARCH)/tarfile .
-	$(OBJCOPY) -I binary -O `cat obj_format` \
-	    -B $(COPY_ARCH) tarfile $(ARCH)/tarfile.o
+
+$(ARCH)/init.c: init.c FilesystemImage.c
+
+FilesystemImage: $(ARCH) stamp-index-html
+	cd rootfs ; \
+	    tar cf ../FilesystemImage --exclude CVS --exclude .cvsignore .
+
+FilesystemImage.c: $(ARCH) FilesystemImage
+	$(PROJECT_ROOT)/bin/bin2c FilesystemImage FilesystemImage
 
 stamp-index-html: index.html.in
 ifneq ($(HTTPD),)

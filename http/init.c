@@ -53,19 +53,11 @@
 #define ARGUMENT 0
 
 /*
- *  The tarfile is built automatically externally so we need to account
- *  for the leading symbol on the names.
+ *  The tarfile image is built automatically externally.
  */
-#if defined(__sh__)
-  #define SYM(_x) _x
-#else
-  #define SYM(_x) _ ## _x
-#endif
-
-extern int SYM(binary_tarfile_start);
-extern int SYM(binary_tarfile_size);
-#define TARFILE_START SYM(binary_tarfile_start)
-#define TARFILE_SIZE SYM(binary_tarfile_size)
+#include "FilesystemImage.h"
+#define TARFILE_START FilesystemImage
+#define TARFILE_SIZE  FilesystemImage_size
 
 #if defined(USE_FTPD)
   boolean FTPD_enabled = TRUE;
