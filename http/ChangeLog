@@ -1,5 +1,9 @@
 2007-09-04	Joel Sherrill <joel.sherrill@oarcorp.com>
 
+	* init.c: Remove TARFILE_XXX macros.
+
+2007-09-04	Joel Sherrill <joel.sherrill@oarcorp.com>
+
 	* Makefile: Use bin2c to more reliably turn the tarfile into a
 	linkable object file. Ignore .cvsignore when making tarfile.
 	* init.c: Clean up tarfile symbol definitions.

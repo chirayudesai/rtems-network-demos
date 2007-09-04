@@ -56,8 +56,6 @@
  *  The tarfile image is built automatically externally.
  */
 #include "FilesystemImage.h"
-#define TARFILE_START FilesystemImage
-#define TARFILE_SIZE  FilesystemImage_size
 
 #if defined(USE_FTPD)
   boolean FTPD_enabled = TRUE;
@@ -110,7 +108,7 @@ rtems_task Init(
    * Load filesystem image
    */
   printf("Loading filesystem image");
-  status = Untar_FromMemory((void *)(&TARFILE_START), (size_t)&TARFILE_SIZE);
+  status = Untar_FromMemory( (char *)FilesystemImage, FilesystemImage_size );
    
   printf("Initializing Network");
   rtems_bsdnet_initialize_network ();
