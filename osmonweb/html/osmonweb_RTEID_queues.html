@@ -1,0 +1,152 @@
+<!-- destvar:osmonweb_RTEID_queue_title -->
+<head>
+<!-- start of document title here -->
+   <title>RTEMS Classic (RTEID) API Message Queues on <!--%printstr %s|4 --></title>
+   <meta http-equiv="cache-control" content="no-cache">
+   <meta http-equiv="refresh" content="<!--%printint %d|7-->; URL=/goforms/osmonweb?<!--%printstr %s|12-->">
+<!-- end of document title -->
+</head>
+<body>
+<!-- destvar:osmonweb_RTEID_queue_header -->
+<table border="0" cellspacing="0" cellpadding="5" width="100%">
+   <tr><td>
+   <div align="center">
+   <!-- start of API selection bar -->
+   <table border="0" cellspacing="0" width="100%">
+      <tr valign="center">
+      <td width="20">&nbsp;</td>
+      <td bgcolor="#4040ff" align="center" width="200">
+         <a href="/goforms/osmonweb?api=RTEID" name="RTEID objects">
+         <font color=#ffffff size="+1"><b>Classic (RTEID) API</b></font>
+         </a>
+      </td>
+      <td width="20">&nbsp;</td>
+      <td bgcolor="#E0E0E0" align="center" width="200">
+         <a href="/goforms/osmonweb?api=POSIX" name="POSIX objects">
+         <font color="Black" size="+1">POSIX API</font>
+         </a>
+      </td>
+      <td width="20">&nbsp;</td>
+      <td bgcolor="#E0E0E0" align="center" width="200">
+         <a href="/goforms/osmonweb?api=ITRON" name="ITRON objects">
+         <font color="Black" size="+1">ITRON API</font>
+         </a>
+      </td>
+      <td width="20">&nbsp;</td>
+      </tr>
+      <tr><td colspan=10 bgcolor="#4040ff"><img width=1 height=1 alt=""></td></tr>
+   </table>
+   <!-- end of API selection bar -->
+
+   <!-- start of Object selection bar -->
+   <table border="0"  cellspacing="0" width="80%">
+      <tr>
+         <td width="20">&nbsp;</td>
+         <td bgcolor="#8080E0" align="center" width="200">
+            <a href="/goforms/osmonweb?api=RTEID&obj_type=task" name="RTEID tasks">
+            <font color="Black">Tasks</font>
+            </a></td>
+         <td width="20">&nbsp;</td>
+         <td bgcolor="#8080E0" align="center" width="200">
+            <a href="/goforms/osmonweb?api=RTEID&obj_type=sema" name="RTEID semaphores">
+            <font color="Black">Semaphores</font>
+            </a></td>
+         <td width="20">&nbsp;</td>
+         <td bgcolor="#4040ff" align="center" width="200">
+            <a href="/goforms/osmonweb?api=RTEID&obj_type=queue" name="RTEID Message Queues">
+            <font color="#ffffff"><b>Message Queues</b></font>
+            </a></td>
+         <td width="20">&nbsp;</td>
+         <td bgcolor="#8080E0" align="center" width="200">
+            <a href="/goforms/osmonweb?api=RTEID&obj_type=rmon" name="RTEID Rate Monotonic Timers">
+            <font color="Black">Rate Monotonic Timers</font>
+            </a></td>
+         <td width="20">&nbsp;</td>
+         <td bgcolor="#8080E0" align="center" width="200">
+            <a href="/goforms/osmonweb?api=RTEID&obj_type=part" name="RTEID Partitions">
+            <font color="Black">Partitions</font>
+            </a></td>
+         <td width="20">&nbsp;</td>
+         <td bgcolor="#8080E0" align="center" width="200">
+            <a href="/goforms/osmonweb?api=RTEID&obj_type=region" name="RTEID Regions">
+            <font color="Black">Regions</font>
+            </a></td>
+         <td width="20">&nbsp;</td>
+      </tr>
+   </table>
+<!-- end of Object selection bar -->
+   </div>
+   </td></tr><tr><td>
+      <div align="center">
+<!-- start of document title here -->
+      <br><h2>Classic (RTEID) API Message Queues On Target <b><font color="#4040ff"><!--%printstr %s|4 --></font></b></h2><br>
+<!-- end of document title -->
+      </div>
+<!-- destvar:osmonweb_RTEID_queue_tabhead -->
+<!-- start of object table -->
+      <table border="1"width=100%>
+         <tr valign="top" bgcolor="#bfbfbf">
+            <td align="center"><b>ID</b><br>
+            <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=0"  name="lowest ID first" >      <IMG src="/osmonweb/arrow-N-S.gif" width=24 height=24 border=0></a>
+            <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=0" name="highest ID first">      <IMG src="/osmonweb/arrow-S-N.gif" width=24 height=24 border=0></a>
+            <td align="center"><b>Name</b><br>
+            <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=1"  name="lowest Name first" >    <IMG src="/osmonweb/arrow-N-S.gif" width=24 height=24 border=0></a>
+            <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=1" name="highest Name first">    <IMG src="/osmonweb/arrow-S-N.gif" width=24 height=24 border=0></a>
+            <td align="center"><b>Message Size</b><br>
+            <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=4"  name="lowest size first" >    <IMG src="/osmonweb/arrow-N-S.gif" width=24 height=24 border=0></a>
+            <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=4" name="highest size first">    <IMG src="/osmonweb/arrow-S-N.gif" width=24 height=24 border=0></a>
+            <td align="center"><b>Max. Message Count</b><br>
+            <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=5"  name="lowest count first"    ><IMG src="/osmonweb/arrow-N-S.gif" width=24 height=24 border=0></a>
+            <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=5" name="highest count first"   ><IMG src="/osmonweb/arrow-S-N.gif" width=24 height=24 border=0></a>
+            <td align="center"><b>Curr. Message Count</b><br>
+            <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=6"  name="lowest count first"    ><IMG src="/osmonweb/arrow-N-S.gif" width=24 height=24 border=0></a>
+            <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=6" name="highest count first"   ><IMG src="/osmonweb/arrow-S-N.gif" width=24 height=24 border=0></a>
+            <td align="center"><b>Attributes</b><br>
+         </form></tr>
+<!-- destvar:osmonweb_RTEID_queue_tabentry -->
+         <tr align="right">
+            <td><div align="center">
+               <a href="/goforms/osmonweb?api=RTEID&obj_type=queue&obj_curr=0x<!--%printint %08x|0-->" title="Details for 0x<!--%printint %08x|0-->">
+               0x<!--%printint %08x|0--><!--%sample-->08010001<!--/%-->
+               </a></div></td>
+            <td><b><div align="center">
+               <a href="/goforms/osmonweb?api=RTEID&obj_type=queue&obj_curr=0x<!--%printint %08x|0-->" title="Details for <!--%printname %s|1 -->">
+               <code><!--%printname %s|1 --><!--%sample-->MSQ1<!--/%--></code>
+               </a></div></b></td>
+            <td><b><div align="center"><!--%printint %8d|4 --><!--%sample-->1234<!--/%--></div></b></td>
+            <td><b><div align="center"><!--%printint %8d|5 --><!--%sample-->64<!--/%--></div></b></td>
+	    <!-- interpolate color from red (high) to azur (low) priority -->
+            <td bgcolor="<!--%sample-->#FE0000<!--/%--><!--%printipol #%02X|11|0|10000|0x40|0xFF--><!--%printipol %02X|11|0|10000|0xFF|0x40--><!--%printipol %02X|11|0|10000|0xFF|0x40-->">
+	       <!--%printint %d|3--><!--%sample-->12<!--/%--></td>
+            <td><b><div align="center">0x<!--%printint %08x|10 --><!--%sample-->64<!--/%--></div></b></td>
+         </tr>
+<!-- destvar:osmonweb_RTEID_queue_tabfoot -->
+      </table>
+<!-- end of object table -->
+   </td></tr>
+   <tr><td>
+<!-- destvar:osmonweb_RTEID_queue_footer -->
+<hr>
+<!-- start of general display options -->
+  <h2><div align="center">Display Options</div></h2>
+   <div align="center"><table>
+      <form action="/goforms/osmonweb?<!--%printstr %s|12-->&auto_rfsh_enab=0&hdr_rep_enable=0&dummy=dummy" method="POST" enctype="application/x-www-form-urlencoded">
+      <tr>
+         <td><input type="checkbox" <!--%printselect %s|6|0xffffffff|||checked--> name="auto_rfsh_enab" value="1">autorefresh </td>
+         <td>every <input type="text" name="auto_rfsh_time" value=<!--%printint %d|7--><!--%sample-->30<!--/%--> size=10 maxlength=10> seconds</td>
+      </tr>
+      <tr>
+         <td><input type="checkbox" <!--%printselect %s|10|0xffffffff|||checked--> name="hdr_rep_enable" value="1">repeat header </td>
+         <td>every <input type="text" name="hdr_rep_cnt" value=<!--%printint %d|11--> size=3 maxlength=3> lines</td>
+      </tr>
+      <tr>
+         <td><input type="submit" name="Submit" value="submit"></td>
+      </tr></form>
+   </table></div>
+<hr>
+<div align="center"><font size="-1"><font  color="blue"><i>osmonweb</i></font> for RTEMS implemented by IMD</font><br><IMG src="/osmonweb/imdlogo_sm.jpg" width=42 height=21 border=0></div>
+<!-- end of general display options -->
+    </td></tr>
+</table>
+<!-- destvar:osmonweb_RTEID_queue_trailer -->
+</body>

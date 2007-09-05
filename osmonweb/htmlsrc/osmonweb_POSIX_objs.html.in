@@ -1,0 +1,89 @@
+<!-- destvar:osmonweb_POSIX_objs_title -->
+<head>
+<!-- start of document title here -->
+   <title>RTEMS POSIX API Objects on <!--%printstr %s|4 --></title>
+<!-- end of document title -->
+</head>
+<body>
+<!-- destvar:osmonweb_POSIX_objs_header -->
+<table border="0" cellspacing="0" cellpadding="5" width="100%">
+   <tr><td><div align="center">
+      <h2>RTEMS POSIX API Objects On Target <b><font color="#4040ff"><!--%printstr %s|4 --></font></b></h2>
+   </div></td></tr>
+   <tr><td>
+   <div align="center">
+   <!-- start of API selection bar -->
+   <table border="0" cellspacing="0" width="100%">
+      <tr valign="center">
+      <td width="20">&nbsp;</td>
+      <td bgcolor="#E0E0E0" align="center" width="200">
+         <a href="/goforms/osmonweb?api=RTEID" name="RTEID objects">
+         <font color="Black" size="+1"><b>Classic (RTEID) API</b></font>
+         </a>
+      </td>
+      <td width="20">&nbsp;</td>
+      <td bgcolor="#4040ff" align="center" width="200">
+         <a href="/goforms/osmonweb?api=POSIX" name="POSIX objects">
+         <font color="#ffffff" size="+1">POSIX API</font>
+         </a>
+      </td>
+      <td width="20">&nbsp;</td>
+      <td bgcolor="#E0E0E0" align="center" width="200">
+         <a href="/goforms/osmonweb?api=ITRON" name="ITRON objects">
+         <font color="Black" size="+1">ITRON API</font>
+         </a>
+      </td>
+      <td width="20">&nbsp;</td>
+      </tr>
+      <tr><td colspan=10 bgcolor="#4040ff"><img width=1 height=1 alt=""></td></tr>
+   </table>
+   <!-- end of API selection bar -->
+
+   <!-- start of Object selection bar -->
+   <table border="0"  cellspacing="0" width="80%">
+      <tr>
+         <td width="20">&nbsp;</td>
+         <td bgcolor="#8080E0" align="center" width="200">
+            <a href="/goforms/osmonweb?api=POSIX&obj_type=thread" name="POSIX Threads">
+            <font color=Black>Threads</font>
+            </a></td>
+         <td width="20">&nbsp;</td>
+         <td bgcolor="#8080E0" align="center" width="200">
+            <a href="/goforms/osmonweb?api=POSIX&obj_type=sema" name="POSIX semaphores">
+            <font color="Black">Semaphores</font>
+            </a></td>
+         <td width="20">&nbsp;</td>
+         <td bgcolor="#8080E0" align="center" width="200">
+            <a href="/goforms/osmonweb?api=POSIX&obj_type=mutex" name="POSIX Mutexes">
+            <font color="Black">Mutexes</font>
+            </a></td>
+         <td width="20">&nbsp;</td>
+         <td bgcolor="#8080E0" align="center" width="200">
+            <a href="/goforms/osmonweb?api=POSIX&obj_type=mqueue" name="POSIX Message Queues">
+            <font color="Black">Message Queues</font>
+            </a></td>
+         <td width="20">&nbsp;</td>
+         <td bgcolor="#8080E0" align="center" width="200">
+            <a href="/goforms/osmonweb?api=POSIX&obj_type=timer" name="POSIX Timers">
+            <font color="Black">Timers</font>
+            </a></td>
+         <td width="20">&nbsp;</td>
+      </tr>
+   </table>
+<!-- end of Object selection bar -->
+   </div>
+<!-- destvar:osmonweb_POSIX_objs_footer -->
+    <br><br><hr><br><br>
+    <div align="center"><table cellspacing="5" cellpadding="15"><tr>
+      <td><IMG src="/osmonweb/EmpoweredByRTEMSEggLogo.gif" alt="Empowered by RTEMS" width=90 height=53 border=0></td>
+      <td><IMG src="/osmonweb/@HTTPD_LOGO@" width=113 height=23 border=0></td>
+      <td><IMG src="/osmonweb/imdlogo.jpg" width=123 height=61 border=0></td>
+    </tr><tr>
+      <td align="center"><b>Empowered by <br>RTEMS</b></td>
+      <td align="center"><b>transported by <br>@HTTPD_SERVER@</b></td>
+      <td align="center"><b>implemented by <br>IMD Th. Dörfler</b></td>
+    </tr></table></div>
+    </td></tr>
+</table>
+<!-- destvar:osmonweb_POSIX_objs_trailer -->
+</body>

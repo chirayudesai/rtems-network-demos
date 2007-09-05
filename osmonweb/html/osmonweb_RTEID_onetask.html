@@ -1,0 +1,172 @@
+<!-- destvar:osmonweb_RTEID_onetask_title -->
+<head>
+<!-- start of document title here -->
+   <title>RTEMS Classic (RTEID) API Tasks on <!--%printstr %s|4 --></title>
+   <meta http-equiv="cache-control" content="no-cache">
+   <meta http-equiv="refresh" content="<!--%printint %d|7-->; URL=/goforms/osmonweb?<!--%printstr %s|12-->">
+<!-- end of document title -->
+</head>
+<body>
+<!-- destvar:osmonweb_RTEID_onetask_header -->
+<table border="0" cellspacing="0" cellpadding="5" width="100%">
+   <tr><td>
+   <div align="center">
+   <!-- start of API selection bar -->
+   <table border="0" cellspacing="0" width="100%">
+      <tr valign="center">
+      <td width="20">&nbsp;</td>
+      <td bgcolor="#4040ff" align="center" width="200">
+         <a href="/goforms/osmonweb?api=RTEID" name="RTEID objects">
+         <font color=#ffffff size="+1"><b>Classic (RTEID) API</b></font>
+         </a>
+      </td>
+      <td width="20">&nbsp;</td>
+      <td bgcolor="#E0E0E0" align="center" width="200">
+         <a href="/goforms/osmonweb?api=POSIX" name="POSIX objects">
+         <font color="Black" size="+1">POSIX API</font>
+         </a>
+      </td>
+      <td width="20">&nbsp;</td>
+      <td bgcolor="#E0E0E0" align="center" width="200">
+         <a href="/goforms/osmonweb?api=ITRON" name="ITRON objects">
+         <font color="Black" size="+1">ITRON API</font>
+         </a>
+      </td>
+      <td width="20">&nbsp;</td>
+      </tr>
+      <tr><td colspan=10 bgcolor="#4040ff"><img width=1 height=1 alt=""></td></tr>
+   </table>
+   <!-- end of API selection bar -->
+
+   <!-- start of Object selection bar -->
+   <table border="0"  cellspacing="0" width="80%">
+      <tr>
+         <td width="20">&nbsp;</td>
+         <td bgcolor="#4040ff" align="center" width="200">
+            <a href="/goforms/osmonweb?api=RTEID&obj_type=task" name="RTEID tasks">
+            <font color=#ffffff><b>Tasks</b></font>
+            </a></td>
+         <td width="20">&nbsp;</td>
+         <td bgcolor="#8080E0" align="center" width="200">
+            <a href="/goforms/osmonweb?api=RTEID&obj_type=sema" name="RTEID semaphores">
+            <font color="Black">Semaphores</font>
+            </a></td>
+         <td width="20">&nbsp;</td>
+         <td bgcolor="#8080E0" align="center" width="200">
+            <a href="/goforms/osmonweb?api=RTEID&obj_type=queue" name="RTEID Message Queues">
+            <font color="Black">Message Queues</font>
+            </a></td>
+         <td width="20">&nbsp;</td>
+         <td bgcolor="#8080E0" align="center" width="200">
+            <a href="/goforms/osmonweb?api=RTEID&obj_type=rmon" name="RTEID Rate Monotonic Timers">
+            <font color="Black">Rate Monotonic Timers</font>
+            </a></td>
+         <td width="20">&nbsp;</td>
+         <td bgcolor="#8080E0" align="center" width="200">
+            <a href="/goforms/osmonweb?api=RTEID&obj_type=part" name="RTEID Partitions">
+            <font color="Black">Partitions</font>
+            </a></td>
+         <td width="20">&nbsp;</td>
+         <td bgcolor="#8080E0" align="center" width="200">
+            <a href="/goforms/osmonweb?api=RTEID&obj_type=region" name="RTEID Regions">
+            <font color="Black">Regions</font>
+            </a></td>
+         <td width="20">&nbsp;</td>
+      </tr>
+   </table>
+<!-- end of Object selection bar -->
+   </div>
+   </td></tr><tr><td>
+      <div align="center">
+<!-- start of document title here -->
+      <br><h2>Classic (RTEID) API Tasks On Target <b><font color="#4040ff"><!--%printstr %s|4 --></font></b></h2><br>
+<!-- end of document title -->
+      </div>
+<!-- destvar:osmonweb_RTEID_onetask_tabhead -->
+<!-- start of object table -->
+      <table border="1"width=100%>
+         <tr valign="top" bgcolor="#bfbfbf">
+            <td align="center"><b>ID</b></td>
+            <td align="center"><b>Name</b></td>
+            <td align="center"><b>Priority</b></td>
+            <td align="center"><b>Mode</b></th>
+            <td align="center"><b>Attributes</b></th>
+            <td align="center"><b>State</b></td>
+            <td align="center"><b>Ticks</b></td>
+            <td align="center"><b>Control</b></td>
+         </tr>
+<!-- destvar:osmonweb_RTEID_onetask_tabentry -->
+         <tr align="right">
+            <td><div align="center">0x<!--%printint %08x|0--><!--%sample-->08010001<!--/%--></div></td>
+            <td><b><div align="center"><code><!--%printname %s|1 --><!--%sample-->TSK1<!--/%--></code></div></b></td>
+	    <!-- interpolate color from red (high) to azur (low) priority -->
+            <td bgcolor="<!--%sample-->#FE0000<!--/%--><!--%printipol #%02X|6|0|255|0xFF|0x40--><!--%printipol %02X|6|0|255|0x40|0xFF--><!--%printipol %02X|6|0|255|0x40|0xFF-->">
+	       <!--%printint %d|6--><!--%sample-->1<!--/%--></td>
+            <td><div align="center"><form action="./change_taskxyz.cgi" method="POST" enctype="application/x-www-form-urlencoded">
+               <table border="1"><tr>
+                  <td><table>
+                     <tr><td align="right">
+		        <input type="checkbox"
+                               <!--%printselect %s|9|0x00000100||checked| -->
+                               name="preempt"
+                               value="preempt"></td><td>preemptive</td></tr>
+                     <tr><td align="right">
+		        <input type="checkbox"
+                               <!--%printselect %s|9|0x00000200|||checked -->
+                               name="timeslc" value="timeslc"></td><td>timesliced</td></tr>
+                  </table></td><td><table>
+                     <tr><td align="right">
+		        <input type="checkbox"
+                               <!--%printselect %s|9|0x00000400||checked| -->
+                               name="ASRenab" value="ASRenab"></td><td>ASR enabled</td></tr>
+                     <tr><td align="right">
+		        <input type="text" name="intlevel" 
+			       value="<!--%printicompress %d|9|0x00000007-->" 
+			       size=5 maxlength=5 align="right"></td><td>Interrupt Level</td></tr>
+                  </table></td>
+                  <td><input type="submit" name="Change" value="Change"></td>
+               </tr></table>
+            </form></div></td>
+            <td><div align="center"><form action="./change_taskxyz.cgi" method="POST" enctype="application/x-www-form-urlencoded">
+               <table border="1"><tr>
+                  <td><table>
+                     <tr><td align="right"><input type="checkbox" checked name="float" value="float"></td><td>floating point</td></tr>
+                     <tr><td align="right"><input type="checkbox"         name="global" value="local"></td><td>global</td></tr>
+                  </table></td>
+               </tr></table>
+            </form></div></td>
+            <td bgcolor="<!--%printselect %s|7|0xffffffff|#808080|#60FF60|#4040C0|#FF8000|#E0E000|#FF0000-->" align="center">
+                         <!--%printselect %s|7|0xffffffff|       |Ready|Dormant|Suspended|Delayed|Blocked--></td>
+            <td bgcolor="#<!--%printipol %02X|14|0|1000|0x40|0xFF--><!--%printipol %02X|14|0|1000|0xFF|0x40--><!--%printipol %02X|14|0|1000|0xFF|0x40-->">
+	       <!--%printint %d|13--></td>
+            <td><table border="1"><tr>
+               <td align="center"><a href="/goforms/osmonweb?<!--%printstr %s|15-->&action=suspend"  name="suspend task" ><IMG src="/osmonweb/pause.gif" alt="suspend" width=24 height=24 border=0><br>suspend</a></td>
+               <td align="center"><a href="/goforms/osmonweb?<!--%printstr %s|15-->&action=resume"  name="resume task" ><IMG src="/osmonweb/run.gif" alt="resume" width=24 height=24 border=0><br>resume</a></td>
+            </tr></table></td>
+         </tr>
+<!-- destvar:osmonweb_RTEID_onetask_tabfoot -->
+      </table>
+<!-- end of object table -->
+   </td></tr>
+   <tr><td>
+<!-- destvar:osmonweb_RTEID_onetask_footer -->
+<hr>
+<!-- start of general display options -->
+  <h2><div align="center">Display Options</div></h2>
+   <div align="center"><table>
+      <form action="/goforms/osmonweb?<!--%printstr %s|12-->&auto_rfsh_enab=0&dummy=dummy" method="POST" enctype="application/x-www-form-urlencoded">
+      <tr>
+         <td><input type="checkbox" <!--%printselect %s|6|0xffffffff|||checked--> name="auto_rfsh_enab" value="1">autorefresh </td>
+         <td>every <input type="text" name="auto_rfsh_time" value=<!--%printint %d|7--><!--%sample-->30<!--/%--> size=10 maxlength=10> seconds</td>
+      </tr>
+      <tr>
+         <td><input type="submit" name="Submit" value="submit"></td>
+      </tr></form>
+   </table></div>
+<hr>
+<div align="center"><font size="-1"><font  color="blue"><i>osmonweb</i></font> for RTEMS implemented by IMD</font><br><IMG src="/osmonweb/imdlogo_sm.jpg" width=42 height=21 border=0></div>
+<!-- end of general display options -->
+    </td></tr>
+</table>
+<!-- destvar:osmonweb_RTEID_onetask_trailer -->
+</body>
