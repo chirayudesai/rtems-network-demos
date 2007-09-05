@@ -121,6 +121,10 @@ html/%.html: htmlsrc/%.html.in
 	sed -e 's/@HTTPD_SERVER@/$(HTTPD)/' \
 	    -e 's/@HTTPD_LOGO@/$(HTTPD_LOGO)/' <$< >$@
 
+## Rule to make .c/.h files from html
+%.h %.c: html/%.html
+        ./tools/html2c.perl --src-file=$< --dest-base=$(*F)
+
 html/$(HTTPD_LOGO): htmlsrc/$(HTTPD_LOGO)
 	cp $< $@
 
