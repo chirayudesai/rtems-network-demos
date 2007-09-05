@@ -2,7 +2,7 @@
 #  $Id$
 #
 
-## RTEMS_MAKEFILE_PATH=/home/joel/rtems-4.8-work/bsp-install/powerpc-rtems4.8/icecube/
+RTEMS_MAKEFILE_PATH=/home/joel/rtems-4.8-work/bsp-install/powerpc-rtems4.8/icecube/
 SAMPLE=osmonweb
 PGM=${ARCH}/$(SAMPLE).exe
 
@@ -51,7 +51,7 @@ LD_PATHS  +=
 USE_GOAHEAD=no
 USE_SIMPLE=yes
 USE_FTPD=yes
-USE_DEBUG=yes
+USE_DEBUG=no
 ifeq ($(USE_GOAHEAD),yes)
   HTTPD       = GoAhead Web Server
   HTTPD_LOGO  = webserver_logo2.gif

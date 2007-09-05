@@ -745,7 +745,7 @@ rtems_status_code osmonweb_init
     printf("chdir(./osmonweb) returned %d\n",rc);
 
     printf("Calling UntarFromMemory\n");
-    rc = Untar_FromMemory(osmonweb_tar, osmonweb_tar_size);
+    rc = Untar_FromMemory((void *)osmonweb_tar, osmonweb_tar_size);
     printf("UntarFromMemory returns %d\n",rc);
     rc = chdir(dir);
     printf("chdir(%s) returned %d\n",dir,rc);

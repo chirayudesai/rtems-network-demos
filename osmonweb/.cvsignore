@@ -1,0 +1,5 @@
+*.swp
+o-optimize
+osmonweb_tar
+osmonweb_tar.c
+osmonweb_tar.h

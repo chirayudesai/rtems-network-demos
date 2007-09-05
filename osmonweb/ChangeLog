@@ -1,0 +1,7 @@
+2007-09-05	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* Makefile, osmonweb.c, osmonweb_RTEID.c, osmonweb_int.h: Remove JOEL
+	conditionals which disabled parts of the code dependent on monitor
+	enhancements which Thomas just merged. Clean up various warnings.
+	* .cvsignore, html/.cvsignore: New files.
+

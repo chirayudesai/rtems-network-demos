@@ -21,6 +21,9 @@
 |*do not edit here)                                               |
 |*****************************************************************|
 |* $Log$
+|* Revision 1.1.1.1  2007/09/05 13:42:17  joel
+|* initial import.
+|*
 |* Revision 1.3  2003/10/13 19:25:35  thomas
 |* ballcart demo works fine (more or less)
 |*
@@ -273,7 +276,6 @@ uint32_t osmonweb_rteid_queue_entry
   return (next_id != RTEMS_OBJECT_ID_FINAL);
 }
 
-#if defined(JOEL)
 /*=========================================================================*\
 | Function:                                                                 |
 \*-------------------------------------------------------------------------*/
@@ -366,7 +368,6 @@ uint32_t osmonweb_rteid_sema_action
   }
   return rc;
 }
-#endif
 
 /* 
  * control data structures
@@ -424,7 +425,6 @@ const osmonweb_fragment_ctrl_t osmonweb_RTEID_onequeue_fragment[] = {
     {NULL,FALSE}
 };
 
-#if defined(JOEL)
 const osmonweb_fragment_ctrl_t osmonweb_RTEID_sema_fragment[] = {
     {osmonweb_RTEID_sema_title,   NULL                        , FALSE},
     {osmonweb_RTEID_sema_header,  NULL                        , FALSE},
@@ -446,7 +446,6 @@ const osmonweb_fragment_ctrl_t osmonweb_RTEID_onesema_fragment[] = {
     {osmonweb_RTEID_onesema_trailer, NULL                        , FALSE},
     {NULL,FALSE}
 };
-#endif
 
 osmonweb_objtype_t RTEID_objtypes[] = {
   {"task",
@@ -457,12 +456,10 @@ osmonweb_objtype_t RTEID_objtypes[] = {
    osmonweb_rteid_queue_entry, NULL, NULL, 
    {osmonweb_RTEID_queue_fragment,osmonweb_RTEID_onequeue_fragment}
   }
-#if defined(JOEL)
   ,{"sema",
     osmonweb_rteid_sema_entry, NULL, osmonweb_rteid_sema_action,
     {osmonweb_RTEID_sema_fragment,osmonweb_RTEID_onesema_fragment}
   }
-#endif
   ,{NULL,NULL,NULL,NULL,{NULL,NULL}}
 };
 

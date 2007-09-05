@@ -20,6 +20,9 @@
 |*do not edit here)                                               |
 |*****************************************************************|
 |* $Log$
+|* Revision 1.1.1.1  2007/09/05 13:42:17  joel
+|* initial import.
+|*
 |* Revision 1.2  2003/10/06 22:56:04  thomas
 |* task resume/suspend works
 |*
@@ -107,14 +110,20 @@ typedef struct {
  */
 typedef struct {
   const char *name;
-  rtems_status_code (*collect_fnc)(osmonweb_common_option_t *common_options,
-                                   uint32_t   *cookie,
-                                   uint32_t   result_cnt,
-                                   html_printf_arg_t *results); 
-  rtems_status_code (*cleanup_fnc)(uint32_t   result_cnt,
-                                   html_printf_arg_t *results); 
-  rtems_status_code (*action_fnc)(osmonweb_ctx_t wp,const char *act_str,
-                                  osmonweb_common_option_t *common_options); 
+  uint32_t (*collect_fnc)(
+    osmonweb_common_option_t *common_options,
+    uint32_t   *cookie,
+    uint32_t   result_cnt,
+    html_printf_arg_t *results); 
+  uint32_t (*cleanup_fnc)(
+    uint32_t   result_cnt,
+    html_printf_arg_t *results
+  ); 
+  uint32_t (*action_fnc)(
+    osmonweb_ctx_t wp,
+    const char *act_str,
+    osmonweb_common_option_t *common_options
+  ); 
   const osmonweb_fragment_ctrl_t *fragment[2];
 } osmonweb_objtype_t;
 
