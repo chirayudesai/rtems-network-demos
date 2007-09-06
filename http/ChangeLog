@@ -1,3 +1,12 @@
+2007-09-06	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* Makefile, init.c, rootfs/.cvsignore: Add some dynamic content.
+	Can now look at cpu usage, reset cpu usage and print a stack
+	usage report.
+	* goahead_index.html, shttpd.png, shttpd_ext.c, shttpd_index.html:
+	New files.
+	* index.html.in: Removed.
+
 2007-09-04	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* init.c: Remove TARFILE_XXX macros.

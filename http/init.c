@@ -24,6 +24,7 @@
                                            RTEMS_NO_ASR | \
                                            RTEMS_INTERRUPT_LEVEL(0))
 
+#define STACK_CHECKER_ON
 #define CONFIGURE_INIT
 
 #include "system.h"
@@ -92,6 +93,10 @@
 
 #define bool2string(_b) ((_b) ? "true" : "false")
 
+#if defined(USE_SIMPLE_HTTPD)
+extern void example_shttpd_addpages(struct shttpd_ctx *ctx);
+#endif
+
 rtems_task Init(
   rtems_task_argument argument
 )
@@ -107,10 +112,10 @@ rtems_task Init(
   /*
    * Load filesystem image
    */
-  printf("Loading filesystem image");
+  printf("Loading filesystem image\n");
   status = Untar_FromMemory( (char *)FilesystemImage, FilesystemImage_size );
    
-  printf("Initializing Network");
+  printf("Initializing Network\n");
   rtems_bsdnet_initialize_network ();
 
   #if defined(USE_FTPD)
@@ -131,11 +136,11 @@ rtems_task Init(
     printf( "Initializing Simple HTTPD\n" );
     status = rtems_initialize_webserver(
       100,                             /* initial priority */
-      RTEMS_MINIMUM_STACK_SIZE * 2,    /* stack size */
+      RTEMS_MINIMUM_STACK_SIZE * 4,    /* stack size */
       RTEMS_DEFAULT_MODES,             /* initial modes */
       RTEMS_DEFAULT_ATTRIBUTES,        /* attributes */
       NULL,                            /* init_callback */
-      NULL,                            /* addpages_callback */
+      example_shttpd_addpages,         /* addpages_callback */
       "/",                             /* initial priority */
       80                               /* port to listen on */
     );

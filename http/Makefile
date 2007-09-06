@@ -8,7 +8,7 @@ PGM=${ARCH}/$(SAMPLE).exe
 MANAGERS=all
 
 # C source names, if any, go here -- minus the .c
-C_PIECES=init FilesystemImage
+C_PIECES=init FilesystemImage shttpd_ext
 C_FILES=$(C_PIECES:%=%.c)
 C_O_FILES=$(C_PIECES:%=${ARCH}/%.o)
 
@@ -73,7 +73,7 @@ LD_LIBS +=
 #
 
 CLEAN_ADDITIONS += FilesystemImage FilesystemImage.c FilesystemImage.h
-CLEAN_ADDIRIONS += stamp-index-html rootfs/index.html
+CLEAN_ADDITIONS += stamp-index-html rootfs/index.html rootfs/shttpd.png
 CLOBBER_ADDITIONS +=
 
 # strip out flags gcc knows but LD doesn't like -- add as needed
@@ -86,19 +86,27 @@ all:	${ARCH} $(SRCS) $(PGM)
 ${PGM}: $(OBJS) $(LINK_FILES)
 	$(make-exe)
 
-
 $(ARCH)/init.c: init.c FilesystemImage.c
 
-FilesystemImage: $(ARCH) stamp-index-html
+FilesystemImage: $(ARCH) stamp-index-html \
+    rootfs/etc/host.conf rootfs/etc/hosts rootfs/rtems_logo.jpg
 	cd rootfs ; \
 	    tar cf ../FilesystemImage --exclude CVS --exclude .cvsignore .
 
 FilesystemImage.c: $(ARCH) FilesystemImage
 	$(PROJECT_ROOT)/bin/bin2c FilesystemImage FilesystemImage
 
-stamp-index-html: index.html.in
-ifneq ($(HTTPD),)
-	sed -e 's/@SERVER@/$(HTTPD)/' <index.html.in >rootfs/index.html
+rootfs/index.html: shttpd_index.html goahead_index.html 
+ifeq ($(USE_SIMPLE),yes)
+	cp shttpd_index.html rootfs/index.html
+endif
+ifeq ($(USE_GOHEAD),yes)
+	cp goahead_index.html rootfs/index.html
+endif
+
+stamp-index-html: rootfs/index.html
+ifeq ($(USE_SIMPLE),yes)
+	cp shttpd.png rootfs
 endif
 	touch stamp-index-html
 
