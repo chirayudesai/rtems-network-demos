@@ -1,5 +1,9 @@
 2007-09-06	Joel Sherrill <joel.sherrill@oarcorp.com>
 
+	* shttpd_ext.c: Use new name.
+
+2007-09-06	Joel Sherrill <joel.sherrill@oarcorp.com>
+
 	* Makefile, init.c, rootfs/.cvsignore: Add some dynamic content.
 	Can now look at cpu usage, reset cpu usage and print a stack
 	usage report.
