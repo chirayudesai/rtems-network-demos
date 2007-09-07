@@ -133,10 +133,15 @@ rtems_task Init(
   #endif
 
   #if defined(USE_SIMPLE_HTTPD)
+    /*
+     *  SHTTPD uses about 37K of stack even in this test on a PowerPC.
+     *  There is no point in doing math for the stack size.  Bump it
+     *  until there isn't a problem.
+     */
     printf( "Initializing Simple HTTPD\n" );
     status = rtems_initialize_webserver(
       100,                             /* initial priority */
-      RTEMS_MINIMUM_STACK_SIZE * 4,    /* stack size */
+      (48 * 1024),                     /* stack size */
       RTEMS_DEFAULT_MODES,             /* initial modes */
       RTEMS_DEFAULT_ATTRIBUTES,        /* attributes */
       NULL,                            /* init_callback */
