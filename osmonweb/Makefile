@@ -2,7 +2,6 @@
 #  $Id$
 #
 
-RTEMS_MAKEFILE_PATH=/home/joel/rtems-4.8-work/bsp-install/powerpc-rtems4.8/icecube/
 SAMPLE=osmonweb
 PGM=${ARCH}/$(SAMPLE).exe
 

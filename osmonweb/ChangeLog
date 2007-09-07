@@ -1,5 +1,9 @@
 2007-09-07	Joel Sherrill <joel.sherrill@oarcorp.com>
 
+	* Makefile: Take out hard-coded RTEMS_MAKEFILE_PATH.
+
+2007-09-07	Joel Sherrill <joel.sherrill@oarcorp.com>
+
 	* init.c: Increase stack size for shttpd to 48K.
 	* osmonweb.c: Turn off some VERY noisy debug output. Clean up
 	osmonweb_WriteBlock() and watch it work.
