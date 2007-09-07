@@ -198,10 +198,12 @@ void *osmonweb_getCommonOptions(
     if ( !lhs )
       break;
     rhs = strtok_r( state, "?=&", &state );
-    fprintf(
-      stderr,
-      "lhs=%s  \trhs=%s\n", lhs, ((rhs)? rhs : "NULL")
-    );
+    #if 0
+      fprintf(
+	stderr,
+	"lhs=%s  \trhs=%s\n", lhs, ((rhs)? rhs : "NULL")
+      );
+    #endif
 
     if ( !strcmp( lhs, "api" ) )
       c->api_type = rhs;
@@ -263,23 +265,13 @@ int osmonweb_WriteBlock(
   int             nChars
 )
 {
-#if 0  /* fprintf( stderr, "%s", buf ); */
-  shttpd_printf(
-    (struct shttpd_arg *)wp,
-    "%s",
-    buf
-  );
-#else
   int i;
-  fprintf(stderr,"\n<***************>\n");
-  for (i = 0; i < nChars;i++) {
-    fprintf(stderr,"%c",buf[i]);
-    shttpd_printf((struct shttpd_arg *)wp,
-		  "%c",
-		  buf[i]);
+  char cbuf[2];
+
+  for ( i = 0 ; i < nChars ; i++ ) {
+    sprintf( cbuf, "%c", buf[i]);
+    shttpd_printf((struct shttpd_arg *)wp, "%s", cbuf);
   }
-  fprintf(stderr,"\n<***************>\n");
-#endif
   return nChars;
 }
 
@@ -461,8 +453,6 @@ void osmonweb_form
    * - table header repetition
    */
   toFree = osmonweb_getCommonOptions( wp, &common_options );
-
-fprintf( stderr, "osmonweb_form\n" );
 
   /*
    * collect common options into a standard parameter list

@@ -142,7 +142,7 @@ rtems_task Init(
     printf( "Initializing Simple HTTPD\n" );
     status = rtems_initialize_webserver(
       100,                             /* initial priority */
-      RTEMS_MINIMUM_STACK_SIZE * 2,    /* stack size */
+      48 * 1024,                       /* stack size */
       RTEMS_DEFAULT_MODES,             /* initial modes */
       RTEMS_DEFAULT_ATTRIBUTES,        /* attributes */
       NULL,                            /* init_callback */
