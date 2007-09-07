@@ -1,5 +1,9 @@
 2007-09-07	Joel Sherrill <joel.sherrill@oarcorp.com>
 
+	* shttpd_index.html: Fix URL for shttpd.
+
+2007-09-07	Joel Sherrill <joel.sherrill@oarcorp.com>
+
 	* goahead_index.html: This is not preprocessed so hard code name.
 	* init.c: Simple HTTPD is using ~39K stack space with this test.
 	Make the stack for the SHTTPD server 48K.
