@@ -1,12 +1,12 @@
 /*
- * Network configuration -- QEMU NOT using DHCP
+ * Network configuration for IceCub in RTEMS Lab
  * 
  ************************************************************
  * EDIT THIS FILE TO REFLECT YOUR NETWORK CONFIGURATION     *
  * BEFORE RUNNING ANY RTEMS PROGRAMS WHICH USE THE NETWORK! * 
  ************************************************************
  *
- *  networkconfig.h,v 1.8 2001/08/31 18:11:43 joel Exp
+ *  $Id$
  */
 
 #ifndef _RTEMS_NETWORKCONFIG_H_
@@ -20,19 +20,17 @@
  *  specific mechanism.
  */
 
-#undef RTEMS_BSP_NETWORK_DRIVER_NAME
-#undef RTEMS_BSP_NETWORK_DRIVER_ATTACH
-#define RTEMS_BSP_NETWORK_DRIVER_NAME    "ne1"
-#define RTEMS_BSP_NETWORK_DRIVER_ATTACH  rtems_ne_driver_attach
-
-#ifdef RTEMS_USE_BOOTP
-#undef RTEMS_USE_BOOTP
+#ifndef RTEMS_BSP_NETWORK_DRIVER_NAME
+#warning "RTEMS_BSP_NETWORK_DRIVER_NAME is not defined"
+#define RTEMS_BSP_NETWORK_DRIVER_NAME "no_network1"
 #endif
 
-/*
- * If you use DHCP on the QEMU instance, there is less configuration
- */
-// #define RTEMS_USE_BOOTP
+#ifndef RTEMS_BSP_NETWORK_DRIVER_ATTACH
+#warning "RTEMS_BSP_NETWORK_DRIVER_ATTACH is not defined"
+#define RTEMS_BSP_NETWORK_DRIVER_ATTACH 0
+#endif
+
+/* #define RTEMS_USE_BOOTP */
 
 #include <bsp.h>
 
@@ -41,14 +39,9 @@
  * Ethernet address here.  If RTEMS_SET_ETHERNET_ADDRESS is not
  * defined the driver will choose an address.
  */
-//#define RTEMS_SET_ETHERNET_ADDRESS
-#ifdef RTEMS_SET_ETHERNET_ADDRESS
-#undef RTEMS_SET_ETHERNET_ADDRESS
-#endif
-
+#define RTEMS_SET_ETHERNET_ADDRESS
 #if (defined (RTEMS_SET_ETHERNET_ADDRESS))
-/* static char ethernet_address[6] = { 0x08, 0x00, 0x3e, 0x12, 0x28, 0xb1 }; */
-static char ethernet_address[6] = { 0x00, 0x80, 0x7F, 0x22, 0x61, 0x77 };
+  static char ethernet_address[6] = { 0x00, 0x11, 0x22, 0x33, 0x44, 0x55 };
 #endif
 
 #ifdef RTEMS_USE_LOOPBACK 
@@ -84,7 +77,7 @@ static struct rtems_bsdnet_ifconfig netdriver_config = {
 	NULL,				/* BOOTP supplies IP address */
 	NULL,				/* BOOTP supplies IP net mask */
 #else
-	"10.0.2.5",			/* IP address */
+	"192.168.1.244",		/* IP address */
 	"255.255.255.0",		/* IP net mask */
 #endif /* !RTEMS_USE_BOOTP */
 
@@ -94,11 +87,12 @@ static struct rtems_bsdnet_ifconfig netdriver_config = {
 	NULL,                           /* Driver supplies hardware address */
 #endif
 	0,				/* Use default driver parameters */
-	0, /* mtu */
-	0, /* rbuf_count */
-	0, /* xbuf_count */
-	0, /* port */
-	9 /* irq */
+        0,				/* mtu */
+        0,				/* rbuf_count */
+        0,				/* xbuf_count */
+        0,				/* port */
+        0				/* irq */
+
 };
 
 /*
@@ -113,18 +107,17 @@ struct rtems_bsdnet_config rtems_bsdnet_config = {
 	NULL,
 #endif
 
-	0,			/* Default network task priority */
+	0,				/* Default network task priority */
 	256 * 1024,			/* Default mbuf capacity */
 	256 * 1024,			/* Default mbuf cluster capacity */
 
 #if (!defined (RTEMS_USE_BOOTP))
-	"rtems",	/* Host name */
-	"",		/* Domain name */
-	"10.0.2.1",	/* Gateway */
-	"10.0.0.1",	/* Log host */
-	{"10.0.2.3" },	/* Name server(s) */
-	{"" },	/* NTP server(s) */
-
+	"rtems",		/* Host name */
+	"nodomain.com",		/* Domain name */
+	"192.168.1.14",  	/* Gateway */
+	"192.168.1.1",  	/* Log host */
+	{"192.168.1.1"  },	/* Name server(s) */
+	{"192.168.1.1"  },	/* NTP server(s) */
 #endif /* !RTEMS_USE_BOOTP */
 
 };
@@ -143,7 +136,7 @@ struct rtems_bsdnet_config rtems_bsdnet_config = {
 /*
  * For NFS test application
  * 
- * NFS mount and a directory to ls once mounted
+ * NFS server/path to mount and a directory to ls once mounted
  */
 #define RTEMS_NFS_SERVER      "192.168.1.210"
 #define RTEMS_NFS_SERVER_PATH "/home"

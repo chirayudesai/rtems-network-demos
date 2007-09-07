@@ -1,3 +1,10 @@
+2007-09-07	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* networkconfig-qemu.h: Disable DHCP and use static IP.
+	* networkconfig.h: Use only loopback so tests can run OK on any target
+	even if they can't do anything.
+	* networkconfig-icecube.h: New file.
+
 2007-08-07	Joel Sherrill <joel.sherrill@OARcorp.com>
 
 	* VERSION: Updated to network-demos-4.7.99.2.

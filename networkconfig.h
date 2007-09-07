@@ -46,6 +46,7 @@ static char ethernet_address[6] = { 0x00, 0x80, 0x7F, 0x22, 0x61, 0x77 };
 
 #endif
 
+#define RTEMS_USE_LOOPBACK
 #ifdef RTEMS_USE_LOOPBACK 
 /*
  * Loopback interface
@@ -95,7 +96,9 @@ static struct rtems_bsdnet_ifconfig netdriver_config = {
  * Network configuration
  */
 struct rtems_bsdnet_config rtems_bsdnet_config = {
+#if 0
 	&netdriver_config,
+#endif
 
 #if (defined (RTEMS_USE_BOOTP))
 	rtems_bsdnet_do_bootp,
