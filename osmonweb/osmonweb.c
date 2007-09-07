@@ -263,12 +263,23 @@ int osmonweb_WriteBlock(
   int             nChars
 )
 {
-  /* fprintf( stderr, "%s", buf ); */
+#if 0  /* fprintf( stderr, "%s", buf ); */
   shttpd_printf(
     (struct shttpd_arg *)wp,
     "%s",
     buf
   );
+#else
+  int i;
+  fprintf(stderr,"\n<***************>\n");
+  for (i = 0; i < nChars;i++) {
+    fprintf(stderr,"%c",buf[i]);
+    shttpd_printf((struct shttpd_arg *)wp,
+		  "%c",
+		  buf[i]);
+  }
+  fprintf(stderr,"\n<***************>\n");
+#endif
   return nChars;
 }
 
