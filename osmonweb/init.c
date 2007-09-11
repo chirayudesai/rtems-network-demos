@@ -24,6 +24,8 @@
                                            RTEMS_NO_ASR | \
                                            RTEMS_INTERRUPT_LEVEL(0))
 
+
+#define STACK_CHECKER_ON
 #define CONFIGURE_INIT
 
 #include <bsp.h>
@@ -94,9 +96,17 @@ rtems_task Init(
 
   #include <shttpd/shttpd.h>
 
-  extern void osmonweb_register(
-    struct shttpd_ctx *ctx
-  );
+  extern void osmonweb_init( const char *, int );
+
+  void my_shttpd_addpages(struct shttpd_ctx *ctx)
+  {
+    extern void osmonweb_register( struct shttpd_ctx *ctx );
+    extern void example_shttpd_addpages(struct shttpd_ctx *ctx);
+    osmonweb_register( ctx );
+    example_shttpd_addpages( ctx );
+  }
+  
+
 #else
   boolean Simple_HTTPD_enabled = FALSE;
 #endif
@@ -150,7 +160,7 @@ rtems_task Init(
       RTEMS_DEFAULT_MODES,             /* initial modes */
       RTEMS_DEFAULT_ATTRIBUTES,        /* attributes */
       NULL,                            /* init_callback */
-      osmonweb_register,               /* addpages_callback */
+      my_shttpd_addpages,              /* addpages_callback */
       "/",                             /* initial priority */
       80                               /* port to listen on */
     );

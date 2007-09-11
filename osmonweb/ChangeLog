@@ -1,5 +1,29 @@
 2007-09-11	Joel Sherrill <joel.sherrill@oarcorp.com>
 
+	* Makefile, init.c: Now generate all embedded HTML from htmlsrc that
+	the original code did. Also added a top level index.html which
+	includes a link to the cpu usage and stack usage generators.
+	* index_goahead.html, index_shttpd.html, shttpd_ext.c,
+	html/arrow-N-S.png, html/arrow-S-N.png, html/obtain.png,
+	html/pause.png, html/release.png, html/run.png,
+	htmlsrc/osmonweb_RTEID_onesema.html.in,
+	htmlsrc/osmonweb_RTEID_onetask.html.in,
+	htmlsrc/osmonweb_RTEID_queues.html.in,
+	htmlsrc/osmonweb_RTEID_semas.html.in,
+	htmlsrc/osmonweb_RTEID_tasks.html.in, rootfs/rtems_logo.jpg: New files.
+	* osmonweb_RTEID_onesema.c, osmonweb_RTEID_onesema.h,
+	osmonweb_RTEID_onetask.c, osmonweb_RTEID_onetask.h,
+	osmonweb_RTEID_queues.c, osmonweb_RTEID_queues.h,
+	osmonweb_RTEID_semas.c, osmonweb_RTEID_semas.h,
+	osmonweb_RTEID_tasks.c, osmonweb_RTEID_tasks.h, html/arrow-N-S.gif,
+	html/arrow-S-N.gif, html/obtain.gif,
+	html/osmonweb_RTEID_onesema.html, html/osmonweb_RTEID_onetask.html,
+	html/osmonweb_RTEID_queues.html, html/osmonweb_RTEID_semas.html,
+	html/osmonweb_RTEID_tasks.html, html/pause.gif, html/release.gif,
+	html/run.gif: Removed.
+
+2007-09-11	Joel Sherrill <joel.sherrill@oarcorp.com>
+
 	* osmonweb_ITRON_objs.c, osmonweb_POSIX_objs.c, osmonweb_RTEID_objs.c,
 	osmonweb_tar.c, htmlsrc/osmonweb_ITRON_objs.html.in,
 	htmlsrc/osmonweb_POSIX_objs.html.in,

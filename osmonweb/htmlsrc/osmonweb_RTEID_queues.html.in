@@ -87,20 +87,20 @@
       <table border="1"width=100%>
          <tr valign="top" bgcolor="#bfbfbf">
             <td align="center"><b>ID</b><br>
-            <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=0"  name="lowest ID first" >      <IMG src="/osmonweb/arrow-N-S.gif" width=24 height=24 border=0></a>
-            <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=0" name="highest ID first">      <IMG src="/osmonweb/arrow-S-N.gif" width=24 height=24 border=0></a>
+            <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=0"  name="lowest ID first" >      <IMG src="/osmonweb/arrow-N-S.png" width=24 height=24 border=0></a>
+            <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=0" name="highest ID first">      <IMG src="/osmonweb/arrow-S-N.png" width=24 height=24 border=0></a>
             <td align="center"><b>Name</b><br>
-            <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=1"  name="lowest Name first" >    <IMG src="/osmonweb/arrow-N-S.gif" width=24 height=24 border=0></a>
-            <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=1" name="highest Name first">    <IMG src="/osmonweb/arrow-S-N.gif" width=24 height=24 border=0></a>
+            <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=1"  name="lowest Name first" >    <IMG src="/osmonweb/arrow-N-S.png" width=24 height=24 border=0></a>
+            <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=1" name="highest Name first">    <IMG src="/osmonweb/arrow-S-N.png" width=24 height=24 border=0></a>
             <td align="center"><b>Message Size</b><br>
-            <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=4"  name="lowest size first" >    <IMG src="/osmonweb/arrow-N-S.gif" width=24 height=24 border=0></a>
-            <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=4" name="highest size first">    <IMG src="/osmonweb/arrow-S-N.gif" width=24 height=24 border=0></a>
+            <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=4"  name="lowest size first" >    <IMG src="/osmonweb/arrow-N-S.png" width=24 height=24 border=0></a>
+            <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=4" name="highest size first">    <IMG src="/osmonweb/arrow-S-N.png" width=24 height=24 border=0></a>
             <td align="center"><b>Max. Message Count</b><br>
-            <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=5"  name="lowest count first"    ><IMG src="/osmonweb/arrow-N-S.gif" width=24 height=24 border=0></a>
-            <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=5" name="highest count first"   ><IMG src="/osmonweb/arrow-S-N.gif" width=24 height=24 border=0></a>
+            <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=5"  name="lowest count first"    ><IMG src="/osmonweb/arrow-N-S.png" width=24 height=24 border=0></a>
+            <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=5" name="highest count first"   ><IMG src="/osmonweb/arrow-S-N.png" width=24 height=24 border=0></a>
             <td align="center"><b>Curr. Message Count</b><br>
-            <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=6"  name="lowest count first"    ><IMG src="/osmonweb/arrow-N-S.gif" width=24 height=24 border=0></a>
-            <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=6" name="highest count first"   ><IMG src="/osmonweb/arrow-S-N.gif" width=24 height=24 border=0></a>
+            <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=6"  name="lowest count first"    ><IMG src="/osmonweb/arrow-N-S.png" width=24 height=24 border=0></a>
+            <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=6" name="highest count first"   ><IMG src="/osmonweb/arrow-S-N.png" width=24 height=24 border=0></a>
             <td align="center"><b>Attributes</b><br>
          </form></tr>
 <!-- destvar:osmonweb_RTEID_queue_tabentry -->

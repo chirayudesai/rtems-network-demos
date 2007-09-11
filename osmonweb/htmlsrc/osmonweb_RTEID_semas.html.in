@@ -1,13 +1,13 @@
-<!-- destvar:osmonweb_RTEID_task_title -->
+<!-- destvar:osmonweb_RTEID_sema_title -->
 <head>
 <!-- start of document title here -->
-   <title>RTEMS Classic (RTEID) API Tasks on <!--%printstr %s|4 --></title>
+   <title>RTEMS Classic (RTEID) API Semaphores on <!--%printstr %s|4 --></title>
    <meta http-equiv="cache-control" content="no-cache">
    <meta http-equiv="refresh" content="<!--%printint %d|7-->; URL=/goforms/osmonweb?<!--%printstr %s|12-->">
 <!-- end of document title -->
 </head>
 <body>
-<!-- destvar:osmonweb_RTEID_task_header -->
+<!-- destvar:osmonweb_RTEID_sema_header -->
 <table border="0" cellspacing="0" cellpadding="5" width="100%">
    <tr><td>
    <div align="center">
@@ -44,12 +44,12 @@
          <td width="20">&nbsp;</td>
          <td bgcolor="#4040ff" align="center" width="200">
             <a href="/goforms/osmonweb?api=RTEID&obj_type=task" name="RTEID tasks">
-            <font color=#ffffff><b>Tasks</b></font>
+            <font color="Black">Tasks</font>
             </a></td>
          <td width="20">&nbsp;</td>
          <td bgcolor="#8080E0" align="center" width="200">
-            <a href="/goforms/osmonweb?api=RTEID&obj_type=sema" name="RTEID semaphores">
-            <font color="Black">Semaphores</font>
+            <a href="/goforms/osmonweb?api=RTEID&obj_type=sema" name="RTEID Semaphores">
+            <font color="#ffffff"><b>Semaphores</b></font>
             </a></td>
          <td width="20">&nbsp;</td>
          <td bgcolor="#8080E0" align="center" width="200">
@@ -79,58 +79,63 @@
    </td></tr><tr><td>
       <div align="center">
 <!-- start of document title here -->
-      <br><h2>Classic (RTEID) API Tasks On Target <b><font color="#4040ff"><!--%printstr %s|4 --></font></b></h2><br>
+      <br><h2>Classic (RTEID) API semaphores On Target <b><font color="#4040ff"><!--%printstr %s|4 --></font></b></h2><br>
 <!-- end of document title -->
       </div>
-<!-- destvar:osmonweb_RTEID_task_tabhead -->
+<!-- destvar:osmonweb_RTEID_sema_tabhead -->
 <!-- start of object table -->
       <table border="1"width=100%>
-         <tr valign="top" bgcolor="#bfbfbf">
-            <td align="center">
-               <b>ID</b><br>
-               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=0"   name="lowest ID first" >      <IMG src="/osmonweb/arrow-N-S.gif" width=24 height=24 border=0></a>
-               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=0"  name="highest ID first">      <IMG src="/osmonweb/arrow-S-N.gif" width=24 height=24 border=0></a>
-            </td><td align="center">
-               <b>Name</b><br>
-               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=1"   name="lowest Name first" >    <IMG src="/osmonweb/arrow-N-S.gif" width=24 height=24 border=0></a>
-               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=1"  name="highest Name first">    <IMG src="/osmonweb/arrow-S-N.gif" width=24 height=24 border=0></a>
-            </td><td align="center">
-               <b>Priority</b><br>
-               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=6"  name="lowest proritiy first" ><IMG src="/osmonweb/arrow-N-S.gif" width=24 height=24 border=0></a>
-               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=6"   name="highest priority first"><IMG src="/osmonweb/arrow-S-N.gif" width=24 height=24 border=0></a>
-            </td><td align="center">
-               <b>State</b><br>
-               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=7"   name="lowest state first"    ><IMG src="/osmonweb/arrow-N-S.gif" width=24 height=24 border=0></a>
-               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=7"  name="highest state first"   ><IMG src="/osmonweb/arrow-S-N.gif" width=24 height=24 border=0></a>
-            </td><td align="center">
-               <b>Ticks</b><br>
-               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=13"  name="lowest ticks first"    ><IMG src="/osmonweb/arrow-N-S.gif" width=24 height=24 border=0></a>
-               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=13" name="highest ticks first"   ><IMG src="/osmonweb/arrow-S-N.gif" width=24 height=24 border=0></a>
+         <tr valign="top"  bgcolor="#bfbfbf"><td align="center"><b>
+               ID</b><br>
+               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=0"  name="lowest ID first" >      <IMG src="/osmonweb/arrow-N-S.png" width=24 height=24 border=0></a>
+               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=0" name="highest ID first">      <IMG src="/osmonweb/arrow-S-N.png" width=24 height=24 border=0></a>
+            </td><td align="center"><b>
+               Name</b><br>
+               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=1"  name="lowest Name first" >    <IMG src="/osmonweb/arrow-N-S.png" width=24 height=24 border=0></a>
+               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=1" name="highest Name first">    <IMG src="/osmonweb/arrow-S-N.png" width=24 height=24 border=0></a>
+            </td><td align="center"><b>
+               Curr. Count</b><br>
+               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=6"  name="lowest count first"    ><IMG src="/osmonweb/arrow-N-S.png" width=24 height=24 border=0></a>
+               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=6" name="highest count first"   ><IMG src="/osmonweb/arrow-S-N.png" width=24 height=24 border=0></a>
+            </td><td align="center"><b>
+               Prio Ceiling</b><br>
+               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=9"  name="lowest count first"    ><IMG src="/osmonweb/arrow-N-S.png" width=24 height=24 border=0></a>
+               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=9" name="highest count first"   ><IMG src="/osmonweb/arrow-S-N.png" width=24 height=24 border=0></a>
+            </td><td align="center"><b>
+               Attributes</b><br>
+            </td><td align="center"><b>
+               Holder ID</b><br>
+               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=11"  name="lowest size first" >    <IMG src="/osmonweb/arrow-N-S.png" width=24 height=24 border=0></a>
+               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=11" name="highest size first">    <IMG src="/osmonweb/arrow-S-N.png" width=24 height=24 border=0></a>
          </td></tr>
-<!-- destvar:osmonweb_RTEID_task_tabentry -->
+<!-- destvar:osmonweb_RTEID_sema_tabentry -->
          <tr align="right">
-            <td><div align="center"><a href="/goforms/osmonweb?api=RTEID&obj_type=task&obj_curr=0x<!--%printint %08x|0-->"
-                   title="Details for 0x<!--%printint %08x|0--><!--%sample-->08010001<!--/%-->">
+            <td><div align="center">
+               <a href="/goforms/osmonweb?api=RTEID&obj_type=sema&obj_curr=0x<!--%printint %08x|0-->" title="Details for 0x<!--%printint %08x|0-->">
                0x<!--%printint %08x|0--><!--%sample-->08010001<!--/%-->
-            </a></div></td>
+               </a></div></td>
             <td><b><div align="center">
-               <a href="/goforms/osmonweb?api=RTEID&obj_type=task&obj_curr=0x<!--%printint %08x|0-->" title="Details for <!--%printname %s|1 --><!--%sample-->TSK1<!--/%-->">
-               <code><!--%printname %s|1 --><!--%sample-->TSK1<!--/%--></code></a>
-            </div></b></td>
-	    <!-- interpolate color from red (high) to azur (low) priority -->
-            <td bgcolor="<!--%sample-->#FE0000<!--/%--><!--%printipol #%02X|6|0|255|0xFF|0x40--><!--%printipol %02X|6|0|255|0x40|0xFF--><!--%printipol %02X|6|0|255|0x40|0xFF-->">
-	       <!--%printint %d|6--><!--%sample-->1<!--/%--></td>
-            <td bgcolor="<!--%printselect %s|7|0xffffffff|#808080|#60FF60|#4040C0|#FF8000|#E0E000|#FF0000-->" align="center">
-                         <!--%printselect %s|7|0xffffffff|       |Ready|Dormant|Suspended|Delayed|Blocked--></td>
-            <td bgcolor="#<!--%printipol %02X|14|0|1000|0x40|0xFF--><!--%printipol %02X|14|0|1000|0xFF|0x40--><!--%printipol %02X|14|0|1000|0xFF|0x40-->">
-	       <!--%printint %d|13--></td>
+               <a href="/goforms/osmonweb?api=RTEID&obj_type=sema&obj_curr=0x<!--%printint %08x|0-->" title="Details for <!--%printname %s|1 -->">
+               <code><!--%printname %s|1 --><!--%sample-->SEM1<!--/%--></code>
+            </a></div></b></td>
+            <!-- interpolate color from red (low) to azur (high) count -->
+            <td bgcolor="<!--%sample-->#FE0000<!--/%--><!--%printipol #%02X|6|0|32|0xFF|0x40--><!--%printipol %02X|6|0|32|0x40|0xFF--><!--%printipol %02X|6|0|32|0x40|0xFF-->">
+               <div align="center"><!--%printint %8d|6 --><!--%sample-->1234<!--/%--></div>
+            </td>
+            <td><div align="center"><!--%printint %8d|9 --><!--%sample-->64<!--/%--></div></td>
+	         <!-- interpolate color from red (high) to azur (low) priority -->
+            <td><div align="center">0x<!--%printint %08x|10 --><!--%sample-->0x00000054<!--/%--></div></td>
+            <td><div align="center">
+               <a href="/goforms/osmonweb?api=RTEID&obj_type=task&obj_curr=0x<!--%printint %08x|11-->" title="Details for holder 0x<!--%printint %08x|11-->">
+               0x<!--%printint %08x|11--><!--%sample-->08010001<!--/%-->
+               </a></div></td>
          </tr>
-<!-- destvar:osmonweb_RTEID_task_tabfoot -->
+<!-- destvar:osmonweb_RTEID_sema_tabfoot -->
       </table>
 <!-- end of object table -->
    </td></tr>
    <tr><td>
-<!-- destvar:osmonweb_RTEID_task_footer -->
+<!-- destvar:osmonweb_RTEID_sema_footer -->
 <hr>
 <!-- start of general display options -->
   <h2><div align="center">Display Options</div></h2>
@@ -153,5 +158,5 @@
 <!-- end of general display options -->
     </td></tr>
 </table>
-<!-- destvar:osmonweb_RTEID_task_trailer -->
+<!-- destvar:osmonweb_RTEID_sema_trailer -->
 </body>

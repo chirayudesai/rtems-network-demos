@@ -87,26 +87,26 @@
       <table border="1"width=100%>
          <tr valign="top"  bgcolor="#bfbfbf"><td align="center"><b>
                ID</b><br>
-               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=0"  name="lowest ID first" >      <IMG src="/osmonweb/arrow-N-S.gif" width=24 height=24 border=0></a>
-               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=0" name="highest ID first">      <IMG src="/osmonweb/arrow-S-N.gif" width=24 height=24 border=0></a>
+               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=0"  name="lowest ID first" >      <IMG src="/osmonweb/arrow-N-S.png" width=24 height=24 border=0></a>
+               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=0" name="highest ID first">      <IMG src="/osmonweb/arrow-S-N.png" width=24 height=24 border=0></a>
             </td><td align="center"><b>
                Name</b><br>
-               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=1"  name="lowest Name first" >    <IMG src="/osmonweb/arrow-N-S.gif" width=24 height=24 border=0></a>
-               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=1" name="highest Name first">    <IMG src="/osmonweb/arrow-S-N.gif" width=24 height=24 border=0></a>
+               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=1"  name="lowest Name first" >    <IMG src="/osmonweb/arrow-N-S.png" width=24 height=24 border=0></a>
+               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=1" name="highest Name first">    <IMG src="/osmonweb/arrow-S-N.png" width=24 height=24 border=0></a>
             </td><td align="center"><b>
                Curr. Count</b><br>
-               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=6"  name="lowest count first"    ><IMG src="/osmonweb/arrow-N-S.gif" width=24 height=24 border=0></a>
-               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=6" name="highest count first"   ><IMG src="/osmonweb/arrow-S-N.gif" width=24 height=24 border=0></a>
+               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=6"  name="lowest count first"    ><IMG src="/osmonweb/arrow-N-S.png" width=24 height=24 border=0></a>
+               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=6" name="highest count first"   ><IMG src="/osmonweb/arrow-S-N.png" width=24 height=24 border=0></a>
             </td><td align="center"><b>
                Prio Ceiling</b><br>
-               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=9"  name="lowest count first"    ><IMG src="/osmonweb/arrow-N-S.gif" width=24 height=24 border=0></a>
-               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=9" name="highest count first"   ><IMG src="/osmonweb/arrow-S-N.gif" width=24 height=24 border=0></a>
+               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=9"  name="lowest count first"    ><IMG src="/osmonweb/arrow-N-S.png" width=24 height=24 border=0></a>
+               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=9" name="highest count first"   ><IMG src="/osmonweb/arrow-S-N.png" width=24 height=24 border=0></a>
             </td><td align="center"><b>
                Attributes</b><br>
             </td><td align="center"><b>
                Holder ID</b><br>
-               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=11"  name="lowest size first" >    <IMG src="/osmonweb/arrow-N-S.gif" width=24 height=24 border=0></a>
-               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=11" name="highest size first">    <IMG src="/osmonweb/arrow-S-N.gif" width=24 height=24 border=0></a>
+               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=1&sort_select=11"  name="lowest size first" >    <IMG src="/osmonweb/arrow-N-S.png" width=24 height=24 border=0></a>
+               <a href="/goforms/osmonweb?<!--%printstr %s|12-->&sort_dir=-1&sort_select=11" name="highest size first">    <IMG src="/osmonweb/arrow-S-N.png" width=24 height=24 border=0></a>
             </td><td align="center"><b>
                Control</b><br>
          </td></tr>
@@ -132,8 +132,8 @@
                0x<!--%printint %08x|11--><!--%sample-->08010001<!--/%-->
                </a></div></td>
             <td align="center"><table border="1"><tr>
-               <td align="center"><a href="/goforms/osmonweb?<!--%printstr %s|15-->&obj_curr=0x<!--%printint %08x|11-->&action=obtain"  name="obtain semaphore" ><IMG src="/osmonweb/obtain.gif" alt="obtain" width=24 height=24 border=0><br>obtain</a></td>
-               <td align="center"><a href="/goforms/osmonweb?<!--%printstr %s|15-->&obj_curr=0x<!--%printint %08x|11-->&action=release"  name="release semaphore" ><IMG src="/osmonweb/release.gif" alt="release" width=24 height=24 border=0><br>release</a></td>
+               <td align="center"><a href="/goforms/osmonweb?<!--%printstr %s|15-->&obj_curr=0x<!--%printint %08x|11-->&action=obtain"  name="obtain semaphore" ><IMG src="/osmonweb/obtain.png" alt="obtain" width=24 height=24 border=0><br>obtain</a></td>
+               <td align="center"><a href="/goforms/osmonweb?<!--%printstr %s|15-->&obj_curr=0x<!--%printint %08x|11-->&action=release"  name="release semaphore" ><IMG src="/osmonweb/release.png" alt="release" width=24 height=24 border=0><br>release</a></td>
             </tr></table></td>
          </tr>
 <!-- destvar:osmonweb_RTEID_onesema_tabfoot -->
