@@ -18,7 +18,23 @@
       "Content-Type: text/html\r\n\r\n" \
       "<html><body>\r\n"
 
-#define END_HTML_BODY \
+#define END_HTML_BODY
+
+static void print_raw_text_header(struct shttpd_arg *arg)
+{
+  shttpd_printf(
+    arg,
+    "<html><body><pre>"
+  );
+}
+
+static void print_raw_text_footer(struct shttpd_arg *arg)
+{
+  shttpd_printf(
+    arg,
+    "</pre></body></html>"
+  );
+}
 
 void example_shttpd_callback(struct shttpd_arg *arg)
 {
@@ -31,10 +47,12 @@ void example_shttpd_callback(struct shttpd_arg *arg)
 
   if ( !strcmp( query, "cpuuse_report" ) ) {
 
+    print_raw_text_header( arg );
     rtems_cpu_usage_report_with_plugin(
       arg,
       (rtems_printk_plugin_t)shttpd_printf
     );
+    print_raw_text_footer( arg );
   } else if ( !strcmp( query, "cpuuse_reset" ) ) {
     rtems_cpu_usage_reset();
     shttpd_printf(
@@ -44,10 +62,12 @@ void example_shttpd_callback(struct shttpd_arg *arg)
       END_HTML_BODY
     );
   } else if ( !strcmp( query, "stackuse_report" ) ) {
+    print_raw_text_header( arg );
     rtems_stack_checker_report_usage_with_plugin(
       arg,
       (rtems_printk_plugin_t)shttpd_printf
     );
+    print_raw_text_footer( arg );
   } else {
     shttpd_printf(
       arg,

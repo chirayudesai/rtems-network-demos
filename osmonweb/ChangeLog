@@ -1,5 +1,9 @@
 2007-09-11	Joel Sherrill <joel.sherrill@oarcorp.com>
 
+	* shttpd_ext.c: Now serves text reports correctly formatted.
+
+2007-09-11	Joel Sherrill <joel.sherrill@oarcorp.com>
+
 	* .cvsignore: Add more generated files.
 	* rootfs/.cvsignore: New file.
 
