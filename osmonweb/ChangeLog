@@ -1,5 +1,10 @@
 2007-09-11	Joel Sherrill <joel.sherrill@oarcorp.com>
 
+	* osmonweb_ITRON_objs.c, osmonweb_POSIX_objs.c, osmonweb_RTEID_objs.c,
+	osmonweb_RTEID_one_sema.c, osmonweb_RTEID_one_sema.h, osmonweb_tar.c: Removed.
+
+2007-09-11	Joel Sherrill <joel.sherrill@oarcorp.com>
+
 	* Makefile, init.c: Now generate all embedded HTML from htmlsrc that
 	the original code did. Also added a top level index.html which
 	includes a link to the cpu usage and stack usage generators.
