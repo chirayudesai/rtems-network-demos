@@ -133,7 +133,7 @@
       "    <div align=\"center\"><table cellspacing=\"5\""
       " cellpadding=\"15\"><tr>\n"
       "      <td><IMG src=\"/osmonweb/EmpoweredByRTEMSEgg"
-      "Logo.gif\" alt=\"Empowered by RTEMS\" width=90 hei"
+      "Logo.png\" alt=\"Empowered by RTEMS\" width=90 hei"
       "ght=53 border=0></td>\n"
       "      <td><IMG src=\"/osmonweb/<!--%printhttpd_log"
       "o-->\" width=120 border=0></td>\n"

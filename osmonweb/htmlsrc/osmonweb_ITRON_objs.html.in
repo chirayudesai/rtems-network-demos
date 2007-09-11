@@ -85,7 +85,7 @@
 <!-- destvar:osmonweb_ITRON_objs_footer -->
     <br><br><hr><br><br>
     <div align="center"><table cellspacing="5" cellpadding="15"><tr>
-      <td><IMG src="/osmonweb/EmpoweredByRTEMSEggLogo.gif" alt="Empowered by RTEMS" width=90 height=53 border=0></td>
+      <td><IMG src="/osmonweb/EmpoweredByRTEMSEggLogo.png" alt="Empowered by RTEMS" width=90 height=53 border=0></td>
       <td><IMG src="/osmonweb/<!--%printhttpd_logo-->" width=120 border=0></td>
       <td><IMG src="/osmonweb/imdlogo.jpg" width=123 height=61 border=0></td>
     </tr><tr>
