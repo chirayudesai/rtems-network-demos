@@ -1,5 +1,10 @@
 2007-09-11	Joel Sherrill <joel.sherrill@oarcorp.com>
 
+	* init.c, osmonweb_tar.c: Reduce number of ifdefs on webserver.
+	* rootfs/etc/host.conf, rootfs/etc/hosts: New files.
+
+2007-09-11	Joel Sherrill <joel.sherrill@oarcorp.com>
+
 	* .cvsignore, Makefile, init.c, osmonweb.c, osmonweb_int.h: Now works
 	ok with both GoAhead and Simple HTTPD.
 	* osmonweb_ITRON_objs.c, osmonweb_POSIX_objs.c, osmonweb_RTEID_objs.c,

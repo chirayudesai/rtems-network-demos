@@ -53,13 +53,6 @@ rtems_task Init(
 
 #include "FilesystemImage.h"
 
-#include <rtems_webserver.h>
-#if defined(USE_GOAHEAD_HTTPD)
-#endif
-#if defined(USE_SIMPLE_HTTPD)
-  #include <shttpd/shttpd.h>
-#endif
-
 /*
  *  FTP data
  */
@@ -74,6 +67,11 @@ rtems_task Init(
 #else
  boolean FTPD_enabled = FALSE;
 #endif
+
+/*
+ *  Include the standard RTEMS Webserver Header file
+ */
+#include <rtems_webserver.h>
 
 /*
  *  Some data declarations that are server dependent
@@ -95,17 +93,15 @@ rtems_task Init(
   boolean Simple_HTTPD_enabled = TRUE;
 
   #include <shttpd/shttpd.h>
+
+  extern void osmonweb_register(
+    struct shttpd_ctx *ctx
+  );
 #else
   boolean Simple_HTTPD_enabled = FALSE;
 #endif
 
 #define bool2string(_b) ((_b) ? "true" : "false")
-
-#if defined(USE_SIMPLE_HTTPD)
-  extern void osmonweb_register(
-    struct shttpd_ctx *ctx
-  );
-#endif
 
 rtems_task Init(
   rtems_task_argument argument
