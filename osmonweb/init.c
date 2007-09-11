@@ -51,7 +51,9 @@ rtems_task Init(
 #include <sys/socket.h>
 #include "networkconfig.h"
 
-  #include <rtems_webserver.h>
+#include "FilesystemImage.h"
+
+#include <rtems_webserver.h>
 #if defined(USE_GOAHEAD_HTTPD)
 #endif
 #if defined(USE_SIMPLE_HTTPD)
@@ -117,6 +119,12 @@ rtems_task Init(
   printf("FTPD Enabled: %s\n", bool2string(FTPD_enabled) );
   printf("\n");
 
+  /*
+   * Load Base Filesystem Image
+   */
+  printf("Loading filesystem image\n");
+  status = Untar_FromMemory( (char *)FilesystemImage, FilesystemImage_size );
+   
   printf("Initializing Network");
   rtems_bsdnet_initialize_network ();
 

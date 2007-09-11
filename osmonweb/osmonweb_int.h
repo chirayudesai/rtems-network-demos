@@ -20,6 +20,14 @@
 |*do not edit here)                                               |
 |*****************************************************************|
 |* $Log$
+|* Revision 1.2  2007/09/05 23:46:07  joel
+|* 2007-09-05	Joel Sherrill <joel.sherrill@oarcorp.com>
+|*
+|* 	* Makefile, osmonweb.c, osmonweb_RTEID.c, osmonweb_int.h: Remove JOEL
+|* 	conditionals which disabled parts of the code dependent on monitor
+|* 	enhancements which Thomas just merged. Clean up various warnings.
+|* 	* .cvsignore, html/.cvsignore: New files.
+|*
 |* Revision 1.1.1.1  2007/09/05 13:42:17  joel
 |* initial import.
 |*
@@ -38,22 +46,7 @@
 
 #include <rtems.h>
 #include "htmlprintf.h"
-#if defined(USE_SIMPLE_HTTPD)
-  #include <shttpd/shttpd.h>
-  typedef struct shttpd_ctx *osmonweb_ctx_t;
-#endif
-#if defined(USE_GOAHEAD_HTTPD)
-  #include "wsIntrn.h"
-  typedef webs_t osmonweb_ctx_t;
-#endif
 
-#ifndef ARRAY_COUNT
-#define ARRAY_COUNT(a) (sizeof(a)/sizeof(a[0]))
-#endif /* ARRAY_COUNT */
-
-/* 
- * internal data structures
- */
 /*
  * data structure to hold common display options like sorting, API/OBJ etc
  */
@@ -82,6 +75,44 @@ typedef struct {
   html_printf_arg_t        data[16];
   osmonweb_common_option_t *common_options;
 } osmonweb_obj_data_t;
+
+/*
+ * Webserver adapter interface used by osmonweb
+ */
+#if defined(USE_SIMPLE_HTTPD)
+  #include <shttpd/shttpd.h>
+  typedef struct shttpd_ctx *osmonweb_ctx_t;
+#endif
+#if defined(USE_GOAHEAD_HTTPD)
+  #include <goahead/wsIntrn.h>
+  typedef webs_t osmonweb_ctx_t;
+#endif
+
+void *osmonweb_getCommonOptions(
+  osmonweb_ctx_t            wp,        /* web handle */
+  osmonweb_common_option_t *c
+);
+
+void osmonweb_header(
+  osmonweb_ctx_t  wp                   /* web handle */
+);;
+
+void osmonweb_footer(
+  osmonweb_ctx_t  wp                   /* web handle */
+);
+
+int osmonweb_WriteBlock(
+  osmonweb_ctx_t  wp,                  /* web handle */
+  char           *buf,
+  int             nChars
+);
+
+/*
+ * Helper macros to determine number of elements in an array
+ */
+#ifndef ARRAY_COUNT
+#define ARRAY_COUNT(a) (sizeof(a)/sizeof(a[0]))
+#endif /* ARRAY_COUNT */
 
 /*
  * data structure to control generation of one html fragment

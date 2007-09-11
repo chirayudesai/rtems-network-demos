@@ -1,4 +1,7 @@
 *.swp
+FilesystemImage
+FilesystemImage.c
+FilesystemImage.h
 o-optimize
 osmonweb_tar
 osmonweb_tar.c
