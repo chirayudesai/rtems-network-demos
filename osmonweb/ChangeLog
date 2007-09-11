@@ -1,5 +1,10 @@
 2007-09-11	Joel Sherrill <joel.sherrill@oarcorp.com>
 
+	* .cvsignore: Add more generated files.
+	* rootfs/.cvsignore: New file.
+
+2007-09-11	Joel Sherrill <joel.sherrill@oarcorp.com>
+
 	* osmonweb_ITRON_objs.c, osmonweb_POSIX_objs.c, osmonweb_RTEID_objs.c,
 	osmonweb_RTEID_one_sema.c, osmonweb_RTEID_one_sema.h, osmonweb_tar.c: Removed.
 

@@ -12,3 +12,14 @@ osmonweb_POSIX_objs.c
 osmonweb_POSIX_objs.h
 osmonweb_RTEID_objs.c
 osmonweb_RTEID_objs.h
+osmonweb_RTEID_onesema.c
+osmonweb_RTEID_onesema.h
+osmonweb_RTEID_onetask.c
+osmonweb_RTEID_onetask.h
+osmonweb_RTEID_queues.c
+osmonweb_RTEID_queues.h
+osmonweb_RTEID_semas.c
+osmonweb_RTEID_semas.h
+osmonweb_RTEID_tasks.c
+osmonweb_RTEID_tasks.h
+
