@@ -161,4 +161,14 @@ int osmonweb_WriteBlock(
   return nChars;
 }
 
+const char *osmonweb_httpdname(void)
+{
+  return "Simple HTTPD";
+}
+
+const char *osmonweb_logoname(void)
+{
+  return "SimpleHTTPD.png";
+}
+
 #endif

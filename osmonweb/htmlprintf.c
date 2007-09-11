@@ -22,6 +22,9 @@
 |*do not edit here)                                               |
 |*****************************************************************|
 |* $Log$
+|* Revision 1.1.1.1  2007/09/05 13:42:17  joel
+|* initial import.
+|*
 |* Revision 1.2  2003/09/26 22:33:16  thomas
 |* RTEID tasks and queues work fine
 |*
@@ -36,6 +39,8 @@
 #include <string.h>
 #include <ctype.h>
 #include "htmlprintf.h"
+
+#include "osmonweb_int.h"
 
 #ifndef MIN
 #define MIN(a,b) (((a) > (b)) ? (b) : (a))
@@ -53,6 +58,8 @@
 #define TRUE (!FALSE)
 #endif
 typedef enum {
+  hp_print_httpd_name,
+  hp_print_httpd_logo,
   hp_print_int,
   hp_print_str,
   hp_print_name,
@@ -69,6 +76,12 @@ typedef struct {
 } html_printf_fncdef_t;
 
 static html_printf_fncdef_t html_printf_fncdef[] = {
+  {"printhttpd_name",hp_print_httpd_name,0,
+   {FALSE,TRUE}},
+  {"printhttpd_logo",hp_print_httpd_logo,0,
+   {FALSE,TRUE}},
+  {"printint",hp_print_int,2,
+   {FALSE,TRUE}},
   {"printint",hp_print_int,2,
    {FALSE,TRUE}},
   {"printstr",hp_print_str,2,
@@ -315,7 +328,7 @@ int html_printf
   const char *token_end;
 #define HP_PARAMS_ARRAYCNT 20
   html_printf_param_t hp_params[HP_PARAMS_ARRAYCNT];
-  html_printf_fncsel_t fnc_sel;
+  html_printf_fncsel_t fnc_sel = -1;
   int hp_param_cnt;
   char fmt_str[40];
   char hp_tmpstr[512];
@@ -386,6 +399,18 @@ int html_printf
           }
           
           switch(fnc_sel) {
+          case hp_print_httpd_name:
+            /*
+             * print HTTPD Server Name
+             */
+            sprintf( hp_tmpstr, osmonweb_httpdname() );
+            break;
+          case hp_print_httpd_logo:
+            /*
+             * print HTTPD Server Name
+             */
+            sprintf( hp_tmpstr,  osmonweb_logoname() );
+            break;
           case hp_print_int:
             /*
              * print integer formatted

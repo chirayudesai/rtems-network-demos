@@ -6,8 +6,8 @@ PGM=${ARCH}/osmonweb.exe
 MANAGERS=all
 
 # Application Configuration parameters
-USE_GOAHEAD=yes
-USE_SIMPLE=no
+USE_GOAHEAD=no
+USE_SIMPLE=yes
 USE_FTPD=yes
 USE_DEBUG=no
 
@@ -81,6 +81,8 @@ endif
 CLEAN_ADDITIONS += osmonweb_tar osmonweb_tar.c osmonweb_tar.h
 CLEAN_ADDITIONS += FilesystemImage FilesystemImage.c FilesystemImage.h
 CLEAN_ADDITIONS += $(HTML_GEN) $(GEN_C_FILES) $(GEN_H_FILES)
+CLEAN_ADDITIONS += html/webserver_logo1.gif 
+CLEAN_ADDITIONS += html/SimpleHTTPD.png
 CLEAN_ADDITIONS += stamp-gen-files
 CLOBBER_ADDITIONS +=
 

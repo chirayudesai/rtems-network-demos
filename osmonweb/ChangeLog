@@ -1,5 +1,15 @@
 2007-09-11	Joel Sherrill <joel.sherrill@oarcorp.com>
 
+	* Makefile, htmlprintf.c, osmonweb_ITRON_objs.c, osmonweb_POSIX_objs.c,
+	osmonweb_RTEID_objs.c, osmonweb_goahead.c, osmonweb_int.h,
+	osmonweb_shttpd.c, osmonweb_tar.c, htmlsrc/SimpleHTTPD.png,
+	htmlsrc/osmonweb_ITRON_objs.html.in,
+	htmlsrc/osmonweb_POSIX_objs.html.in,
+	htmlsrc/osmonweb_RTEID_objs.html.in: Now switches to correct server
+	name and logo using htmlprintf.
+
+2007-09-11	Joel Sherrill <joel.sherrill@oarcorp.com>
+
 	* init.c, osmonweb_tar.c: Reduce number of ifdefs on webserver.
 	* rootfs/etc/host.conf, rootfs/etc/hosts: New files.
 

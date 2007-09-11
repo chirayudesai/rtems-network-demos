@@ -20,6 +20,14 @@
 |*do not edit here)                                               |
 |*****************************************************************|
 |* $Log$
+|* Revision 1.3  2007/09/11 18:25:42  joel
+|* 2007-09-11	Joel Sherrill <joel.sherrill@oarcorp.com>
+|*
+|* 	* .cvsignore, Makefile, init.c, osmonweb.c, osmonweb_int.h: Now works
+|* 	ok with both GoAhead and Simple HTTPD.
+|* 	* osmonweb_ITRON_objs.c, osmonweb_POSIX_objs.c, osmonweb_RTEID_objs.c,
+|* 	osmonweb_goahead.c, osmonweb_shttpd.c, osmonweb_tar.c: New files.
+|*
 |* Revision 1.2  2007/09/05 23:46:07  joel
 |* 2007-09-05	Joel Sherrill <joel.sherrill@oarcorp.com>
 |*
@@ -106,6 +114,10 @@ int osmonweb_WriteBlock(
   char           *buf,
   int             nChars
 );
+
+const char *osmonweb_httpdname(void);
+
+const char *osmonweb_logoname(void);
 
 /*
  * Helper macros to determine number of elements in an array

@@ -106,4 +106,15 @@ void osmonweb_footer(
   websFooter(wp);
   websDone(wp, 200);
 }
+
+const char *osmonweb_httpdname(void)
+{
+  return "GoAhead Webserver";
+}
+
+const char *osmonweb_logoname(void)
+{
+  return "webserver_logo2.gif";
+}
+
 #endif

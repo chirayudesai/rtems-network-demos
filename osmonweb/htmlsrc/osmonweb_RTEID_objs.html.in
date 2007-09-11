@@ -81,11 +81,11 @@
     <br><br><hr><br><br>
     <div align="center"><table cellspacing="5" cellpadding="15"><tr>
       <td><IMG src="/osmonweb/EmpoweredByRTEMSEggLogo.gif" alt="Empowered by RTEMS" width=90 height=53 border=0></td>
-      <td><IMG src="/osmonweb/@HTTPD_LOGO@" width=113 height=23 border=0></td>
+      <td><IMG src="/osmonweb/<!--%printhttpd_logo-->" width=120 border=0></td>
       <td><IMG src="/osmonweb/imdlogo.jpg" width=123 height=61 border=0></td>
     </tr><tr>
       <td align="center"><b>Empowered by <br>RTEMS</b></td>
-      <td align="center"><b>transported by <br>@HTTPD_SERVER@</b></td>
+      <td align="center"><b>transported by <br><!--%printhttpd_name--></b></td>
       <td align="center"><b>implemented by <br>IMD Th. Dörfler</b></td>
     </tr></table></div>
     </td></tr>
