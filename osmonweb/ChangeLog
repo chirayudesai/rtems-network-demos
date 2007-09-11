@@ -1,3 +1,11 @@
+2007-09-11	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* .cvsignore, Makefile: Now generate the XXX_objs.[ch] from htmlsrc and
+	recognize this in the Makefile.
+	* ITRON_objs.c, ITRON_objs.h, osmonweb_ITRON_objs.c,
+	osmonweb_ITRON_objs.h, osmonweb_POSIX_objs.c, osmonweb_POSIX_objs.h,
+	osmonweb_RTEID_objs.c, osmonweb_RTEID_objs.h: Removed.
+
 2007-09-07	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* Makefile: Take out hard-coded RTEMS_MAKEFILE_PATH.

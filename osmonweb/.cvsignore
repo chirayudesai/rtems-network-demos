@@ -3,3 +3,9 @@ o-optimize
 osmonweb_tar
 osmonweb_tar.c
 osmonweb_tar.h
+osmonweb_ITRON_objs.c
+osmonweb_ITRON_objs.h
+osmonweb_POSIX_objs.c
+osmonweb_POSIX_objs.h
+osmonweb_RTEID_objs.c
+osmonweb_RTEID_objs.h

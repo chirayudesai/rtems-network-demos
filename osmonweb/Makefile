@@ -2,33 +2,27 @@
 #  $Id$
 #
 
-SAMPLE=osmonweb
-PGM=${ARCH}/$(SAMPLE).exe
+PGM=${ARCH}/osmonweb.exe
 
 MANAGERS=all
 
-# C source names, if any, go here -- minus the .c
-C_PIECES=init osmonweb htmlprintf osmonweb_tar \
-  osmonweb_RTEID osmonweb_RTEID_objs osmonweb_RTEID_one_sema \
-  osmonweb_RTEID_onetask osmonweb_RTEID_queues \
-  osmonweb_RTEID_semas osmonweb_RTEID_tasks \
-  osmonweb_POSIX_objs osmonweb_ITRON_objs 
+# C source names
+GEN_C_FILES= osmonweb_tar.c osmonweb_RTEID_objs.c \
+  osmonweb_POSIX_objs.c osmonweb_ITRON_objs.c
+C_FILES=init.c osmonweb.c htmlprintf.c \
+  osmonweb_RTEID.c osmonweb_RTEID_one_sema.c osmonweb_RTEID_onetask.c \
+  osmonweb_RTEID_queues.c osmonweb_RTEID_semas.c osmonweb_RTEID_tasks.c
+C_FILES+=$(GEN_C_FILES)
+OBJS=$(C_FILES:%.c=${ARCH}/%.o)
 
-
-C_FILES=$(C_PIECES:%=%.c)
-C_O_FILES=$(C_PIECES:%=${ARCH}/%.o)
-
+GEN_H_FILES= osmonweb_tar.h osmonweb_RTEID_objs.h \
+  osmonweb_POSIX_objs.h osmonweb_ITRON_objs.h
 H_FILES=
+H_FILES+= $(GEN_H_FILES)
 
-DOCTYPES=
-DOCS=$(DOCTYPES:%=$(SAMPLE).%)
+DOCS=
 
-SRCS=$(DOCS) $(C_FILES) $(CC_FILES) $(H_FILES) $(S_FILES)
-OBJS=$(C_O_FILES) $(CC_O_FILES) $(S_O_FILES)
-
-PRINT_SRCS=$(DOCS)
-
-PGM=${ARCH}/$(SAMPLE).exe
+SRCS=$(DOCS) $(C_FILES)
 
 include $(RTEMS_MAKEFILE_PATH)/Makefile.inc
 include $(RTEMS_CUSTOM)
@@ -86,43 +80,41 @@ LD_LIBS +=
 #  'make clobber' already includes 'make clean'
 #
 
-HTML_GEN=html/osmonweb_ITRON_objs.html html/osmonweb_POSIX_objs.html \
-  html/osmonweb_RTEID_objs.html
+#HTML_GEN=html/osmonweb_ITRON_objs.html html/osmonweb_POSIX_objs.html \
+#  html/osmonweb_RTEID_objs.html
 ifneq ($(HTTPD_LOGO),)
   HTML_GEN += html/$(HTTPD_LOGO)
 endif
 
 CLEAN_ADDITIONS += osmonweb_tar osmonweb_tar.c osmonweb_tar.h
-CLEAN_ADDITIONS += $(HTML_GEN)
+CLEAN_ADDITIONS += $(HTML_GEN) $(GEN_C_FILES) $(GEN_H_FILES)
+CLEAN_ADDITIONS += stamp-gen-files
 CLOBBER_ADDITIONS +=
 
 # strip out flags gcc knows but LD doesn't like -- add as needed
 LD_CPU_CFLAGS=$(CPU_CFLAGS:-mstrict-align:)
 
-COPY_ARCH=$(shell echo $(OBJCOPY) | cut -d'-' -f1)
+all:	${ARCH} stamp-gen-files $(SRCS) $(PGM)
 
-all:	${ARCH} $(HTML_GEN) $(SRCS) $(PGM)
+stamp-gen-files: $(HTML_GEN) $(GEN_C_FILES) $(GEN_H_FILES)
+	echo $(HTML_GEN) $(GEN_C_FILES) $(GEN_H_FILES)
+	# touch stamp-gen-files
 
-${PGM}: $(OBJS) $(LINK_FILES)
+${PGM}: $(SRCS) $(OBJS) $(LINK_FILES)
 	$(make-exe)
 
-$(ARCH)/init.c: init.c osmonweb_tar.c
+$(ARCH)/init.o: init.c osmonweb_tar.c
 
 osmonweb_tar: $(ARCH) $(HTML_GEN)
 	cd html ; \
 	    tar cf ../osmonweb_tar --exclude CVS --exclude .cvsignore .
 
-osmonweb_tar.c: $(ARCH) osmonweb_tar
+osmonweb_tar.c osmonweb_tar.h: $(ARCH) osmonweb_tar
 	$(PROJECT_ROOT)/bin/bin2c osmonweb_tar osmonweb_tar
 
-## Rule to make html we sed info into
-html/%.html: htmlsrc/%.html.in
-	sed -e 's/@HTTPD_SERVER@/$(HTTPD)/' \
-	    -e 's/@HTTPD_LOGO@/$(HTTPD_LOGO)/' <$< >$@
-
 ## Rule to make .c/.h files from html
-%.h %.c: html/%.html
-        ./tools/html2c.perl --src-file=$< --dest-base=$(*F)
+%.h %.c: htmlsrc/%.html.in
+	./tools/html2c.perl --src-file=$< --dest-base=$(*F)
 
 html/$(HTTPD_LOGO): htmlsrc/$(HTTPD_LOGO)
 	cp $< $@
