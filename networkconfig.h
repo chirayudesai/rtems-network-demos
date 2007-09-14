@@ -44,10 +44,15 @@ static struct rtems_bsdnet_ifconfig netdriver_config = {
  */
 struct rtems_bsdnet_config rtems_bsdnet_config = {
   &netdriver_config,
-  NULL,                   /* do not use bootp */
-  0,                      /* Default network task priority */
-  0,                      /* Default mbuf capacity */
-  0,                      /* Default mbuf cluster capacity */
+  NULL,                /* do not use bootp */
+  0,                   /* Default network task priority */
+  0,                   /* Default mbuf capacity */
+  0,                   /* Default mbuf cluster capacity */
+  "rtems",             /* Host name */
+  "nodomain.com",      /* Domain name */
+  "127.0.0.1",         /* Gateway */
+  "127.0.0.1",         /* Log host */
+  {"127.0.0.1"  },     /* Name server(s) */
 };
 
 /*
