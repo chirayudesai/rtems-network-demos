@@ -76,17 +76,12 @@ CLEAN_ADDITIONS += FilesystemImage FilesystemImage.c FilesystemImage.h
 CLEAN_ADDITIONS += stamp-index-html rootfs/index.html rootfs/shttpd.png
 CLOBBER_ADDITIONS +=
 
-# strip out flags gcc knows but LD doesn't like -- add as needed
-LD_CPU_CFLAGS=$(CPU_CFLAGS:-mstrict-align:)
-
-COPY_ARCH=$(shell echo $(OBJCOPY) | cut -d'-' -f1)
-
 all:	${ARCH} $(SRCS) $(PGM)
 
 ${PGM}: $(OBJS) $(LINK_FILES)
 	$(make-exe)
 
-$(ARCH)/init.c: init.c FilesystemImage.c
+$(ARCH)/init.o: init.c FilesystemImage.c
 
 FilesystemImage: $(ARCH) stamp-index-html \
     rootfs/etc/host.conf rootfs/etc/hosts rootfs/rtems_logo.jpg
