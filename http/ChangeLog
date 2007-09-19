@@ -1,3 +1,7 @@
+2007-09-19	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* Makefile: Initial add of multicast test.
+
 2007-09-07	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* shttpd_index.html: Fix URL for shttpd.
