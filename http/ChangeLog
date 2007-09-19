@@ -1,6 +1,6 @@
 2007-09-19	Joel Sherrill <joel.sherrill@oarcorp.com>
 
-	* Makefile: Initial add of multicast test.
+	* Makefile: Cleanup.
 
 2007-09-07	Joel Sherrill <joel.sherrill@oarcorp.com>
 
