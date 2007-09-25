@@ -8,7 +8,7 @@ PGM=${ARCH}/$(SAMPLE).exe
 MANAGERS=all
 
 # C source names, if any, go here -- minus the .c
-C_PIECES=init dirutils
+C_PIECES=init dirutils FilesystemImage
 C_FILES=$(C_PIECES:%=%.c)
 C_O_FILES=$(C_PIECES:%=${ARCH}/%.o)
 
@@ -18,7 +18,7 @@ DOCTYPES=
 DOCS=$(DOCTYPES:%=$(SAMPLE).%)
 
 SRCS=$(DOCS) $(C_FILES) $(CC_FILES) $(H_FILES) $(S_FILES)
-OBJS=$(C_O_FILES) $(CC_O_FILES) $(S_O_FILES) $(ARCH)/tarfile.o
+OBJS=$(C_O_FILES) $(CC_O_FILES) $(S_O_FILES)
 
 PRINT_SRCS=$(DOCS)
 
@@ -40,10 +40,8 @@ CFLAGS_DEBUG_V   += -v -qrtems_debug
 
 LD_PATHS  +=
 
-OBJDUMP=$(OBJCOPY:copy=dump)
-
 CFLAGS   += 
-LD_LIBS  += -lrtemsNfs
+LD_LIBS  += -lnfs
 
 #
 # Add your list of files to delete here.  The config files
@@ -52,26 +50,23 @@ LD_LIBS  += -lrtemsNfs
 #  'make clobber' already includes 'make clean'
 #
 
-CLEAN_ADDITIONS += tarfile obj_format
+CLEAN_ADDITIONS += FilesystemImage FilesystemImage.c FilesystemImage.h
 CLOBBER_ADDITIONS +=
 
-# strip out flags gcc knows but LD doesn't like -- add as needed
-LD_CPU_CFLAGS=$(CPU_CFLAGS:-mstrict-align:)
-
 all:	${ARCH} $(SRCS) $(PGM)
-
-obj_format:
-	$(OBJDUMP) -f $(ARCH)/init.o | grep .o: | \
-	    sed -e 's/^.*format //' >obj_format
 
 ${PGM}: $(OBJS) $(LINK_FILES)
 	$(make-exe)
 
-$(ARCH)/tarfile.o: $(ARCH) obj_format
-	cd rootfs ; tar cf ../$(ARCH)/tarfile --exclude CVS .
-	cp $(ARCH)/tarfile .
-	$(OBJCOPY) -I binary -O `cat obj_format` tarfile $(ARCH)/tarfile.o
-	$(LD) $(LD_CPU_CFLAGS) -r -o $(ARCH)/temp.o $(ARCH)/tarfile.o
+$(ARCH)/init.o: init.c FilesystemImage.h
+
+FilesystemImage: $(ARCH) rootfs/etc/host.conf rootfs/etc/hosts rootfs/rtems_logo.jpg
+	cd rootfs ; \
+	    tar cf ../FilesystemImage --exclude CVS --exclude .cvsignore .
+
+FilesystemImage.c: $(ARCH) FilesystemImage
+	$(PROJECT_ROOT)/bin/bin2c FilesystemImage FilesystemImage
+
 
 # Install the program(s), appending _g or _p as appropriate.
 # for include files, just use $(INSTALL)

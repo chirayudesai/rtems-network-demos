@@ -1,3 +1,8 @@
+2007-09-25	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* .cvsignore, Makefile, init.c: Switch to using rtems-bin2c for initial
+	filesystem image.
+
 2007-07-18	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* init.c: Make the NFS server, remote filesystem, and directory to look
