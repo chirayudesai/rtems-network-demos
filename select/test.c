@@ -141,8 +141,6 @@ echoServer (unsigned short port)
 	}
 }
 
-static rtems_id tid;
-
 void
 doSocket (void)
 {
