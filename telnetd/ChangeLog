@@ -1,0 +1,4 @@
+2007-09-25	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* .cvsignore, ChangeLog, Makefile, init.c: New files.
+
