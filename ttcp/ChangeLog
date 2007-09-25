@@ -1,5 +1,9 @@
 2007-09-25	Joel Sherrill <joel.sherrill@oarcorp.com>
 
+	* .cvsignore: New file.
+
+2007-09-25	Joel Sherrill <joel.sherrill@oarcorp.com>
+
 	* Makefile: Build native ttcp as side-effect of main build.
 	* rtems_ttcp.c: Fix warning.
 
