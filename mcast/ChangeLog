@@ -1,3 +1,7 @@
+2007-09-25	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* mcast.c: Remove warning.
+
 2007-09-19	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* .cvsignore: New file.

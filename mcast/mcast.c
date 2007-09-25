@@ -85,7 +85,7 @@ int main(int ac, char **av)
     perror("gethostname");
     exit(1);
   }
-  printf( "Hostname: %s\n", ((mhost) ? mhost : "NULL") );
+  printf( "Hostname: %s\n", mhost );
   if (!(h = gethostbyname(mhost))) {    // Get host entry
     perror("gethostbyname");
     exit(1);
