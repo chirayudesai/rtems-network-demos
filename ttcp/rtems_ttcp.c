@@ -26,6 +26,7 @@
 #include <rtems.h>
 #include <rtems/rtems_bsdnet.h>
 #include <rtems/error.h>
+#include <rtems/cpuuse.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>

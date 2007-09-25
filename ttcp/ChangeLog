@@ -1,3 +1,8 @@
+2007-09-25	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* Makefile: Build native ttcp as side-effect of main build.
+	* rtems_ttcp.c: Fix warning.
+
 2007-08-16	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* init.c: Change clock tick to 1 millisecond.

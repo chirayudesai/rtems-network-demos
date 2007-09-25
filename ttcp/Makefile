@@ -49,13 +49,16 @@ LD_LIBS   +=
 #  'make clobber' already includes 'make clean'
 #
 
-CLEAN_ADDITIONS +=
+CLEAN_ADDITIONS += ttcp
 CLOBBER_ADDITIONS +=
 
-all:	${ARCH} $(SRCS) $(PGM)
+all:	${ARCH} $(SRCS) $(PGM) ttcp
 
 ${PGM}: $(OBJS) $(LINK_FILES)
 	$(make-exe)
+
+ttcp: ttcp_orig/ttcp.c
+	gcc -o $(@) $< 
 
 # Install the program(s), appending _g or _p as appropriate.
 # for include files, just use $(INSTALL)
