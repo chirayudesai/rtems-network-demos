@@ -1,3 +1,7 @@
+2007-09-25	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* networkconfig-icecube.h: Fix MAC address and typo.
+
 2007-09-19	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* Makefile: Add mcast.
