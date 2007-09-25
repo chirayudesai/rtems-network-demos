@@ -1,5 +1,9 @@
 2007-09-25	Joel Sherrill <joel.sherrill@oarcorp.com>
 
+	* .cvsignore: New file.
+
+2007-09-25	Joel Sherrill <joel.sherrill@oarcorp.com>
+
 	* test.c: Remove warning.
 
 2007-06-22	Joel Sherrill <joel.sherrill@OARcorp.com>
