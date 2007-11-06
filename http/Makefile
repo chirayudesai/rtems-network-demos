@@ -40,9 +40,6 @@ CFLAGS_DEBUG_V   += -v -qrtems_debug
 
 LD_PATHS  +=
 
-#NATIVE_OBJ = $(shell $(OBJCOPY) 2>&1  | grep copy: | cut -d':' -f3 | cut -d' ' -f2)
-OBJDUMP=$(OBJCOPY:copy=dump)
-
 USE_GOHEAD=no
 USE_SIMPLE=yes
 USE_FTPD=yes
