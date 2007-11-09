@@ -1,3 +1,7 @@
+2007-11-09	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* init.c: Test improved.
+
 2007-09-25	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* .cvsignore, ChangeLog, Makefile, init.c: New files.

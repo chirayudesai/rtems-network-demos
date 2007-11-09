@@ -5,11 +5,13 @@
  *  Don't forget to change the IP addresses
  */
 
+#define USE_RTEMS_SHELL
+
 #define CONFIGURE_APPLICATION_NEEDS_CONSOLE_DRIVER
 #define CONFIGURE_APPLICATION_NEEDS_CLOCK_DRIVER
 #define CONFIGURE_RTEMS_INIT_TASKS_TABLE
 #define CONFIGURE_LIBIO_MAXIMUM_FILE_DESCRIPTORS	20
-#define CONFIGURE_MAXIMUM_PTYS                          1
+#define CONFIGURE_MAXIMUM_PTYS                          8
 #define CONFIGURE_USE_IMFS_AS_BASE_FILESYSTEM
 
 #define CONFIGURE_MEMORY_OVERHEAD       256
@@ -30,6 +32,8 @@
 
 #define CONFIGURE_MAXIMUM_DRIVERS 10
 #define CONFIGURE_INIT
+
+#define STACK_CHECKER_ON
 
 #include <stdlib.h>
 #include <rtems.h>
@@ -64,6 +68,11 @@ rtems_task Init(
 #include <arpa/inet.h>
 #include <sys/socket.h>
 #include "../networkconfig.h"
+
+#if defined(USE_ECHO_SHELL)
+
+#define SHELL_HELP_MSG \
+  "Starting echoShell via telnetd -- default password is rtems\n"
 
 /*
  *  Number of sessions
@@ -122,6 +131,31 @@ void echoShell(
   }
 }
 
+#define SHELL_ENTRY echoShell
+
+#endif
+
+#if defined(USE_RTEMS_SHELL)
+
+#include <rtems/shell.h>
+
+#define SHELL_HELP_MSG \
+  "Starting rtemsShell via telnetd -- default account is rtems w/no password\n"
+
+void rtemsShell(
+  char *pty_name,
+  void *cmd_arg
+)
+{
+  printk("============== Starting Shell ==============\n");
+  shell_shell_loop( NULL ); 
+  printk("============== Exiting Shell ==============\n");
+}
+
+#define SHELL_ENTRY rtemsShell
+
+#endif
+
 /*
  *  Init task
  */
@@ -138,13 +172,16 @@ rtems_task Init(
   rtems_bsdnet_show_inet_routes ();
 
   printf("============== Start Telnetd ==============\n");
-  printk( "Starting echoShell via telnetd -- default password is rtems\n" );
+
+  printk( SHELL_HELP_MSG );
+
   rtems_telnetd_initialize(
-    echoShell,                 /* "shell" function */
+    SHELL_ENTRY,               /* "shell" function */
     NULL,                      /* no context necessary for echoShell */
     FALSE,                     /* spawn a new thread */
-    RTEMS_MINIMUM_STACK_SIZE,  /* default stack size please */
-    1                          /* priority .. we feel important today */
+    RTEMS_MINIMUM_STACK_SIZE * 4,  /* default stack size please */
+    1,                         /* priority .. we feel important today */
+    0                          /* do not ask for password */
   ); 
 
   printf("============== Deleting Init Task ==============\n");
