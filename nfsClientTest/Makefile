@@ -65,7 +65,7 @@ FilesystemImage: $(ARCH) rootfs/etc/host.conf rootfs/etc/hosts rootfs/rtems_logo
 	    tar cf ../FilesystemImage --exclude CVS --exclude .cvsignore .
 
 FilesystemImage.c: $(ARCH) FilesystemImage
-	$(PROJECT_ROOT)/bin/bin2c FilesystemImage FilesystemImage
+	$(PROJECT_ROOT)/bin/rtems-bin2c FilesystemImage FilesystemImage
 
 
 # Install the program(s), appending _g or _p as appropriate.

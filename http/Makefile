@@ -86,7 +86,7 @@ FilesystemImage: $(ARCH) stamp-index-html \
 	    tar cf ../FilesystemImage --exclude CVS --exclude .cvsignore .
 
 FilesystemImage.c: $(ARCH) FilesystemImage
-	$(PROJECT_ROOT)/bin/bin2c FilesystemImage FilesystemImage
+	$(PROJECT_ROOT)/bin/rtems-bin2c FilesystemImage FilesystemImage
 
 rootfs/index.html: shttpd_index.html goahead_index.html 
 ifeq ($(USE_SIMPLE),yes)

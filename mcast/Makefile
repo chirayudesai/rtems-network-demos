@@ -66,7 +66,7 @@ FilesystemImage: rootfs/etc/host.conf rootfs/etc/hosts
 	cd rootfs ; tar cf ../FilesystemImage --exclude CVS --exclude .cvsignore .
 
 FilesystemImage.c: FilesystemImage
-	$(PROJECT_ROOT)/bin/bin2c FilesystemImage FilesystemImage
+	$(PROJECT_ROOT)/bin/rtems-bin2c FilesystemImage FilesystemImage
 
 ${PGM}: $(OBJS) $(LINK_FILES)
 	$(make-exe)

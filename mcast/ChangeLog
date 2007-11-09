@@ -1,3 +1,7 @@
+2007-11-09	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* Makefile: bin2c now rtems-bin2c.
+
 2007-09-25	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* mcast.c: Remove warning.
