@@ -70,6 +70,12 @@
  boolean FTPD_enabled = FALSE;
 #endif
 
+#if defined(USE_GOAHEAD_HTTPD) && !defined(RTEMS_POSIX_API)
+  #warning "GoAhead server requires POSIX API - switching to SHTTPD"
+  #undef USE_GOAHEAD_HTTPD
+  #undef USE_SIMPLE_HTTPD
+#endif
+
 #if defined(USE_GOAHEAD_HTTPD)
   boolean GoAhead_HTTPD_enabled = TRUE;
 

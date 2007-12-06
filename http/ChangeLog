@@ -1,3 +1,8 @@
+2007-12-06	Joel Sherrill <joel.sherrill@OARcorp.com>
+
+	* Makefile, init.c: Make sure POSIX threading is enabled if using
+	GoAhead.
+
 2007-11-09	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* Makefile: bin2c now rtems-bin2c.

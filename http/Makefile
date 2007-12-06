@@ -40,6 +40,7 @@ CFLAGS_DEBUG_V   += -v -qrtems_debug
 
 LD_PATHS  +=
 
+## FYI GoAhead requires POSIX to be enabled
 USE_GOHEAD=no
 USE_SIMPLE=yes
 USE_FTPD=yes
