@@ -1,3 +1,8 @@
+2007-12-19	Joel Sherrill <joel.sherrill@OARcorp.com>
+
+	* init.c: Shell now has some commands that require filesystems with
+	bdbuf support.
+
 2007-11-09	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* init.c: Test improved.

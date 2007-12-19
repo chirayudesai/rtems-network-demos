@@ -7,18 +7,29 @@
 
 #define USE_RTEMS_SHELL
 
+/*
+ * Configuration parameters
+ */
+
 #define CONFIGURE_APPLICATION_NEEDS_CONSOLE_DRIVER
 #define CONFIGURE_APPLICATION_NEEDS_CLOCK_DRIVER
 #define CONFIGURE_RTEMS_INIT_TASKS_TABLE
+
 #define CONFIGURE_LIBIO_MAXIMUM_FILE_DESCRIPTORS	20
 #define CONFIGURE_MAXIMUM_PTYS                          8
+
+#if defined(USE_RTEMS_SHELL)
+  #define CONFIGURE_APPLICATION_NEEDS_LIBBLOCK
+#endif
 #define CONFIGURE_USE_IMFS_AS_BASE_FILESYSTEM
 
-#define CONFIGURE_MEMORY_OVERHEAD       256
-#define CONFIGURE_MESSAGE_BUFFER_MEMORY 32 * 1024
-#define CONFIGURE_MAXIMUM_SEMAPHORES	40
-#define CONFIGURE_MAXIMUM_TASKS		20
-#define CONFIGURE_MAXIMUM_MESSAGE_QUEUES	20
+#define STACK_CHECKER_ON
+
+#define CONFIGURE_MEMORY_OVERHEAD         256
+#define CONFIGURE_MESSAGE_BUFFER_MEMORY   (32 * 1024)
+#define CONFIGURE_MAXIMUM_SEMAPHORES	  40
+#define CONFIGURE_MAXIMUM_TASKS		  20
+#define CONFIGURE_MAXIMUM_MESSAGE_QUEUES  20
 
 #define CONFIGURE_MICROSECONDS_PER_TICK	1000
 
@@ -32,8 +43,6 @@
 
 #define CONFIGURE_MAXIMUM_DRIVERS 10
 #define CONFIGURE_INIT
-
-#define STACK_CHECKER_ON
 
 #include <stdlib.h>
 #include <rtems.h>
@@ -148,7 +157,7 @@ void rtemsShell(
 )
 {
   printk("============== Starting Shell ==============\n");
-  shell_shell_loop( NULL ); 
+  rtems_shell_main_loop( NULL ); 
   printk("============== Exiting Shell ==============\n");
 }
 
