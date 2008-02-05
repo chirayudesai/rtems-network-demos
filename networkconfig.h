@@ -36,7 +36,12 @@ static struct rtems_bsdnet_ifconfig netdriver_config = {
   "127.0.0.1",              /* IP address */
   "255.0.0.0",              /* IP net mask */
   NULL,                     /* Driver supplies hardware address */
-  0                         /* Use default driver parameters */
+  0,                        /* Use default driver parameters */
+  0,                        /* default efficiency multiplier */
+  0,                        /* default udp TX socket buffer size */
+  0,                        /* default udp RX socket buffer size */
+  0,                        /* default tcp TX socket buffer size */
+  0,                        /* default tcp RX socket buffer size */
 };
 
 /*
