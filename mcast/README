@@ -45,7 +45,7 @@ Driver Requirements
 GNU/Linux
 =========
 You will have to have a route in place.  Something like this command should
-work if you adjust the 192.168.1.244 to match your IP addresa and adjust the
+work if you adjust the 192.168.1.244 to match your IP address and adjust the
 239.9.8.0 to match the multicast address used in mcast_params.h:
 
 /sbin/route  add -net 239.9.8.0  netmask 255.255.255.0 gw 192.168.1.244 dev eth0
