@@ -13,6 +13,11 @@
 
 #define CONFIGURE_APPLICATION_NEEDS_CONSOLE_DRIVER
 #define CONFIGURE_APPLICATION_NEEDS_CLOCK_DRIVER
+#ifdef RTEMS_BSP_HAS_IDE_DRIVER
+#define CONFIGURE_APPLICATION_NEEDS_IDE_DRIVER
+#endif
+#define CONFIGURE_APPLICATION_NEEDS_LIBBLOCK
+
 #define CONFIGURE_RTEMS_INIT_TASKS_TABLE
 
 #define CONFIGURE_LIBIO_MAXIMUM_FILE_DESCRIPTORS	20
@@ -188,7 +193,7 @@ rtems_task Init(
     SHELL_ENTRY,               /* "shell" function */
     NULL,                      /* no context necessary for echoShell */
     FALSE,                     /* spawn a new thread */
-    RTEMS_MINIMUM_STACK_SIZE * 4,  /* default stack size please */
+    RTEMS_MINIMUM_STACK_SIZE * 20,  /* shell needs a large stack */
     1,                         /* priority .. we feel important today */
     0                          /* do not ask for password */
   ); 
