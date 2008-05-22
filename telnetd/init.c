@@ -156,6 +156,13 @@ void echoShell(
 #define SHELL_HELP_MSG \
   "Starting rtemsShell via telnetd -- default account is rtems w/no password\n"
 
+#define CONFIGURE_SHELL_COMMANDS_ALL_NETWORKING
+#define CONFIGURE_SHELL_COMMANDS_ALL
+
+#define CONFIGURE_SHELL_COMMANDS_INIT
+#include <rtems/shellconfig.h>
+
+
 void rtemsShell(
   char *pty_name,
   void *cmd_arg
