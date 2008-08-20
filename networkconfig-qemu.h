@@ -120,7 +120,14 @@ struct rtems_bsdnet_config rtems_bsdnet_config = {
         "10.0.0.1",     /* Log host */
         {"10.0.2.3" },  /* Name server(s) */
         {"" },          /* NTP server(s) */
+#else
+      #error "Fill me in"
 #endif /* !RTEMS_USE_BOOTP */
+        1,                   /* sb_efficiency */
+        0,                   /* udp_tx_buf_size */
+        0,                   /* udp_rx_buf_size */
+        0,                   /* tcp_tx_buf_size */
+        0                    /* tcp_rx_buf_size */
 
 };
 
