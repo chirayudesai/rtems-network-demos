@@ -30,7 +30,10 @@ void example_shttpd_callback(struct shttpd_arg *arg)
   /* fprintf( stderr, "RTEMS Request -%s-\n", query ); */
 
   if ( !strcmp( query, "cpuuse_report" ) ) {
-    rtems_cpu_usage_report_with_plugin( arg, shttpd_printf );
+    rtems_cpu_usage_report_with_plugin(
+      arg,
+      (rtems_printk_plugin_t) shttpd_printf
+    );
   } else if ( !strcmp( query, "cpuuse_reset" ) ) {
     rtems_cpu_usage_reset();
     shttpd_printf(
@@ -40,7 +43,10 @@ void example_shttpd_callback(struct shttpd_arg *arg)
       END_HTML_BODY
     );
   } else if ( !strcmp( query, "stackuse_report" ) ) {
-    rtems_stack_checker_report_usage_with_plugin( arg, shttpd_printf );
+    rtems_stack_checker_report_usage_with_plugin(
+      arg,
+      (rtems_printk_plugin_t) shttpd_printf
+    );
   } else {
     shttpd_printf(
       arg,

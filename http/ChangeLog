@@ -1,3 +1,7 @@
+2008-08-20	Joel Sherrill <joel.sherrill@OARcorp.com>
+
+	* shttpd_ext.c: Fix warning.
+
 2007-12-06	Joel Sherrill <joel.sherrill@OARcorp.com>
 
 	* Makefile, init.c: Make sure POSIX threading is enabled if using
