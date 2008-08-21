@@ -1,3 +1,7 @@
+2008-08-21	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* networkconfig-mpc8313erdb.h: New file.
+
 2008-08-20	Joel Sherrill <joel.sherrill@OARcorp.com>
 
 	* networkconfig-qemu.h, networkconfig.h: Add missing initializers.
