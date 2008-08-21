@@ -64,8 +64,16 @@
     10,                     /* FTPD task priority            */
     1024,                   /* Maximum buffersize for hooks  */
     21,                     /* Well-known port     */
-    NULL                    /* List of hooks       */
+    NULL,                   /* List of hooks       */
+    NULL,                   /* Root for FTPD or 0 for / */
+    0,                      /* Max. connections    */
+    0,                      /* Idle timeout in seoconds
+                               or 0 for no (inf) timeout */
+    0,                      /* 0 - r/w, 1 - read-only,
+                               2 - write-only,
+                               3 - browse-only */
  };
+
 #else
  boolean FTPD_enabled = FALSE;
 #endif
