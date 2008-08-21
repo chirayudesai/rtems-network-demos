@@ -593,6 +593,7 @@ prep_timer()
 double
 read_timer(str,len)
 char *str;
+int len;
 {
 	struct timeval timedol;
 	struct rusage ru1;
@@ -837,7 +838,7 @@ again:
 }
 
 void
-delay(us)
+delay(int us)
 {
 	struct timeval tv;
 
