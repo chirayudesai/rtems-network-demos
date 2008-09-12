@@ -1,3 +1,7 @@
+2008-09-12	Joel Sherrill <joel.sherrill@OARcorp.com>
+
+	* init.c: Eliminate use of boolean type. Use C99 bool.
+
 2008-08-21	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* init.c: Fix missing initializers warning.

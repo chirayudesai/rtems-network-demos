@@ -59,7 +59,7 @@
 #include "FilesystemImage.h"
 
 #if defined(USE_FTPD)
-  boolean FTPD_enabled = TRUE;
+  bool FTPD_enabled = true;
   struct rtems_ftpd_configuration rtems_ftpd_configuration = {
     10,                     /* FTPD task priority            */
     1024,                   /* Maximum buffersize for hooks  */
@@ -75,7 +75,7 @@
  };
 
 #else
- boolean FTPD_enabled = FALSE;
+ bool FTPD_enabled = false;
 #endif
 
 #if defined(USE_GOAHEAD_HTTPD) && !defined(RTEMS_POSIX_API)
@@ -85,7 +85,7 @@
 #endif
 
 #if defined(USE_GOAHEAD_HTTPD)
-  boolean GoAhead_HTTPD_enabled = TRUE;
+  bool GoAhead_HTTPD_enabled = true;
 
   /* GoAhead Trace Handler */
   #include <goahead/uemf.h>
@@ -94,15 +94,15 @@
     /* do nothing */
   }
 #else
-  boolean GoAhead_HTTPD_enabled = FALSE;
+  bool GoAhead_HTTPD_enabled = false;
 #endif
 
 #if defined(USE_SIMPLE_HTTPD)
-  boolean Simple_HTTPD_enabled = TRUE;
+  bool Simple_HTTPD_enabled = true;
 
   #include <shttpd/shttpd.h>
 #else
-  boolean Simple_HTTPD_enabled = FALSE;
+  bool Simple_HTTPD_enabled = false;
 #endif
 
 #define bool2string(_b) ((_b) ? "true" : "false")
