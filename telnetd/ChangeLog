@@ -1,3 +1,8 @@
+2008-09-17	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* init.c: Rename STACK_CHECKER_ON to more appropriate
+	CONFIGURE_STACK_CHECKER_ENABLED.
+
 2008-05-22	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* init.c: Add shell configuration.

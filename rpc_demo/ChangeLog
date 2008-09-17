@@ -1,3 +1,8 @@
+2008-09-17	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* init.c: Rename STACK_CHECKER_ON to more appropriate
+	CONFIGURE_STACK_CHECKER_ENABLED.
+
 2007-06-21	Joel Sherrill <joel.sherrill@OARcorp.com>
 
 	* init.c: Now compiles reasonably cleanly with CVS head.
