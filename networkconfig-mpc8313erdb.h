@@ -39,7 +39,6 @@
  * Ethernet address here.  If RTEMS_SET_ETHERNET_ADDRESS is not
  * defined the driver will choose an address.
  */
-#define RTEMS_SET_ETHERNET_ADDRESS
 #if (defined (RTEMS_SET_ETHERNET_ADDRESS))
   static char ethernet_address[6] = { 0x00, 0x04, 0x9F, 0x00, 0x5B, 0x21 };
 #endif
