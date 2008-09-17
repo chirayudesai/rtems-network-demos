@@ -24,7 +24,7 @@
                                            RTEMS_NO_ASR | \
                                            RTEMS_INTERRUPT_LEVEL(0))
 
-#define STACK_CHECKER_ON
+#define CONFIGURE_STACK_CHECKER_ENABLED
 #define CONFIGURE_INIT
 
 #include "system.h"
