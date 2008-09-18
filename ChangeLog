@@ -1,3 +1,8 @@
+2008-09-18	Joel Sherrill <joel.sherrill@OARcorp.com>
+
+	* networkconfig.h: Revert previous patch. Use loopback configuration
+	only.
+
 2008-09-17	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* networkconfig-mpc8313erdb.h, networkconfig.h: Rename STACK_CHECKER_ON
