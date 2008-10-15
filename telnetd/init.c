@@ -83,6 +83,13 @@ rtems_task Init(
 #include <sys/socket.h>
 #include "../networkconfig.h"
 
+/*
+ *  If true, listen on socket(s).
+ *  If false, remain on console.
+ */
+/* #define REMAIN_ON_CONSOLE */
+bool remain_on_console = false;
+
 #if defined(USE_ECHO_SHELL)
 
 #define SHELL_HELP_MSG \
@@ -168,9 +175,13 @@ void rtemsShell(
   void *cmd_arg
 )
 {
-  printk("============== Starting Shell ==============\n");
+  if ( !remain_on_console )
+    printk("============== Starting Shell ==============\n");
+
   rtems_shell_main_loop( NULL ); 
-  printk("============== Exiting Shell ==============\n");
+
+  if ( !remain_on_console )
+    printk("============== Exiting Shell ==============\n");
 }
 
 #define SHELL_ENTRY rtemsShell
@@ -184,28 +195,36 @@ rtems_task Init(
   rtems_task_argument argument
 )
 {
-  printf("\n\n*** Telnetd Server Test ***\n\r" );
+  fprintf(stderr, "\n\n*** Telnetd Server Test ***\n\r" );
 
-  printf("============== Initializing Network ==============\n");
+  fprintf(stderr, "============== Initializing Network ==============\n");
   rtems_bsdnet_initialize_network ();
 
-  printf("============== Add Route ==============\n");
+  fprintf(stderr, "============== Add Route ==============\n");
   rtems_bsdnet_show_inet_routes ();
 
-  printf("============== Start Telnetd ==============\n");
+  fprintf(stderr, "============== Start Telnetd ==============\n");
 
   printk( SHELL_HELP_MSG );
 
+  #if defined(REMAIN_ON_CONSOLE)
+    remain_on_console = true;
+  #endif
+  
   rtems_telnetd_initialize(
-    SHELL_ENTRY,               /* "shell" function */
-    NULL,                      /* no context necessary for echoShell */
-    FALSE,                     /* spawn a new thread */
+    SHELL_ENTRY,                    /* "shell" function */
+    NULL,                           /* no context necessary for echoShell */
+    remain_on_console,              /* true == remain on console */
+                                    /* false == listen on sockets */
     RTEMS_MINIMUM_STACK_SIZE * 20,  /* shell needs a large stack */
-    1,                         /* priority .. we feel important today */
-    0                          /* do not ask for password */
+    1,                              /* priority .. we feel important today */
+    false                        /* false = telnetd does NOT ask for password */
+                                 /* true = telnetd asks for password */
+                                 /* RTEMS Shell always asks for user/passwd */
   ); 
 
-  printf("============== Deleting Init Task ==============\n");
+  if ( !remain_on_console )
+    fprintf(stderr, "============== Deleting Init Task ==============\n");
   rtems_task_delete(RTEMS_SELF);
 }
 
