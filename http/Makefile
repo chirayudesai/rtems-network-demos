@@ -41,10 +41,10 @@ CFLAGS_DEBUG_V   += -v -qrtems_debug
 LD_PATHS  +=
 
 ## FYI GoAhead requires POSIX to be enabled
-USE_GOHEAD=no
+USE_GOAHEAD=no
 USE_SIMPLE=yes
 USE_FTPD=yes
-ifeq ($(USE_GOHEAD),yes)
+ifeq ($(USE_GOAHEAD),yes)
   HTTPD     = GoAhead Web Server
   CFLAGS   += -DWEBS -DUEMF -DUSE_GOAHEAD_HTTPD
   LD_LIBS  += -lhttpd
@@ -68,7 +68,7 @@ LD_LIBS +=
 #  already know how to delete some stuff, so you may want
 #  to just run 'make clean' first to see what gets missed.
 #  'make clobber' already includes 'make clean'
-#
+
 
 CLEAN_ADDITIONS += FilesystemImage FilesystemImage.c FilesystemImage.h
 CLEAN_ADDITIONS += stamp-index-html rootfs/index.html rootfs/shttpd.png
