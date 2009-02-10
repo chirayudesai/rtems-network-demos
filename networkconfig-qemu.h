@@ -22,8 +22,16 @@
 
 #undef RTEMS_BSP_NETWORK_DRIVER_NAME
 #undef RTEMS_BSP_NETWORK_DRIVER_ATTACH
+#if 0
 #define RTEMS_BSP_NETWORK_DRIVER_NAME    "ne1"
 #define RTEMS_BSP_NETWORK_DRIVER_ATTACH  rtems_ne_driver_attach
+#else
+int
+rtems_fxp_attach(struct rtems_bsdnet_ifconfig *config, int attaching);
+#define RTEMS_BSP_NETWORK_DRIVER_NAME    "fxp1"
+#define RTEMS_BSP_NETWORK_DRIVER_ATTACH  rtems_fxp_attach
+#endif
+
 
 #ifdef RTEMS_USE_BOOTP
 #undef RTEMS_USE_BOOTP

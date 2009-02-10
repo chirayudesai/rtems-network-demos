@@ -1,3 +1,7 @@
+2009-02-10	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* networkconfig-qemu.h: Add option for qemu to use PCI i82551 NIC.
+
 2008-09-18	Joel Sherrill <joel.sherrill@OARcorp.com>
 
 	* networkconfig.h: Revert previous patch. Use loopback configuration
