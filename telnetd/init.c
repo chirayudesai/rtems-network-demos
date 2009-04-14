@@ -186,6 +186,18 @@ void rtemsShell(
 
 #define SHELL_ENTRY rtemsShell
 
+/*
+ *  Telnet demon configuration
+ */
+rtems_telnetd_config_table rtems_telnetd_config = {
+  .command = SHELL_ENTRY,
+  .arg = NULL,
+  .priority = 1, /* We feel important today */
+  .stack_size = 20 * RTEMS_MINIMUM_STACK_SIZE, /* Shell needs a large stack */
+  .login_check = NULL, /* Shell asks for user and password */
+  .keep_stdio = false
+};
+
 #endif
 
 /*
@@ -210,18 +222,10 @@ rtems_task Init(
   #if defined(REMAIN_ON_CONSOLE)
     remain_on_console = true;
   #endif
+
+  rtems_telnetd_config.keep_stdio = remain_on_console;
   
-  rtems_telnetd_initialize(
-    SHELL_ENTRY,                    /* "shell" function */
-    NULL,                           /* no context necessary for echoShell */
-    remain_on_console,              /* true == remain on console */
-                                    /* false == listen on sockets */
-    RTEMS_MINIMUM_STACK_SIZE * 20,  /* shell needs a large stack */
-    1,                              /* priority .. we feel important today */
-    false                        /* false = telnetd does NOT ask for password */
-                                 /* true = telnetd asks for password */
-                                 /* RTEMS Shell always asks for user/passwd */
-  ); 
+  rtems_telnetd_initialize();
 
   if ( !remain_on_console )
     fprintf(stderr, "============== Deleting Init Task ==============\n");
