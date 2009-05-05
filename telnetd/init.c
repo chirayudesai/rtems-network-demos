@@ -223,6 +223,7 @@ rtems_task Init(
     remain_on_console = true;
   #endif
 
+  rtems_global_shell_env.login_check = rtems_shell_login_check;
   rtems_telnetd_config.keep_stdio = remain_on_console;
   
   rtems_telnetd_initialize();

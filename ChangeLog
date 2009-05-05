@@ -1,3 +1,7 @@
+2009-05-05	Sebastian Huber <sebastian.huber@embedded-brains.de>
+
+	* telnetd/init.c: Enable shell login checks.
+
 2009-04-14	Sebastian Huber <sebastian.huber@embedded-brains.de>
 
 	* telnetd/init.c: Updated telnet demon initialization.
