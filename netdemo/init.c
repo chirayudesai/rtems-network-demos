@@ -17,6 +17,28 @@
 
 #include <bsp.h>
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <rtems/rtems_bsdnet.h>
+#include "../networkconfig.h"
+
+/*
+ * RTEMS Startup Task
+ */
+rtems_task
+Init (rtems_task_argument ignored)
+{
+  int doSocket(void);
+
+  printk( "Initialize network\n" );
+  rtems_bsdnet_initialize_network ();
+  printk( "Network initialized\n" );
+  rtems_bsdnet_show_inet_routes ();
+  printk( "Initiating test\n" );
+  doSocket ();
+  exit (0);
+}
+
 #define CONFIGURE_APPLICATION_NEEDS_CONSOLE_DRIVER
 #define CONFIGURE_APPLICATION_NEEDS_CLOCK_DRIVER
 #define CONFIGURE_RTEMS_INIT_TASKS_TABLE
@@ -41,24 +63,3 @@ rtems_task Init (rtems_task_argument argument);
 
 #include <rtems/confdefs.h>
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <rtems/rtems_bsdnet.h>
-#include "../networkconfig.h"
-
-/*
- * RTEMS Startup Task
- */
-rtems_task
-Init (rtems_task_argument ignored)
-{
-  int doSocket(void);
-
-  printk( "Initialize network\n" );
-  rtems_bsdnet_initialize_network ();
-  printk( "Network initialized\n" );
-  rtems_bsdnet_show_inet_routes ();
-  printk( "Initiating test\n" );
-  doSocket ();
-  exit (0);
-}

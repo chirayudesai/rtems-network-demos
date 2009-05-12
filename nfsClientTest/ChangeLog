@@ -1,3 +1,7 @@
+2009-05-12	Joel Sherrill <joel.sherrill@OARcorp.com>
+
+	* init.c: Now build with libbsdport.
+
 2007-11-09	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* Makefile: bin2c now rtems-bin2c.

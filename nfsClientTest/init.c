@@ -5,49 +5,11 @@
  *  Don't forget to change the IP addresses
  */
 
-#define CONFIGURE_APPLICATION_NEEDS_CONSOLE_DRIVER
-#define CONFIGURE_APPLICATION_NEEDS_CLOCK_DRIVER
-#define CONFIGURE_RTEMS_INIT_TASKS_TABLE
-#define CONFIGURE_LIBIO_MAXIMUM_FILE_DESCRIPTORS	20
-#define CONFIGURE_USE_IMFS_AS_BASE_FILESYSTEM
-
-#define CONFIGURE_MEMORY_OVERHEAD       256
-#define CONFIGURE_MESSAGE_BUFFER_MEMORY 32 * 1024
-#define CONFIGURE_MAXIMUM_SEMAPHORES	40
-#define CONFIGURE_MAXIMUM_TASKS		20
-#define CONFIGURE_MAXIMUM_MESSAGE_QUEUES	20
-
-#define CONFIGURE_MICROSECONDS_PER_TICK	1000
-
-#define CONFIGURE_INIT_TASK_STACK_SIZE	(64*1024)
-#define CONFIGURE_INIT_TASK_PRIORITY	120
-#define CONFIGURE_INIT_TASK_ATTRIBUTES    RTEMS_FLOATING_POINT
-#define CONFIGURE_INIT_TASK_INITIAL_MODES (RTEMS_PREEMPT | \
-                                           RTEMS_NO_TIMESLICE | \
-                                           RTEMS_NO_ASR | \
-                                           RTEMS_INTERRUPT_LEVEL(0))
-
-#define CONFIGURE_MAXIMUM_DRIVERS 10
-#define CONFIGURE_INIT
-
-#include <rtems.h>
-#include <librtemsNfs.h>
-
-/* functions */
-
-rtems_task Init(
-  rtems_task_argument argument
-);
-
-/* configuration information */
-
-#include <rtems/confdefs.h>
 #include <bsp.h>
 
 #include <errno.h>
 #include <time.h>
 
-#include <rtems/confdefs.h>
 #include <stdio.h>
 #include <rtems/rtems_bsdnet.h>
 #include <rtems/untar.h>
@@ -138,3 +100,40 @@ rtems_task Init(
   status = rtems_task_delete( RTEMS_SELF );
 }
 
+#define CONFIGURE_APPLICATION_NEEDS_CONSOLE_DRIVER
+#define CONFIGURE_APPLICATION_NEEDS_CLOCK_DRIVER
+#define CONFIGURE_RTEMS_INIT_TASKS_TABLE
+#define CONFIGURE_LIBIO_MAXIMUM_FILE_DESCRIPTORS	20
+#define CONFIGURE_USE_IMFS_AS_BASE_FILESYSTEM
+
+#define CONFIGURE_MEMORY_OVERHEAD       256
+#define CONFIGURE_MESSAGE_BUFFER_MEMORY 32 * 1024
+#define CONFIGURE_MAXIMUM_SEMAPHORES	40
+#define CONFIGURE_MAXIMUM_TASKS		20
+#define CONFIGURE_MAXIMUM_MESSAGE_QUEUES	20
+
+#define CONFIGURE_MICROSECONDS_PER_TICK	1000
+
+#define CONFIGURE_INIT_TASK_STACK_SIZE	(64*1024)
+#define CONFIGURE_INIT_TASK_PRIORITY	120
+#define CONFIGURE_INIT_TASK_ATTRIBUTES    RTEMS_FLOATING_POINT
+#define CONFIGURE_INIT_TASK_INITIAL_MODES (RTEMS_PREEMPT | \
+                                           RTEMS_NO_TIMESLICE | \
+                                           RTEMS_NO_ASR | \
+                                           RTEMS_INTERRUPT_LEVEL(0))
+
+#define CONFIGURE_MAXIMUM_DRIVERS 10
+#define CONFIGURE_INIT
+
+#include <rtems.h>
+#include <librtemsNfs.h>
+
+/* functions */
+
+rtems_task Init(
+  rtems_task_argument argument
+);
+
+/* configuration information */
+
+#include <rtems/confdefs.h>
