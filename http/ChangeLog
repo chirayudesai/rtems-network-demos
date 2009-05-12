@@ -1,3 +1,7 @@
+2009-05-12	Joel Sherrill <joel.sherrill@OARcorp.com>
+
+	* Makefile: Now build with libbsdport.
+
 2009-02-10	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* Makefile: Fix typo.

@@ -47,21 +47,19 @@ USE_FTPD=yes
 ifeq ($(USE_GOAHEAD),yes)
   HTTPD     = GoAhead Web Server
   CFLAGS   += -DWEBS -DUEMF -DUSE_GOAHEAD_HTTPD
-  LD_LIBS  += -lhttpd
+  override LD_LIBS  += -lhttpd
 endif
 
 ifeq ($(USE_SIMPLE),yes)
   HTTPD     = Simple HTTPD Web Server
   CFLAGS   += -DUSE_SIMPLE_HTTPD
-  LD_LIBS  += -lshttpd
+  override LD_LIBS  += -lshttpd
 endif
 
 ifeq ($(USE_FTPD),yes)
   CFLAGS   += -DUSE_FTPD
-  LD_LIBS  += -lftpd
+  override LD_LIBS  += -lftpd
 endif
-
-LD_LIBS +=
 
 #
 # Add your list of files to delete here.  The config files
