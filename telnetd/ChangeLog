@@ -1,3 +1,7 @@
+2009-05-12	Joel Sherrill <joel.sherrill@OARcorp.com>
+
+	* Makefile, init.c: Now build with libbsdport.
+
 2008-10-15	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	PR 1331/networking

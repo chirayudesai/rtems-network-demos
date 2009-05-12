@@ -7,73 +7,16 @@
 
 #define USE_RTEMS_SHELL
 
-/*
- * Configuration parameters
- */
-
-#define CONFIGURE_APPLICATION_NEEDS_CONSOLE_DRIVER
-#define CONFIGURE_APPLICATION_NEEDS_CLOCK_DRIVER
-#ifdef RTEMS_BSP_HAS_IDE_DRIVER
-#define CONFIGURE_APPLICATION_NEEDS_IDE_DRIVER
-#endif
-#define CONFIGURE_APPLICATION_NEEDS_LIBBLOCK
-
-#define CONFIGURE_RTEMS_INIT_TASKS_TABLE
-
-#define CONFIGURE_LIBIO_MAXIMUM_FILE_DESCRIPTORS	20
-#define CONFIGURE_MAXIMUM_PTYS                          8
-
-#if defined(USE_RTEMS_SHELL)
-  #define CONFIGURE_APPLICATION_NEEDS_LIBBLOCK
-#endif
-#define CONFIGURE_USE_IMFS_AS_BASE_FILESYSTEM
-
-#define CONFIGURE_STACK_CHECKER_ENABLED
-
-#define CONFIGURE_MEMORY_OVERHEAD         256
-#define CONFIGURE_MESSAGE_BUFFER_MEMORY   (32 * 1024)
-#define CONFIGURE_MAXIMUM_SEMAPHORES	  40
-#define CONFIGURE_MAXIMUM_TASKS		  20
-#define CONFIGURE_MAXIMUM_MESSAGE_QUEUES  20
-
-#define CONFIGURE_MICROSECONDS_PER_TICK	1000
-
-#define CONFIGURE_INIT_TASK_STACK_SIZE	(64*1024)
-#define CONFIGURE_INIT_TASK_PRIORITY	120
-#define CONFIGURE_INIT_TASK_ATTRIBUTES    RTEMS_FLOATING_POINT
-#define CONFIGURE_INIT_TASK_INITIAL_MODES (RTEMS_PREEMPT | \
-                                           RTEMS_NO_TIMESLICE | \
-                                           RTEMS_NO_ASR | \
-                                           RTEMS_INTERRUPT_LEVEL(0))
-
-#define CONFIGURE_MAXIMUM_DRIVERS 10
-#define CONFIGURE_INIT
-
-#include <stdlib.h>
-#include <rtems.h>
-#include <rtems/telnetd.h>
-
-/* functions */
-
-rtems_task Init(
-  rtems_task_argument argument
-);
-
-/* configuration information */
-
-#include <rtems/confdefs.h>
 #include <bsp.h>
 
 #include <errno.h>
 #include <time.h>
 
-#include <rtems/confdefs.h>
 #include <stdio.h>
 #include <rtems/rtems_bsdnet.h>
 #include <rtems/telnetd.h>
 #include <rtems/shell.h>
 
-     
 #include <rtems/error.h>
 #include <rpc/rpc.h>
 #include <netinet/in.h>
@@ -233,3 +176,58 @@ rtems_task Init(
   rtems_task_delete(RTEMS_SELF);
 }
 
+/*
+ * Configuration parameters
+ */
+
+#define CONFIGURE_APPLICATION_NEEDS_CONSOLE_DRIVER
+#define CONFIGURE_APPLICATION_NEEDS_CLOCK_DRIVER
+#ifdef RTEMS_BSP_HAS_IDE_DRIVER
+#define CONFIGURE_APPLICATION_NEEDS_IDE_DRIVER
+#endif
+#define CONFIGURE_APPLICATION_NEEDS_LIBBLOCK
+
+#define CONFIGURE_RTEMS_INIT_TASKS_TABLE
+
+#define CONFIGURE_LIBIO_MAXIMUM_FILE_DESCRIPTORS	20
+#define CONFIGURE_MAXIMUM_PTYS                          8
+
+#if defined(USE_RTEMS_SHELL)
+  #define CONFIGURE_APPLICATION_NEEDS_LIBBLOCK
+#endif
+#define CONFIGURE_USE_IMFS_AS_BASE_FILESYSTEM
+
+#define CONFIGURE_STACK_CHECKER_ENABLED
+
+#define CONFIGURE_MEMORY_OVERHEAD         256
+#define CONFIGURE_MESSAGE_BUFFER_MEMORY   (32 * 1024)
+#define CONFIGURE_MAXIMUM_SEMAPHORES	  40
+#define CONFIGURE_MAXIMUM_TASKS		  20
+#define CONFIGURE_MAXIMUM_MESSAGE_QUEUES  20
+
+#define CONFIGURE_MICROSECONDS_PER_TICK	1000
+
+#define CONFIGURE_INIT_TASK_STACK_SIZE	(64*1024)
+#define CONFIGURE_INIT_TASK_PRIORITY	120
+#define CONFIGURE_INIT_TASK_ATTRIBUTES    RTEMS_FLOATING_POINT
+#define CONFIGURE_INIT_TASK_INITIAL_MODES (RTEMS_PREEMPT | \
+                                           RTEMS_NO_TIMESLICE | \
+                                           RTEMS_NO_ASR | \
+                                           RTEMS_INTERRUPT_LEVEL(0))
+
+#define CONFIGURE_MAXIMUM_DRIVERS 10
+#define CONFIGURE_INIT
+
+#include <stdlib.h>
+#include <rtems.h>
+#include <rtems/telnetd.h>
+
+/* functions */
+
+rtems_task Init(
+  rtems_task_argument argument
+);
+
+/* configuration information */
+
+#include <rtems/confdefs.h>

@@ -35,8 +35,8 @@ CFLAGS_LD +=
 CFLAGS_OPTIMIZE_V   +=
 CFLAGS_DEBUG_V   += -v -qrtems_debug
 
-LD_PATHS  +=
-LD_LIBS  += -ltelnetd
+LD_PATHS +=
+override LD_LIBS  += -ltelnetd
 
 CFLAGS   += 
 
