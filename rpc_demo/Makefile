@@ -41,6 +41,7 @@ include $(PROJECT_ROOT)/make/leaf.cfg
 # (OPTIONAL) Add local stuff here using +=
 #
 
+override DEFINES  += 
 ifdef SERVER
 DEFINES  += "-DSERVER=$(SERVER)"
 endif

@@ -32,7 +32,7 @@ include $(PROJECT_ROOT)/make/leaf.cfg
 # (OPTIONAL) Add local stuff here using +=
 #
 
-DEFINES  +=
+override DEFINES  +=
 CPPFLAGS +=
 CFLAGS_LD += # -Wl,--defsym -Wl,HeapSize=0xC0000 
 CFLAGS_OPTIMIZE_V   +=

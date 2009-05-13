@@ -22,7 +22,7 @@ include $(PROJECT_ROOT)/make/leaf.cfg
 # (OPTIONAL) Add local stuff here using +=
 #
 
-DEFINES  +=
+override DEFINES  +=
 CPPFLAGS +=
 CFLAGS   +=
 CFLAGS_LD += 
