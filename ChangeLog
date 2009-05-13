@@ -1,3 +1,9 @@
+2009-05-13	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* networkconfig-qemu.h: Now works on qemu with fxp driver in RTEMS, the
+	newer version in libbsdport, and on the real NIC in the Winsystems PC
+	in RTEMS Lab.
+
 2009-05-05	Sebastian Huber <sebastian.huber@embedded-brains.de>
 
 	* telnetd/init.c: Enable shell login checks.
