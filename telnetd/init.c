@@ -113,15 +113,21 @@ void echoShell(
 #include <rtems/shellconfig.h>
 
 
-void rtemsShell(
+static void rtemsShell(
   char *pty_name,
   void *cmd_arg
 )
 {
+  rtems_shell_env_t env = rtems_global_shell_env;
+  
+  env.devname = pty_name;
+  env.taskname = "TLNT";
+  env.login_check = rtems_shell_login_check;
+
   if ( !remain_on_console )
     printk("============== Starting Shell ==============\n");
 
-  rtems_shell_main_loop( NULL ); 
+  rtems_shell_main_loop( &env ); 
 
   if ( !remain_on_console )
     printk("============== Exiting Shell ==============\n");

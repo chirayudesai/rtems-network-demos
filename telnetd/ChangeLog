@@ -1,3 +1,7 @@
+2009-05-14	Sebastian Huber <sebastian.huber@embedded-brains.de>
+
+	* init.c: Provide custom shell environment.
+
 2009-05-13	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* Makefile: Allow overrides from invoking environment.
@@ -5,6 +9,14 @@
 2009-05-12	Joel Sherrill <joel.sherrill@OARcorp.com>
 
 	* Makefile, init.c: Now build with libbsdport.
+
+2009-05-05	Sebastian Huber <sebastian.huber@embedded-brains.de>
+
+	* init.c: Enable shell login checks.
+
+2009-04-14	Sebastian Huber <sebastian.huber@embedded-brains.de>
+
+	* init.c: Updated telnet demon initialization.
 
 2008-10-15	Joel Sherrill <joel.sherrill@oarcorp.com>
 

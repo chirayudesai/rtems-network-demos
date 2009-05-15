@@ -4,14 +4,6 @@
 	newer version in libbsdport, and on the real NIC in the Winsystems PC
 	in RTEMS Lab.
 
-2009-05-05	Sebastian Huber <sebastian.huber@embedded-brains.de>
-
-	* telnetd/init.c: Enable shell login checks.
-
-2009-04-14	Sebastian Huber <sebastian.huber@embedded-brains.de>
-
-	* telnetd/init.c: Updated telnet demon initialization.
-
 2009-02-10	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* networkconfig-qemu.h: Add option for qemu to use PCI i82551 NIC.
