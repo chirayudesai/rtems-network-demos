@@ -82,6 +82,14 @@
   bool Simple_HTTPD_enabled = false;
 #endif
 
+#if defined(USE_MONGOOSE_HTTPD)
+  #include <mghttpd/mongoose.h>
+
+  void example_mongoose_addpages(
+    struct mg_context *server
+  );
+#endif
+
 #define bool2string(_b) ((_b) ? "true" : "false")
 
 #if defined(USE_SIMPLE_HTTPD)
@@ -145,6 +153,18 @@ rtems_task Init(
 
   #endif
 
+  #if defined(USE_MONGOOSE_HTTPD)
+    {
+      struct mg_context *WebServer;
+      printf( "Initializing Mongoose HTTPD\n" );
+      WebServer = mg_start();
+
+      mg_set_option(WebServer, "root", "/" );
+      mg_set_option(WebServer, "ports", "80" );
+      example_mongoose_addpages( WebServer );
+
+    }
+  #endif
   status = rtems_task_delete( RTEMS_SELF );
 }
 
@@ -161,6 +181,14 @@ rtems_task Init(
 #define CONFIGURE_EXECUTIVE_RAM_SIZE	(512*1024)
 #define CONFIGURE_MAXIMUM_SEMAPHORES	20
 #define CONFIGURE_MAXIMUM_TASKS		20
+
+#if defined(USE_MONGOOSE_HTTPD)
+#define CONFIGURE_MAXIMUM_POSIX_THREADS 10
+#define CONFIGURE_MAXIMUM_POSIX_MUTEXES 30
+#define CONFIGURE_MAXIMUM_POSIX_CONDITION_VARIABLES 10
+#define CONFIGURE_MINIMUM_TASK_STACK_SIZE (32 * 1024)
+#define CONFIGURE_UNIFIED_WORK_AREAS
+#endif
 
 #define CONFIGURE_MICROSECONDS_PER_TICK	10000
 

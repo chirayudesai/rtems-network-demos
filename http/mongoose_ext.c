@@ -4,10 +4,11 @@
  */
 
 
-#if defined(USE_SIMPLE_HTTPD)
+#if defined(USE_MONGOOSE_HTTPD)
 
 #include <rtems.h>
-#include <shttpd/shttpd.h>
+#include <stdio.h>
+#include <mghttpd/mongoose.h>
 #include <rtems/cpuuse.h>
 #include <rtems/stackchk.h>
 
@@ -19,57 +20,58 @@
       "<html><body>\r\n"
 
 #define END_HTML_BODY \
+      "</html></body>\r\n"
 
-void example_shttpd_callback(struct shttpd_arg *arg)
+void example_mongoose_callback(
+  struct mg_connection         *conn,
+  const struct mg_request_info *request_info,
+  void                         *user_data
+)
 {
   const char *query;
 
-  query = shttpd_get_env(arg, "QUERY_STRING" );
+  query = mg_get_var(conn, "action" );
   if ( !query )
     query = "";
   /* fprintf( stderr, "RTEMS Request -%s-\n", query ); */
 
+  mg_printf( conn, START_HTML_BODY "<pre>" );
   if ( !strcmp( query, "cpuuse_report" ) ) {
-
-    shttpd_printf( arg, "<pre>" );
     rtems_cpu_usage_report_with_plugin(
-      arg,
-      (rtems_printk_plugin_t) shttpd_printf
+      conn,
+      (rtems_printk_plugin_t) mg_printf
     );
-    shttpd_printf( arg, "</pre>" );
   } else if ( !strcmp( query, "cpuuse_reset" ) ) {
     rtems_cpu_usage_reset();
-    shttpd_printf(
-      arg,
-      START_HTML_BODY
+    mg_printf(
+      conn,
       " <p><big>CPU Usage data reset -- return to the previous page</big></p>"
-      END_HTML_BODY
     );
   } else if ( !strcmp( query, "stackuse_report" ) ) {
-    shttpd_printf( arg, "<pre>" );
     rtems_stack_checker_report_usage_with_plugin(
-      arg,
-      (rtems_printk_plugin_t) shttpd_printf
+      conn,
+      (rtems_printk_plugin_t) mg_printf
     );
-    shttpd_printf( arg, "</pre>" );
   } else {
-    shttpd_printf(
-      arg,
+    mg_printf(
+      conn,
       START_HTML_BODY
       " <h2>Unknown Request</h2>"
       " <h3>URI: %s</br>"
-      "  Arguments: %s</h3>"
-      END_HTML_BODY,
-      shttpd_get_env(arg, "REQUEST_URI"),
+      "  Arguments: %s</h3>",
+      mg_get_var(conn, "REQUEST_URI"),
       query
     );
   }
-  arg->flags |= SHTTPD_END_OF_OUTPUT;
+  mg_printf( conn, "</pre>" END_HTML_BODY );
+  /*arg->flags |= SHTTPD_END_OF_OUTPUT; */
 }
 
-void example_shttpd_addpages(struct shttpd_ctx *ctx)
+void example_mongoose_addpages(
+  struct mg_context *server
+)
 {
-  shttpd_register_uri( ctx, "/queries*", example_shttpd_callback, NULL );
+  mg_set_uri_callback( server, "/queries*", example_mongoose_callback, NULL );
 }
 
 #endif

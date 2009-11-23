@@ -1,3 +1,9 @@
+2009-11-23	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* Makefile, goahead_index.html, init.c, shttpd_ext.c,
+	shttpd_index.html: Add Mongoose HTTPD support.
+	* mongoose_ext.c, mongoose_index.html: New files.
+
 2009-05-13	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* Makefile, init.c, system.h: Allow overrides from invoking

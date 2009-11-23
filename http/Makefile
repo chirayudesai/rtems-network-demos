@@ -8,7 +8,7 @@ PGM=${ARCH}/$(SAMPLE).exe
 MANAGERS=all
 
 # C source names, if any, go here -- minus the .c
-C_PIECES=init FilesystemImage shttpd_ext
+C_PIECES=init FilesystemImage shttpd_ext mongoose_ext
 C_FILES=$(C_PIECES:%=%.c)
 C_O_FILES=$(C_PIECES:%=${ARCH}/%.o)
 
@@ -42,7 +42,8 @@ LD_PATHS  +=
 
 ## FYI GoAhead requires POSIX to be enabled
 USE_GOAHEAD=no
-USE_SIMPLE=yes
+USE_SIMPLE=no
+USE_MONGOOSE=yes
 USE_FTPD=yes
 ifeq ($(USE_GOAHEAD),yes)
   HTTPD     = GoAhead Web Server
@@ -54,6 +55,12 @@ ifeq ($(USE_SIMPLE),yes)
   HTTPD     = Simple HTTPD Web Server
   CFLAGS   += -DUSE_SIMPLE_HTTPD
   override LD_LIBS  += -lshttpd
+endif
+
+ifeq ($(USE_MONGOOSE),yes)
+  HTTPD     = Mongoose HTTPD Web Server
+  CFLAGS   += -DUSE_MONGOOSE_HTTPD
+  override LD_LIBS  += -lmghttpd
 endif
 
 ifeq ($(USE_FTPD),yes)
@@ -87,12 +94,15 @@ FilesystemImage: $(ARCH) stamp-index-html \
 FilesystemImage.c: $(ARCH) FilesystemImage
 	$(PROJECT_ROOT)/bin/rtems-bin2c FilesystemImage FilesystemImage
 
-rootfs/index.html: shttpd_index.html goahead_index.html 
+rootfs/index.html: shttpd_index.html goahead_index.html mongoose_index.html
 ifeq ($(USE_SIMPLE),yes)
 	cp shttpd_index.html rootfs/index.html
 endif
 ifeq ($(USE_GOHEAD),yes)
 	cp goahead_index.html rootfs/index.html
+endif
+ifeq ($(USE_MONGOOSE),yes)
+	cp mongoose_index.html rootfs/index.html
 endif
 
 stamp-index-html: rootfs/index.html
