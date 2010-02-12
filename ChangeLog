@@ -1,3 +1,7 @@
+2010-02-12	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* ttcp/rtems_ttcp.c: Update timeval usage.
+
 2009-11-13	Joel Sherrill <joel.sherrill@OARcorp.com>
 
 	* VERSION: Updated to network-demos-4.9.3.

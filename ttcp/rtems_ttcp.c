@@ -71,13 +71,13 @@ struct rusage {
 int
 getrusage(int ignored, struct rusage *ru)
 {
-	rtems_clock_time_value now;
+	struct timeval now;
 	static struct rusage nullUsage;
 
-	rtems_clock_get (RTEMS_CLOCK_GET_TIME_VALUE, &now);
+        rtems_clock_get_tod_timeval( &now );
 	*ru = nullUsage;
-	ru->ru_stime.tv_sec  = now.seconds;
-	ru->ru_stime.tv_usec = now.microseconds;
+	ru->ru_stime.tv_sec  = now.tv_sec;
+	ru->ru_stime.tv_usec = now.tv_usec;
 	ru->ru_utime.tv_sec  = 0;
 	ru->ru_utime.tv_usec = 0;
 	return 0;
