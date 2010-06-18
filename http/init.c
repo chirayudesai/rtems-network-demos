@@ -26,8 +26,6 @@
 #include <sys/socket.h>
 #include "../networkconfig.h"
 
-#include <rtems_webserver.h>
-
 #define ARGUMENT 0
 
 /*
