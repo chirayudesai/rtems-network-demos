@@ -16,11 +16,11 @@
  */
 
 #include <bsp.h>
-#include <rtems/tftp.h>
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <rtems/rtems_bsdnet.h>
+#include <rtems/libio.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include "../networkconfig.h"
@@ -36,7 +36,13 @@ Init (rtems_task_argument ignored)
 	const char *hostname, *filename;
 
 	rtems_bsdnet_initialize_network ();
-	rtems_bsdnet_initialize_tftp_filesystem ();
+	mount_and_make_target_path(
+		NULL,
+		"/TFTP",
+		RTEMS_FILESYSTEM_TYPE_TFTPFS,
+		RTEMS_FILESYSTEM_READ_WRITE,
+		NULL
+	);
 
 	hostname = RTEMS_TFTP_TEST_HOST_NAME;
 	filename = RTEMS_TFTP_TEST_FILE_NAME;
@@ -50,6 +56,8 @@ Init (rtems_task_argument ignored)
 #define CONFIGURE_RTEMS_INIT_TASKS_TABLE
 #define CONFIGURE_LIBIO_MAXIMUM_FILE_DESCRIPTORS 20
 #define CONFIGURE_USE_IMFS_AS_BASE_FILESYSTEM
+#define CONFIGURE_FILESYSTEM_IMFS
+#define CONFIGURE_FILESYSTEM_TFTPFS
 
 #define CONFIGURE_EXECUTIVE_RAM_SIZE	(512*1024)
 #define CONFIGURE_MAXIMUM_SEMAPHORES	20
