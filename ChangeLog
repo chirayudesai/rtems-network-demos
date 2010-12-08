@@ -1,3 +1,9 @@
+2010-12-08     Sebastian Huber <Sebastian.Huber@embedded-brains.de>
+
+	* networkconfig.h, networkconfig-qemu.h, networkconfig-icecube.h,
+	networkconfig-mpc8313erdb.h: Loop back interface will be initialized
+	now during normal initialization via rtems_bsdnet_initialize_network().
+
 2010-02-12	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* ttcp/rtems_ttcp.c: Update timeval usage.

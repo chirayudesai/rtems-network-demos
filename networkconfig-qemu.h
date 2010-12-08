@@ -61,9 +61,6 @@
  *                                          must also define FIXED_NETMASK
  *   FIXED_NETMASK            <undefined>   IP netmask string
  *                                          (e.g. "255.255.255.0")
- *   LO_IF_ONLY               <undefined>   If defined, do NOT configure
- *                                          any ethernet driver but only the
- *                                          loopback interface.
  *   MULTI_NETDRIVER          <undefined>   ugly hack; if defined try to probe
  *                                          a variety of PCI and ISA drivers
  *                                          (i386 ONLY) use is discouraged!
@@ -140,9 +137,7 @@ const int gesysNetworkTaskPriority = NETWORK_TASK_PRIORITY;
 #define FIXED_NETMASK  0
 #endif
 
-#ifdef LO_IF_ONLY
-#undef NIC_NAME
-#elif !defined(NIC_NAME)
+#if !defined(NIC_NAME)
 
 #ifdef MULTI_NETDRIVER
 
@@ -230,8 +225,6 @@ extern int if_index;
 
 #endif /* ifdef MULTI_NETDRIVER */
 
-#endif /* ifdef LO_IF_ONLY */
-
 #ifdef NIC_NAME
 
 extern int NIC_ATTACH();
@@ -245,30 +238,16 @@ static struct rtems_bsdnet_ifconfig netdriver_config[1] = {{
   FIXED_NETMASK
 }};
 #else
-#ifndef LO_IF_ONLY
-#warning "NO KNOWN NETWORK DRIVER FOR THIS BSP -- YOU MAY HAVE TO EDIT rtems_netconfig.c"
+#warning "NO KNOWN NETWORK DRIVER FOR THIS BSP -- YOU MAY HAVE TO EDIT networkconfig.h"
 #endif
-#endif
-
-extern void rtems_bsdnet_loopattach();
-static struct rtems_bsdnet_ifconfig loopback_config = {
-    "lo0",                          /* name */
-    (int (*)(struct rtems_bsdnet_ifconfig *, int))rtems_bsdnet_loopattach, /* attach function */
-#ifdef NIC_NAME
-    netdriver_config,               /* link to next interface */
-#else
-    0,                              /* link to next interface */
-#endif
-    "127.0.0.1",                    /* IP address */
-    "255.0.0.0",                    /* IP net mask */
-};
 
 struct rtems_bsdnet_config rtems_bsdnet_config = {
-    &loopback_config,         /* Network interface */
 #ifdef NIC_NAME
+    netdriver_config,         /* link to next interface */
     RTEMS_DO_BOOTP,           /* Use BOOTP to get network configuration */
 #else
-    0,                        /* Use BOOTP to get network configuration */
+    0,
+    0,
 #endif
     NETWORK_TASK_PRIORITY,    /* Network task priority */
 #if   defined(MEMORY_CUSTOM)

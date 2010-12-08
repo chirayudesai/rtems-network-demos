@@ -22,33 +22,10 @@
 #include <bsp.h>
 
 /*
- * Loopback interface
- */
-extern int rtems_bsdnet_loopattach();
-
-/*
- * Default network interface
- */
-static struct rtems_bsdnet_ifconfig netdriver_config = {
-  "lo0",                    /* name */
-  rtems_bsdnet_loopattach,  /* attach function */
-  NULL,                     /* No more interfaces */
-  "127.0.0.1",              /* IP address */
-  "255.0.0.0",              /* IP net mask */
-  NULL,                     /* Driver supplies hardware address */
-  0,                        /* Use default driver parameters */
-  0,                        /* default efficiency multiplier */
-  0,                        /* default udp TX socket buffer size */
-  0,                        /* default udp RX socket buffer size */
-  0,                        /* default tcp TX socket buffer size */
-  0,                        /* default tcp RX socket buffer size */
-};
-
-/*
  * Network configuration
  */
 struct rtems_bsdnet_config rtems_bsdnet_config = {
-  &netdriver_config,
+  NULL,                /* Loop back interface only */
   NULL,                /* do not use bootp */
   0,                   /* Default network task priority */
   0,                   /* Default mbuf capacity */

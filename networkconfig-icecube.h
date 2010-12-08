@@ -44,32 +44,13 @@
   static char ethernet_address[6] = { 0x00, 0x04, 0x9F, 0x00, 0x5B, 0x21 };
 #endif
 
-#ifdef RTEMS_USE_LOOPBACK 
-/*
- * Loopback interface
- */
-extern void rtems_bsdnet_loopattach();
-static struct rtems_bsdnet_ifconfig loopback_config = {
-        "lo0",                          /* name */
-        rtems_bsdnet_loopattach,        /* attach function */
-        NULL,                           /* link to next interface */
-        "127.0.0.1",                    /* IP address */
-        "255.0.0.0",                    /* IP net mask */
-};
-#endif
-
 /*
  * Default network interface
  */
 static struct rtems_bsdnet_ifconfig netdriver_config = {
         RTEMS_BSP_NETWORK_DRIVER_NAME,          /* name */
         RTEMS_BSP_NETWORK_DRIVER_ATTACH,        /* attach function */
-
-#ifdef RTEMS_USE_LOOPBACK 
-        &loopback_config,               /* link to next interface */
-#else
         NULL,                           /* No more interfaces */
-#endif
 
 #if (defined (RTEMS_USE_BOOTP))
         NULL,                           /* BOOTP supplies IP address */
