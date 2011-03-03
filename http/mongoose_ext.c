@@ -1,4 +1,4 @@
-/*  SHTTPD Extensions
+/*  Mongoose HTTPD Extensions
  *
  *  $Id$
  */

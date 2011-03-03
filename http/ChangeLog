@@ -1,3 +1,7 @@
+2011-03-03	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* mongoose_ext.c, mongoose_index.html: Clean up.
+
 2010-06-17	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* init.c: Remove include of rtems_webserver.h
