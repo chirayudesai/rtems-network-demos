@@ -1,3 +1,7 @@
+2011-03-03	Joel Sherrill <joel.sherrill@oarcorp.com>
+
+	* networkconfig-qemu.h: Add missing endif.
+
 2010-12-08     Sebastian Huber <Sebastian.Huber@embedded-brains.de>
 
 	* networkconfig.h, networkconfig-qemu.h, networkconfig-icecube.h,

@@ -12,7 +12,7 @@
  *      eric.norum@usask.ca
  *      (306) 966-5394
  *
- *  networkconfig.h,v 1.8 2001/08/31 18:11:43 joel Exp
+ *  $Id$
  */
 
 #ifndef _RTEMS_NETWORKCONFIG_H_
@@ -224,6 +224,7 @@ extern int if_index;
 #endif
 
 #endif /* ifdef MULTI_NETDRIVER */
+#endif
 
 #ifdef NIC_NAME
 
