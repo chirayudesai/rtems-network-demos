@@ -29,7 +29,8 @@
 #define NSERVER		2
 #define BASE_PORT	24742
 
-#define DATA_SINK_HOST	((128 << 24) | (233 << 16) | (14 << 8) | 60)
+#define UDP_DATA_SINK_HOST	((10 << 24) | (0 << 16) | (2 << 8) | 255)
+#define TCP_DATA_SINK_HOST	((10 << 24) | (0 << 16) | (2 << 8) | 2)
 
 void showbroad(int s)
 {
@@ -88,12 +89,13 @@ showbroad (s);
 	if (setsockopt (s, SOL_SOCKET, SO_BROADCAST, &opt, sizeof opt) < 0)
 		rtems_panic ("Can't set socket broadcast: %s", strerror (errno));
 showbroad (s);
+	farAddr.sin_addr.s_addr = htonl (UDP_DATA_SINK_HOST);
 	for (i = 0 ; i < 5 ; i++) {
 		if (sendto (s, cbuf, sizeof cbuf, 0, (struct sockaddr *)&farAddr, sizeof farAddr) < 0)
 			rtems_panic ("Can't broadcast: %s", strerror (errno));
 	}
 #endif
-	farAddr.sin_addr.s_addr = htonl (DATA_SINK_HOST);
+	farAddr.sin_addr.s_addr = htonl (UDP_DATA_SINK_HOST);
 #if 1
 	for (i = 0 ; i < 500 ; i++) {
 		if (sendto (s, cbuf, sizeof cbuf, 0, (struct sockaddr *)&farAddr, sizeof farAddr) < 0)
@@ -137,7 +139,7 @@ transmitTcp (void)
 		rtems_panic ("Can't bind socket: %s", strerror (errno));
 	farAddr.sin_family = AF_INET;
 	farAddr.sin_port = htons (9);	/* The `discard' port */
-	farAddr.sin_addr.s_addr = htonl (DATA_SINK_HOST);
+	farAddr.sin_addr.s_addr = htonl (TCP_DATA_SINK_HOST);
 	printf ("Connect socket.\n");
 	if (connect (s, (struct sockaddr *)&farAddr, sizeof farAddr) < 0) {
 		printf ("Can't connect socket: %s\n", strerror (errno));
