@@ -1,5 +1,11 @@
 2011-03-03	Joel Sherrill <joel.sherrill@oarcorp.com>
 
+	* networkconfig-qemu.h: VirtualBox uses 10.0.x.x for its eth0 so we
+	need to switch to 10.1.x.x for things to work smoothly.
+	* networkconfig-loopback.h: New file.
+
+2011-03-03	Joel Sherrill <joel.sherrill@oarcorp.com>
+
 	* networkconfig-qemu.h: Add missing endif.
 
 2010-12-08     Sebastian Huber <Sebastian.Huber@embedded-brains.de>

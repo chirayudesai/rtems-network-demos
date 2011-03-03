@@ -112,7 +112,7 @@
 #endif
 
 #if defined(ON_QEMU)
-#define FIXED_IP_ADDR "10.0.2.5"
+#define FIXED_IP_ADDR "10.1.2.5"
 #endif
 
 #if defined(ON_RTEMS_LAB_WINSYSTEMS)
