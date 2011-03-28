@@ -1,3 +1,7 @@
+2011-03-29     Sebastian Huber <Sebastian.Huber@embedded-brains.de>
+
+	* mcast/listener.c: Output only received characters.
+
 2011-03-03	Joel Sherrill <joel.sherrill@oarcorp.com>
 
 	* networkconfig-qemu.h: VirtualBox uses 10.0.x.x for its eth0 so we

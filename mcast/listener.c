@@ -30,7 +30,7 @@ main(int argc, char *argv[])
      struct sockaddr_in addr;
      int fd, nbytes,addrlen;
      struct ip_mreq mreq;
-     char msgbuf[MSGBUFSIZE];
+     char msgbuf[MSGBUFSIZE + 1];
 
      u_int yes=1;            /*** MODIFICATION TO ORIGINAL */
 
@@ -77,6 +77,7 @@ main(int argc, char *argv[])
 	       perror("recvfrom");
 	       exit(1);
 	  }
+	  msgbuf [nbytes] = '\0';
 	  puts(msgbuf);
      }
 }
