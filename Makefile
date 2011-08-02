@@ -14,5 +14,6 @@ SUBDIRS +=
 endif
 
 include $(RTEMS_CUSTOM)
-include $(RTEMS_ROOT)/make/directory.cfg
+include $(RTEMS_SHARE)/make/directory.cfg
+
 
