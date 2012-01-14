@@ -3,7 +3,7 @@
 #
 
 This is a very preliminary version of the RTEMS OS Web Monitoring
-package (oswebmon).  It is currently in CVS to encourage team
+package (oswebmon).  It is currently in git to encourage team
 development.  It was conceived and initially implemented by
 Thomas Doerfler using the GoAhead webserver.  Thomas never got
 time to finish this and has graciously opened the code.
@@ -18,6 +18,7 @@ Warnings about the conversion and update:
   as GoAhead did.  The html argument parsing is new for Simple HTTPD.
 
 + Joel left ifdef's in for GoAhead but didn't test on GoAhead.
+  - GoAhead's server has been obsoleted. Code should be removed.
 
 There is one serious bug and a number of open issues to address:
 
