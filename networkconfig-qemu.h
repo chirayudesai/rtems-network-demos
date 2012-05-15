@@ -11,8 +11,6 @@
  *      W. Eric Norum
  *      eric.norum@usask.ca
  *      (306) 966-5394
- *
- *  $Id$
  */
 
 #ifndef _RTEMS_NETWORKCONFIG_H_

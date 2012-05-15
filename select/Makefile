@@ -1,7 +1,3 @@
-#
-#  $Id$
-#
-
 SAMPLE=selectTest
 PGM=${ARCH}/$(SAMPLE).exe
 

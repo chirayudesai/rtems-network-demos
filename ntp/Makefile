@@ -1,7 +1,3 @@
-#
-#  $Id$
-#
-
 SAMPLE=ntpdemo
 PGM=${ARCH}/$(SAMPLE).exe
 

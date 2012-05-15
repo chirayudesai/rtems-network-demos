@@ -1,7 +1,3 @@
-#
-#  $Id$
-#
-
 SAMPLE=ttcp
 PGM=${ARCH}/$(SAMPLE).exe
 

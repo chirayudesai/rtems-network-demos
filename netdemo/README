@@ -1,7 +1,3 @@
-#
-# $Id$
-#
-
 A simple application to test some of the RTEMS/FreeBSD networking code.
 
     **************************

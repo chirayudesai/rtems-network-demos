@@ -34,8 +34,6 @@
  *
  * Distribution Status -
  *      Public Domain.  Distribution Unlimited.
- *
- *  $Id$
  */
 
 #ifndef lint

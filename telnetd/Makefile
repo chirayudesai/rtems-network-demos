@@ -1,7 +1,3 @@
-#
-#  $Id$
-#
-
 SAMPLE=telnetd
 PGM=${ARCH}/$(SAMPLE).exe
 

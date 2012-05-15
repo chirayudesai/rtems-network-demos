@@ -1,7 +1,3 @@
-#
-#  $Id$
-#
-
 SAMPLE=nfsClientTest
 PGM=${ARCH}/$(SAMPLE).exe
 

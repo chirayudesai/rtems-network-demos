@@ -1,7 +1,3 @@
-#
-#  $Id$
-#
-
 This directory contains a very simple multicast demo program.  There
 are multiple multicast demo programs on the Internet and this program
 is a combination of those.

@@ -1,7 +1,3 @@
-#
-#  $Id$
-#
-
 This directory contains an RTEMS application for measuring TCP/UDP
 network throughput.   The ttcp_orig subdirectory contains the original
 UNIX program which can be compiled and run on your host machine.

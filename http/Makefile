@@ -1,7 +1,3 @@
-#
-#  $Id$
-#
-
 SAMPLE=http
 PGM=${ARCH}/$(SAMPLE).exe
 

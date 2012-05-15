@@ -9,8 +9,6 @@
  * EDIT THIS FILE TO REFLECT YOUR NETWORK CONFIGURATION     *
  * BEFORE RUNNING ANY RTEMS PROGRAMS WHICH USE THE NETWORK! * 
  ************************************************************
- *
- *  $Id$
  */
 
 #ifndef _RTEMS_NETWORKCONFIG_H_

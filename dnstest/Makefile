@@ -1,7 +1,3 @@
-#
-#  $Id$
-#
-
 SAMPLE=dnstest
 PGM=${ARCH}/$(SAMPLE).exe
 

@@ -1,6 +1,4 @@
 /*  SHTTPD Extensions
- *
- *  $Id$
  */
 
 

@@ -1,7 +1,5 @@
 /*
  *  Multicast parameters which you might want to change
- *
- *  $Id$
  */
 
 #define MCAST_ADDR      "239.9.8.0"

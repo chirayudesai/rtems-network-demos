@@ -1,7 +1,3 @@
-#
-#  $Id$
-#
-
 TTCP is a benchmarking tool for determining TCP and UDP performance
 between 2 systems.
 

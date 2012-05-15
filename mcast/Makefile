@@ -1,7 +1,3 @@
-#
-#  $Id$
-#
-
 PGM=${ARCH}/mcast.exe
 
 MANAGERS=all
