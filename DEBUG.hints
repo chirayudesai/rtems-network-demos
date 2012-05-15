@@ -1,7 +1,3 @@
-#
-#  $Id$
-#
-
 Debugging Hints
 ===============
 For debugging, I'd suggest breakpoints in the socket receive and transmit  

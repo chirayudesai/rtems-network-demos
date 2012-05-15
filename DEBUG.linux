@@ -1,7 +1,3 @@
-#
-#  $Id$
-#
-
 TCPDUMP
 =======
 On Linux, you can use the tcpdump utility to examine packets.  Something 
