@@ -17,8 +17,8 @@ Warnings about the conversion and update:
 + Simple HTTPD does NOT have the same type of argument parsing
   as GoAhead did.  The html argument parsing is new for Simple HTTPD.
 
-+ Joel left ifdef's in for GoAhead but didn't test on GoAhead.
-  - GoAhead's server has been obsoleted. Code should be removed.
++ Simple HTTPD has been renamed to Mongoose HTTPD, the code should
+  be adapted for that.
 
 There is one serious bug and a number of open issues to address:
 

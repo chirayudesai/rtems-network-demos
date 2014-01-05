@@ -6,7 +6,6 @@ PGM=${ARCH}/osmonweb.exe
 MANAGERS=all
 
 # Application Configuration parameters
-USE_GOAHEAD=no
 USE_SIMPLE=yes
 USE_FTPD=yes
 USE_DEBUG=no
@@ -15,9 +14,6 @@ USE_DEBUG=no
 C_FILES=init.c osmonweb.c htmlprintf.c \
   osmonweb_RTEID.c \
   osmonweb_RTEID_queues.c 
-ifeq ($(USE_GOAHEAD),yes)
-  C_FILES+=  osmonweb_goahead.c
-endif
 ifeq ($(USE_SIMPLE),yes)
   C_FILES+=  osmonweb_shttpd.c shttpd_ext.c
 endif
@@ -46,14 +42,6 @@ include $(PROJECT_ROOT)/make/leaf.cfg
 #
 # (OPTIONAL) Add local stuff here using +=
 #
-
-ifeq ($(USE_GOAHEAD),yes)
-  HTTPD         = GoAhead Web Server
-  HTTPD_LOGO    = webserver_logo2.gif
-  HTTPD_INDEX   = index_goahead.html
-  CFLAGS       += -DWEBS -DUEMF -DUSE_GOAHEAD_HTTPD
-  LD_LIBS      += -lhttpd
-endif
 
 ifeq ($(USE_SIMPLE),yes)
   HTTPD         = Simple HTTPD Web Server
@@ -114,7 +102,7 @@ FilesystemImage: $(ARCH) rootfs/etc/host.conf rootfs/etc/hosts rootfs/index.html
 FilesystemImage.c FilesystemImage.h: $(ARCH) FilesystemImage
 	$(PROJECT_ROOT)/bin/bin2c FilesystemImage FilesystemImage
 
-rootfs/index.html: index_goahead.html index_shttpd.html
+rootfs/index.html: index_shttpd.html
 	cp $(HTTPD_INDEX) $@
 
 osmonweb_tar: $(ARCH) $(HTML_GEN)

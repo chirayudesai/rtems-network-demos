@@ -91,10 +91,6 @@ typedef struct {
   #include <shttpd/shttpd.h>
   typedef struct shttpd_ctx *osmonweb_ctx_t;
 #endif
-#if defined(USE_GOAHEAD_HTTPD)
-  #include <goahead/wsIntrn.h>
-  typedef webs_t osmonweb_ctx_t;
-#endif
 
 void *osmonweb_getCommonOptions(
   osmonweb_ctx_t            wp,        /* web handle */

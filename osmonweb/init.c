@@ -43,7 +43,6 @@ rtems_task Init(
 #include <rtems/ftpd.h>
 #include <rtems/untar.h>
 
-     
 #include <rtems/error.h>
 #include <rpc/rpc.h>
 #include <netinet/in.h>
@@ -71,25 +70,8 @@ rtems_task Init(
 #endif
 
 /*
- *  Include the standard RTEMS Webserver Header file
- */
-#include <rtems_webserver.h>
-
-/*
  *  Some data declarations that are server dependent
  */
-#if defined(USE_GOAHEAD_HTTPD)
-  boolean GoAhead_HTTPD_enabled = TRUE;
-
-  /* GoAhead Trace Handler */
-  #include <goahead/uemf.h>
-  void quietTraceHandler(int level, char *buf)
-  {
-    /* do nothing */
-  }
-#else
-  boolean GoAhead_HTTPD_enabled = FALSE;
-#endif
 
 #if defined(USE_SIMPLE_HTTPD)
   boolean Simple_HTTPD_enabled = TRUE;
@@ -120,7 +102,6 @@ rtems_task Init(
   rtems_status_code status;
 
   printf("\n\n*** OSMONWEB TEST ***\n\r" );
-  printf("GoAhead HTTPD Enabled: %s\n", bool2string(GoAhead_HTTPD_enabled) );
   printf("Simple HTTPD Enabled: %s\n", bool2string(Simple_HTTPD_enabled) );
   printf("FTPD Enabled: %s\n", bool2string(FTPD_enabled) );
   printf("\n");
@@ -141,15 +122,6 @@ rtems_task Init(
   #if defined(USE_FTPD)
     printf( "Initializing FTPD\n" );
     rtems_initialize_ftpd();
-  #endif
-
-  #if defined(USE_GOAHEAD_HTTPD)
-    printf( "Initializing GoAhead HTTPD\n" );
-    status = rtems_initialize_webserver();
-    if ( status )
-      printf( "ERROR -- failed to initialize webserver\n" );
-
-    traceSetHandler( quietTraceHandler );
   #endif
 
   #if defined(USE_SIMPLE_HTTPD)

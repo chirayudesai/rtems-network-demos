@@ -527,12 +527,6 @@ rtems_status_code osmonweb_init
     if (gethostname(osmonweb_hostname, sizeof(osmonweb_hostname)) < 0) {
       strcpy(osmonweb_hostname,"RTEMS Target");
     }
-    /*
-     * define form handler
-     */
-    #if defined(USE_GOAHEAD_HTTPD)
-      websFormDefine(T("osmonweb"), osmonweb_form);
-    #endif
   }
   return RTEMS_SUCCESSFUL;
 }
