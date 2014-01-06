@@ -100,7 +100,7 @@ FilesystemImage: $(ARCH) rootfs/etc/host.conf rootfs/etc/hosts rootfs/index.html
 	    tar cf ../FilesystemImage --exclude CVS --exclude .cvsignore .
 
 FilesystemImage.c FilesystemImage.h: $(ARCH) FilesystemImage
-	$(PROJECT_ROOT)/bin/bin2c FilesystemImage FilesystemImage
+	$(PROJECT_ROOT)/bin/rtems-bin2c FilesystemImage FilesystemImage
 
 rootfs/index.html: index_shttpd.html
 	cp $(HTTPD_INDEX) $@
@@ -110,7 +110,7 @@ osmonweb_tar: $(ARCH) $(HTML_GEN)
 	    tar cf ../osmonweb_tar --exclude CVS --exclude .cvsignore .
 
 osmonweb_tar.c osmonweb_tar.h: $(ARCH) osmonweb_tar
-	$(PROJECT_ROOT)/bin/bin2c osmonweb_tar osmonweb_tar
+	$(PROJECT_ROOT)/bin/rtems-bin2c osmonweb_tar osmonweb_tar
 
 ## Rule to make .c/.h files from html
 %.h %.c: htmlsrc/%.html.in
