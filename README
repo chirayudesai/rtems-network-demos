@@ -11,6 +11,7 @@ programs.
     select   - test of select() routine functionality
     tftpTest - test of TFTP (Trivial FTP) client filesystem 
     ttcp     - TTCP throughput test
+    osmonweb - Web OS Monitor.
 
 The file networkconfig.h MUST be configured to reflect your local
 network according to the included Configuration Notes.
