@@ -1,7 +1,3 @@
-#
-# $Id$
-#
-
 This is a very preliminary version of the RTEMS OS Web Monitoring
 package (oswebmon).  It is currently in git to encourage team
 development.  It was conceived and initially implemented by

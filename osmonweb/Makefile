@@ -1,7 +1,3 @@
-#
-#  $Id$
-#
-
 PGM=${ARCH}/osmonweb.exe
 MANAGERS=all
 

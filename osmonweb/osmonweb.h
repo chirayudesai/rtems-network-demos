@@ -11,7 +11,6 @@
 | GNU C Compiler                                                  |
 |                                                                 |
 +-----------------------------------------------------------------+
- * $Id$
 */
 #ifndef _OSMONWEB_H
 #define _OSMONWEB_H
